@@ -105,11 +105,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   // Maximum post search radius for map in kilometers
   private static final int MAX_POST_SEARCH_DISTANCE = 100;
 
-  /*
-   * Other class member variables
-   */
-
-
   // Fields for the map radius in feet
   private float radius;
   private float lastRadius;
