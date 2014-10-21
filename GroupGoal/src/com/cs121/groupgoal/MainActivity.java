@@ -108,11 +108,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   /*
    * Other class member variables
    */
-  // Map fragment
-  private SupportMapFragment mapFragment;
 
-  // Represents the circle around a map
-  private Circle mapCircle;
 
   // Fields for the map radius in feet
   private float radius;
@@ -120,7 +116,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
 
   // Fields for helping process map and location changes
   private final Map<String, Marker> mapMarkers = new HashMap<String, Marker>();
-  private int mostRecentMapUpdate;
   private boolean hasSetUpInitialLocation;
   private String selectedPostObjectId;
   private Location lastLocation;
@@ -179,6 +174,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         if (view == null) {
           view = View.inflate(getContext(), R.layout.anywall_post_item, null);
         }
+        
+        // #TODO (nhurwitz) Replace fields with appropriate ones.
+        
         TextView contentView = (TextView) view.findViewById(R.id.content_view);
         TextView usernameView = (TextView) view.findViewById(R.id.username_view);
         contentView.setText(post.getText());
@@ -202,53 +200,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final GoalPost item = postsQueryAdapter.getItem(position);
         selectedPostObjectId = item.getObjectId();
-        mapFragment.getMap().animateCamera(
-            CameraUpdateFactory.newLatLng(new LatLng(item.getLocation().getLatitude(), item
-                .getLocation().getLongitude())), new CancelableCallback() {
-              public void onFinish() {
-                Marker marker = mapMarkers.get(item.getObjectId());
-                if (marker != null) {
-                  marker.showInfoWindow();
-                }
-              }
-
-              public void onCancel() {
-              }
-            });
-        Marker marker = mapMarkers.get(item.getObjectId());
-        if (marker != null) {
-          marker.showInfoWindow();
-        }
-      }
-    });
-
-    // Set up the map fragment
-    mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
-    // Enable the current location "blue dot"
-    mapFragment.getMap().setMyLocationEnabled(true);
-    // Set up the camera change handler
-    mapFragment.getMap().setOnCameraChangeListener(new OnCameraChangeListener() {
-      public void onCameraChange(CameraPosition position) {
-        // When the camera changes, update the query
-        doMapQuery();
-      }
-    });
-
-    // Set up the handler for the post button click
-    Button postButton = (Button) findViewById(R.id.post_button);
-    postButton.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        // Only allow posts if we have a location
-        Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
-        if (myLoc == null) {
-          Toast.makeText(MainActivity.this,
-              "Please try again after your location appears on the map.", Toast.LENGTH_LONG).show();
-          return;
-        }
-
-        Intent intent = new Intent(MainActivity.this, PostActivity.class);
-        intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
-        startActivity(intent);
+        
+        // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.  
+        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
       }
     });
   }
@@ -291,21 +245,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
 
     // Get the latest search distance preference
     radius = Application.getSearchDistance();
-    // Checks the last saved location to show cached data if it's available
-    if (lastLocation != null) {
-      LatLng myLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-      // If the search distance preference has been changed, move
-      // map to new bounds.
-      if (lastRadius != radius) {
-        updateZoom(myLatLng);
-      }
-      // Update the circle map
-      updateCircle(myLatLng);
-    }
     // Save the current radius
     lastRadius = radius;
     // Query for the latest data to update the views.
-    doMapQuery();
     doListQuery();
   }
 
@@ -442,15 +384,10 @@ public class MainActivity extends FragmentActivity implements LocationListener,
       return;
     }
     lastLocation = location;
-    LatLng myLatLng = new LatLng(location.getLatitude(), location.getLongitude());
     if (!hasSetUpInitialLocation) {
       // Zoom to the current location.
-      updateZoom(myLatLng);
       hasSetUpInitialLocation = true;
     }
-    // Update map radius indicator
-    updateCircle(myLatLng);
-    doMapQuery();
     doListQuery();
   }
 
@@ -495,221 +432,10 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   }
 
   /*
-   * Set up the query to update the map view
-   */
-  private void doMapQuery() {
-    final int myUpdateNumber = ++mostRecentMapUpdate;
-    Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
-    // If location info isn't available, clean up any existing markers
-    if (myLoc == null) {
-      cleanUpMarkers(new HashSet<String>());
-      return;
-    }
-    final ParseGeoPoint myPoint = geoPointFromLocation(myLoc);
-    // Create the map Parse query
-    ParseQuery<GoalPost> mapQuery = GoalPost.getQuery();
-    // Set up additional query filters
-    mapQuery.whereWithinKilometers("location", myPoint, MAX_POST_SEARCH_DISTANCE);
-    mapQuery.include("user");
-    mapQuery.orderByDescending("createdAt");
-    mapQuery.setLimit(MAX_POST_SEARCH_RESULTS);
-    // Kick off the query in the background
-    mapQuery.findInBackground(new FindCallback<GoalPost>() {
-      @Override
-      public void done(List<GoalPost> objects, ParseException e) {
-        if (e != null) {
-          if (Application.APPDEBUG) {
-            Log.d(Application.APPTAG, "An error occurred while querying for map posts.", e);
-          }
-          return;
-        }
-        /*
-         * Make sure we're processing results from
-         * the most recent update, in case there
-         * may be more than one in progress.
-         */
-        if (myUpdateNumber != mostRecentMapUpdate) {
-          return;
-        }
-        // Posts to show on the map
-        Set<String> toKeep = new HashSet<String>();
-        // Loop through the results of the search
-        for (GoalPost post : objects) {
-          // Add this post to the list of map pins to keep
-          toKeep.add(post.getObjectId());
-          // Check for an existing marker for this post
-          Marker oldMarker = mapMarkers.get(post.getObjectId());
-          // Set up the map marker's location
-          MarkerOptions markerOpts =
-              new MarkerOptions().position(new LatLng(post.getLocation().getLatitude(), post
-                  .getLocation().getLongitude()));
-          // Set up the marker properties based on if it is within the search radius
-          if (post.getLocation().distanceInKilometersTo(myPoint) > radius * METERS_PER_FEET
-              / METERS_PER_KILOMETER) {
-            // Check for an existing out of range marker
-            if (oldMarker != null) {
-              if (oldMarker.getSnippet() == null) {
-                // Out of range marker already exists, skip adding it
-                continue;
-              } else {
-                // Marker now out of range, needs to be refreshed
-                oldMarker.remove();
-              }
-            }
-            // Display a red marker with a predefined title and no snippet
-            markerOpts =
-                markerOpts.title(getResources().getString(R.string.post_out_of_range)).icon(
-                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-          } else {
-            // Check for an existing in range marker
-            if (oldMarker != null) {
-              if (oldMarker.getSnippet() != null) {
-                // In range marker already exists, skip adding it
-                continue;
-              } else {
-                // Marker now in range, needs to be refreshed
-                oldMarker.remove();
-              }
-            }
-            // Display a green marker with the post information
-            markerOpts =
-                markerOpts.title(post.getText()).snippet(post.getOwner().getUsername())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-          }
-          // Add a new marker
-          Marker marker = mapFragment.getMap().addMarker(markerOpts);
-          mapMarkers.put(post.getObjectId(), marker);
-          if (post.getObjectId().equals(selectedPostObjectId)) {
-            marker.showInfoWindow();
-            selectedPostObjectId = null;
-          }
-        }
-        // Clean up old markers.
-        cleanUpMarkers(toKeep);
-      }
-    });
-  }
-
-  /*
-   * Helper method to clean up old markers
-   */
-  private void cleanUpMarkers(Set<String> markersToKeep) {
-    for (String objId : new HashSet<String>(mapMarkers.keySet())) {
-      if (!markersToKeep.contains(objId)) {
-        Marker marker = mapMarkers.get(objId);
-        marker.remove();
-        mapMarkers.get(objId).remove();
-        mapMarkers.remove(objId);
-      }
-    }
-  }
-
-  /*
    * Helper method to get the Parse GEO point representation of a location
    */
   private ParseGeoPoint geoPointFromLocation(Location loc) {
     return new ParseGeoPoint(loc.getLatitude(), loc.getLongitude());
-  }
-
-  /*
-   * Displays a circle on the map representing the search radius
-   */
-  private void updateCircle(LatLng myLatLng) {
-    if (mapCircle == null) {
-      mapCircle =
-          mapFragment.getMap().addCircle(
-              new CircleOptions().center(myLatLng).radius(radius * METERS_PER_FEET));
-      int baseColor = Color.DKGRAY;
-      mapCircle.setStrokeColor(baseColor);
-      mapCircle.setStrokeWidth(2);
-      mapCircle.setFillColor(Color.argb(50, Color.red(baseColor), Color.green(baseColor),
-          Color.blue(baseColor)));
-    }
-    mapCircle.setCenter(myLatLng);
-    mapCircle.setRadius(radius * METERS_PER_FEET); // Convert radius in feet to meters.
-  }
-
-  /*
-   * Zooms the map to show the area of interest based on the search radius
-   */
-  private void updateZoom(LatLng myLatLng) {
-    // Get the bounds to zoom to
-    LatLngBounds bounds = calculateBoundsWithCenter(myLatLng);
-    // Zoom to the given bounds
-    mapFragment.getMap().animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 5));
-  }
-
-  /*
-   * Helper method to calculate the offset for the bounds used in map zooming
-   */
-  private double calculateLatLngOffset(LatLng myLatLng, boolean bLatOffset) {
-    // The return offset, initialized to the default difference
-    double latLngOffset = OFFSET_CALCULATION_INIT_DIFF;
-    // Set up the desired offset distance in meters
-    float desiredOffsetInMeters = radius * METERS_PER_FEET;
-    // Variables for the distance calculation
-    float[] distance = new float[1];
-    boolean foundMax = false;
-    double foundMinDiff = 0;
-    // Loop through and get the offset
-    do {
-      // Calculate the distance between the point of interest
-      // and the current offset in the latitude or longitude direction
-      if (bLatOffset) {
-        Location.distanceBetween(myLatLng.latitude, myLatLng.longitude, myLatLng.latitude
-            + latLngOffset, myLatLng.longitude, distance);
-      } else {
-        Location.distanceBetween(myLatLng.latitude, myLatLng.longitude, myLatLng.latitude,
-            myLatLng.longitude + latLngOffset, distance);
-      }
-      // Compare the current difference with the desired one
-      float distanceDiff = distance[0] - desiredOffsetInMeters;
-      if (distanceDiff < 0) {
-        // Need to catch up to the desired distance
-        if (!foundMax) {
-          foundMinDiff = latLngOffset;
-          // Increase the calculated offset
-          latLngOffset *= 2;
-        } else {
-          double tmp = latLngOffset;
-          // Increase the calculated offset, at a slower pace
-          latLngOffset += (latLngOffset - foundMinDiff) / 2;
-          foundMinDiff = tmp;
-        }
-      } else {
-        // Overshot the desired distance
-        // Decrease the calculated offset
-        latLngOffset -= (latLngOffset - foundMinDiff) / 2;
-        foundMax = true;
-      }
-    } while (Math.abs(distance[0] - desiredOffsetInMeters) > OFFSET_CALCULATION_ACCURACY);
-    return latLngOffset;
-  }
-
-  /*
-   * Helper method to calculate the bounds for map zooming
-   */
-  LatLngBounds calculateBoundsWithCenter(LatLng myLatLng) {
-    // Create a bounds
-    LatLngBounds.Builder builder = LatLngBounds.builder();
-
-    // Calculate east/west points that should to be included
-    // in the bounds
-    double lngDifference = calculateLatLngOffset(myLatLng, false);
-    LatLng east = new LatLng(myLatLng.latitude, myLatLng.longitude + lngDifference);
-    builder.include(east);
-    LatLng west = new LatLng(myLatLng.latitude, myLatLng.longitude - lngDifference);
-    builder.include(west);
-
-    // Calculate north/south points that should to be included
-    // in the bounds
-    double latDifference = calculateLatLngOffset(myLatLng, true);
-    LatLng north = new LatLng(myLatLng.latitude + latDifference, myLatLng.longitude);
-    builder.include(north);
-    LatLng south = new LatLng(myLatLng.latitude - latDifference, myLatLng.longitude);
-    builder.include(south);
-
-    return builder.build();
   }
 
   @Override
