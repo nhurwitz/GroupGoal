@@ -195,7 +195,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     postButton.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
         Intent intent = new Intent(MainActivity.this, PostActivity.class);
-        intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
         startActivity(intent);
       }
     });
