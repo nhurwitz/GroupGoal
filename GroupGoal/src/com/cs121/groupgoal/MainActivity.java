@@ -174,7 +174,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         
         TextView contentView = (TextView) view.findViewById(R.id.content_view);
         TextView usernameView = (TextView) view.findViewById(R.id.username_view);
-        contentView.setText(post.getText());
+        contentView.setText(post.getDescription());
         usernameView.setText(post.getOwner().getUsername());
         return view;
       }
@@ -189,6 +189,24 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Attach the query adapter to the view
     ListView postsListView = (ListView) findViewById(R.id.posts_listview);
     postsListView.setAdapter(postsQueryAdapter);
+    
+ // Set up the handler for the post button click
+    Button postButton = (Button) findViewById(R.id.post_button);
+    postButton.setOnClickListener(new OnClickListener() {
+      public void onClick(View v) {
+        // Only allow posts if we have a location
+        Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
+        if (myLoc == null) {
+          Toast.makeText(MainActivity.this,
+              "Please try again after your location appears on the map.", Toast.LENGTH_LONG).show();
+          return;
+        }
+
+        Intent intent = new Intent(MainActivity.this, PostActivity.class);
+        intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
+        startActivity(intent);
+      }
+    });
 
     // Set up the handler for an item's selection
     postsListView.setOnItemClickListener(new OnItemClickListener() {
@@ -196,8 +214,10 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         final GoalPost item = postsQueryAdapter.getItem(position);
         selectedPostObjectId = item.getObjectId();
         
-        // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.  
-        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class)
+        	.putExtra("goal_name", item.getName());
+        startActivity(intent);
       }
     });
   }

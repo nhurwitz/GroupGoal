@@ -85,7 +85,7 @@ public class PostActivity extends Activity {
 
     // Set the location to the current user's location
     post.setLocation(geoPoint);
-    post.setText(text);
+    post.setDescription(text);
     post.setOwner(ParseUser.getCurrentUser());
     ParseACL acl = new ParseACL();
 

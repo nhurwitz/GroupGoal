@@ -1,5 +1,8 @@
 package com.cs121.groupgoal;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import com.parse.ParseClassName;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -11,12 +14,21 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Posts")
 public class GoalPost extends ParseObject {
-  public String getText() {
-    return getString("text");
+	
+  public String getName() {
+	  return getString("name");
   }
 
-  public void setText(String value) {
-    put("text", value);
+  public void setName(String name) {
+	  put ("name", name);
+  }
+  
+  public String getDescription() {
+	  return getString("description");
+  }  
+
+  public void setDescription(String value) {
+    put("description", value);
   }
 
   public ParseUser getOwner() {
@@ -33,6 +45,14 @@ public class GoalPost extends ParseObject {
 
   public void setLocation(ParseGeoPoint value) {
     put("location", value);
+  }
+  
+  public boolean isPrivate() {
+	  return getBoolean("private");
+  }
+  
+  public void setPrivate(boolean isPrivate) {
+	  put("private", isPrivate);
   }
 
   public static ParseQuery<GoalPost> getQuery() {
