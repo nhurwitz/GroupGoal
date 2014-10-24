@@ -190,11 +190,20 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     ListView postsListView = (ListView) findViewById(R.id.posts_listview);
     postsListView.setAdapter(postsQueryAdapter);
     
- // Set up the handler for the post button click
+    // Set up the handler for the post button click
     Button postButton = (Button) findViewById(R.id.post_button);
     postButton.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
+    	  
+    	Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
+    	if (myLoc == null) {
+    	  	 Toast.makeText(MainActivity.this,
+    	            "Please try again after your location appears on the map.", Toast.LENGTH_LONG).show();
+    	     return;
+    	}
+    	  
         Intent intent = new Intent(MainActivity.this, PostActivity.class);
+        intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
         startActivity(intent);
       }
     });
