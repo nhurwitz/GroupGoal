@@ -18,5 +18,8 @@
     <string name="settings_distance_format">%d feet</string>
     <string name="activity_post_title">Create a Post</string>
     <string name="character_count_placeholder">0/140</string>
-
+    <string name="title_activity_start_guide">StartGuideActivity</string>
+    <string name="user_guide">Welcome to the User QuickStart Guide!</string>
+    <string name="use_right_menu">Use the menu in the top right corner to view your profile, scroll through posted goals, create a new goal, and view your notifications!</string>
+	<string name="GotIt_button">Got it, thanks!</string>
 </resources>

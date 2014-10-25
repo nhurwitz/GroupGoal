@@ -29,36 +29,33 @@
         android:required="true" />
 
     <application
-        android:name="com.cs121.groupgoal.Application"
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
-            android:name="com.cs121.groupgoal.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="YOUR_GOOGLE_ANDROID_MAPS_V2_API_KEY" />
-        
-        <meta-data android:name="com.google.android.gms.version" 
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.cs121.groupgoal.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name="com.cs121.groupgoal.SignUpActivity"
+            android:name=".SignUpActivity"
             android:label="@string/title_activity_signup"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name="com.cs121.groupgoal.DispatchActivity"
+            android:name=".DispatchActivity"
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,17 +64,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.cs121.groupgoal.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo" />
         <activity
-            android:name="com.cs121.groupgoal.PostActivity"
+            android:name=".PostActivity"
             android:label="@string/activity_post_title"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.cs121.groupgoal.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".StartGuideActivity"
+            android:label="@string/title_activity_start_guide" >
+        </activity>
     </application>
 
 </manifest>
