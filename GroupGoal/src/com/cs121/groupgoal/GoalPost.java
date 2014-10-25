@@ -1,7 +1,7 @@
 package com.cs121.groupgoal;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.parse.ParseClassName;
 import com.parse.ParseGeoPoint;
@@ -53,6 +53,38 @@ public class GoalPost extends ParseObject {
   
   public void setPrivate(boolean isPrivate) {
 	  put("private", isPrivate);
+  }
+  
+  public Date getDate() {
+	  return getDate("date");
+  }
+  
+  public void setDate(Date date) {
+	  put("date", date);
+  }
+  
+  public List<Object> getAttendees() {
+	  return getList("attendees");
+  }
+  
+  public void setAttendees(List<ParseUser> attendees) {
+	  put("attendees", attendees);
+  }
+  
+  public void addAttendee(ParseUser user) {
+	  List<Object> attendees = getList("attendees");
+	  if(!attendees.contains(user)) {
+		  attendees.add(user);
+		  put("attendees", attendees);
+	  }
+  }
+  
+  public void removeAttendee(ParseUser user) {
+	  List<Object> attendees = getList("attendees");
+	  if(attendees.contains(user)) {
+		  attendees.remove(user);
+		  put("attendees", attendees);
+	  }
   }
 
   public static ParseQuery<GoalPost> getQuery() {

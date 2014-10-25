@@ -202,8 +202,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     	     return;
     	}
     	  
-        Intent intent = new Intent(MainActivity.this, PostActivity.class);
-        intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
+        Intent intent = new Intent(MainActivity.this, PostActivity.class)
+        	.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
+        
         startActivity(intent);
       }
     });
@@ -215,8 +216,8 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         selectedPostObjectId = item.getObjectId();
         
         // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.
-        Intent intent = new Intent(MainActivity.this, SettingsActivity.class)
-        	.putExtra("goal_name", item.getName());
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        
         startActivity(intent);
       }
     });
