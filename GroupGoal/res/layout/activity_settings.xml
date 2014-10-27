@@ -26,16 +26,27 @@
         android:layout_alignLeft="@+id/description_textview"
         android:layout_alignStart="@+id/description_textview"
         android:layout_below="@+id/description_textview" />
-
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:padding="10dp"
+	    android:gravity="center_horizontal"
+	    android:layout_alignParentBottom="true"
+	    >
+        <Button
+        android:id="@+id/prof_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+  		android:layout_marginTop="40dp"
+        android:text="@string/view_profile"/>
+        
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+		android:layout_marginTop="40dp"
+     	android:layout_below="@id/prof_button"
         android:text="@string/logout_full" />
-
+	</LinearLayout>
 </RelativeLayout>
