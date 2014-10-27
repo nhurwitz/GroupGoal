@@ -1,5 +1,6 @@
 package com.cs121.groupgoal;
 
+import com.cs121.groupgoal.R;
 
 import android.app.Activity;
 import android.content.Intent;
