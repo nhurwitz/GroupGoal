@@ -215,8 +215,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         final GoalPost item = postsQueryAdapter.getItem(position);
         selectedPostObjectId = item.getObjectId();
         
-        // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.
-        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        Intent intent = new Intent(MainActivity.this, ViewGoal.class);
         
         startActivity(intent);
       }

@@ -76,6 +76,9 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
+            android:name=".ViewGoal"
+            android:label="@string/title_activity_view_goal" />
+        <activity
             android:name=".StartGuideActivity"
             android:label="@string/title_activity_start_guide" >
         </activity>
