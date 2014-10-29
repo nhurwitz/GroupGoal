@@ -20,7 +20,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!--
      The following permission is not required to use
-     Google Maps Android API v2, but is recommended.
+     Google Maps Android API v2, but is recommended.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -76,8 +76,20 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
+            android:name=".ViewGoal"
+            android:label="@string/title_activity_view_goal" />
+        <activity
             android:name=".StartGuideActivity"
             android:label="@string/title_activity_start_guide" >
+        </activity>
+        <activity
+            android:name=".UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+   
+        <activity
+            android:name=".NotificationsActivity"
+            android:label="@string/title_activity_notifications" >
         </activity>
     </application>
 

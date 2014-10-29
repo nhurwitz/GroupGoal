@@ -215,7 +215,8 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         final GoalPost item = postsQueryAdapter.getItem(position);
         selectedPostObjectId = item.getObjectId();
         
-        Intent intent = new Intent(MainActivity.this, ViewGoal.class);
+        // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         
         startActivity(intent);
       }
@@ -464,6 +465,33 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         return true;
       }
     });
+    
+    
+    //Add the My Profile Option to the Menu-------------------RD
+      menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+      public boolean onMenuItemClick(MenuItem item) {
+    	System.out.println("Inside OnMenuItemClick");
+    	Intent amp = new Intent(MainActivity.this, UserProfileActivity.class);
+    	//Pass the user to the amp activity
+    	//amp.putExtra("user",User Object*);
+        startActivity(amp);
+        return true;
+      }
+    });
+      
+      menu.findItem(R.id.action_notifications).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+          public boolean onMenuItemClick(MenuItem item) {
+        	System.out.println("Inside OnMenuItemClick");
+        	Intent amp = new Intent(MainActivity.this, NotificationsActivity.class);
+        	//Pass the user to the amp activity
+        	//amp.putExtra("user",User Object*);
+            startActivity(amp);
+            return true;
+          }
+        });
+          
+      //------------------------------------------------------
+     
     return true;
   }
 
