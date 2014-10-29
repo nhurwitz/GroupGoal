@@ -32,5 +32,4 @@
     <string name="title_activity_notifications_page">NotificationsPageActivity</string>
     <string name="title_activity_notifications">Your Notifications!</string>
 	<string name="action_notifications">Notifications</string>
-    
 </resources>
