@@ -89,6 +89,11 @@
             android:name=".NotificationsActivity"
             android:label="@string/title_activity_notifications" >
         </activity>
+        
+        <activity
+            android:name=".ViewGoal"
+            android:label="@string/title_activity_view_goal" >
+        </activity>
     </application>
 
 </manifest>

@@ -21,21 +21,11 @@ public class ViewGoal extends Activity {
 	private String description = "this is a long description about a goal";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		TextView textviewD = new TextView(this);
-		
-		textviewD.setText(description);
-		
-		TextView textviewU = new TextView(this);
-		
-		textviewU.setText(name);
-
-		
+		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_view_goal);
 		
 		
-		Button attendButton = (Button) findViewById(R.id.attend_button);
+		Button attendButton = (Button) findViewById(R.id.join_goal_button);
 		
 		attendButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

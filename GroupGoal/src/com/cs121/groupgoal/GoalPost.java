@@ -47,6 +47,14 @@ public class GoalPost extends ParseObject {
     put("location", value);
   }
   
+  public String getEventLocation() {
+	  return getString("event_location");
+  }
+  
+  public void setEventLocation(String eventLocation) {
+	  put("event_location", eventLocation);
+  }
+  
   public boolean isPrivate() {
 	  return getBoolean("private");
   }

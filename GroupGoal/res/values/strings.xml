@@ -12,11 +12,12 @@
     <string name="search_distance">Search Distance</string>
     <string name="logout_full">Log out of GroupGoal</string>
     <string name="post">Post</string>
+    <string name="create">Create</string>
     <string name="prompt_post">Post</string>
     <string name="post_out_of_range">Can\'t view post! Get closer.</string>
     <string name="progress_post">Posting&#8230;</string>
     <string name="settings_distance_format">%d feet</string>
-    <string name="activity_post_title">Create a Post</string>
+    <string name="activity_post_title">Create a Goal</string>
     <string name="character_count_placeholder">0/140</string>
     <string name="title_activity_start_guide">Start Guide Activity</string>
     <string name="user_guide">Welcome to the User QuickStart Guide!</string>
@@ -32,4 +33,17 @@
     <string name="title_activity_notifications_page">NotificationsPageActivity</string>
     <string name="title_activity_notifications">Your Notifications!</string>
 	<string name="action_notifications">Notifications</string>
+	
+	<!-- PostActivity Strings -->
+	<string name="goal_name">Goal Name</string>
+	<string name="goal_description">Description</string>
+	<string name="goal_description_hint">Describe your goal…</string>
+	<string name="location">Location</string>
+	
+	<!-- GoalView Strings -->
+	<string name="goal_owner">Goal Owner</string>
+	<string name="goal_location">Location</string>
+	<string name="goal_date">Date</string>
+	<string name="join">Join</string>
+	
 </resources>

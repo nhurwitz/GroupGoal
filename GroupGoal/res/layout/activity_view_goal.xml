@@ -1,34 +1,92 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="cs121.jam.chirps.ChirpDetailsActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/goal_details_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
 
-    
-	<TextView
-        android:id="@+id/character_count_textview"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goal_description"
+        android:textAllCaps="true"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/chirp_details_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_above="@id/post_button"
-        android:text="@string/character_count_placeholder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-	    <Button
-        android:id="@+id/attend_button"
+        android:textSize="16sp"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goal_location"
+        android:textAllCaps="true"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/goal_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:text="@string/attend" 
-        android:onClick = "attended"/>
-	    
-</RelativeLayout>
+        android:textSize="16sp"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goal_date"
+        android:textAllCaps="true"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/goal_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goal_owner"
+        android:textAllCaps="true"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/goal_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start" />
+    
+    <Button
+        android:id="@+id/join_goal_button"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:text="@string/join" />
+
+</LinearLayout>
