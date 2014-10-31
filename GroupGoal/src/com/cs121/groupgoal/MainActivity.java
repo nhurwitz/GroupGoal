@@ -103,6 +103,8 @@ public class MainActivity extends FragmentActivity implements LocationListener,
 
   // Maximum post search radius for map in kilometers
   private static final int MAX_POST_SEARCH_DISTANCE = 100;
+  
+  private static final String GOAL_OJBECT_ID = "goalObjectId";
 
   // Fields for the map radius in feet
   private float radius;
@@ -215,7 +217,12 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         selectedPostObjectId = item.getObjectId();
         
         // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.
-        Intent intent = new Intent(MainActivity.this, ViewGoal.class);
+        Intent intent = new Intent(MainActivity.this, ViewGoal.class)
+        	.putExtra("goal_name", item.getName().toString())
+        	.putExtra("goal_description", item.getDescription().toString())
+        	.putExtra("goal_location", item.getEventLocation().toString())
+        	.putExtra("goal_owner", item.getOwner().getUsername().toString())
+        	.putExtra("goal_date_time", item.getDate().toString());
         
         startActivity(intent);
       }

@@ -64,6 +64,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     setContentView(R.layout.activity_post);
 
     Intent intent = getIntent();
+    
     date = new Date();
     
     Location location = intent.getParcelableExtra(Application.INTENT_EXTRA_LOCATION);
@@ -96,6 +97,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setOwner(ParseUser.getCurrentUser());
 				goal.setDate(scheduledDate);
 				goal.setEventLocation(goalLocation);
+				goal.setLocation(geoPoint);
 				
 				goal.saveInBackground(new SaveCallback() {
 			      @Override

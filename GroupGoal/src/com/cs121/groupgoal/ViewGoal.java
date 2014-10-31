@@ -14,15 +14,34 @@ import android.widget.TextView;
 
 public class ViewGoal extends Activity {
 
-	//private static final GoalPost post;
-	
-	//goalpost instance variable mockups
-	private String name = "joanna";
-	private String description = "this is a long description about a goal";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_view_goal);
+		
+		Intent intent = getIntent();
+		Bundle extras = intent.getExtras();
+		String goalName = extras.getString("goal_name");
+		String goalDescription = extras.getString("goal_description");
+		String goalLocation = extras.getString("goal_location");
+		String goalOwner = extras.getString("goal_owner");
+		String goalDateAndTime = extras.getString("goal_date_time");
+		
+		TextView textView = (TextView) findViewById(R.id.goal_details_title);
+		textView.setText(goalName);
+		
+		textView = (TextView) findViewById(R.id.goal_details_description);
+		textView.setText(goalDescription);
+		
+		textView = (TextView) findViewById(R.id.goal_details_location);
+		textView.setText(goalLocation);
+		
+		textView = (TextView) findViewById(R.id.goal_details_date);
+		textView.setText(goalDateAndTime);
+		
+		textView = (TextView) findViewById(R.id.goal_details_owner);
+		textView.setText(goalOwner);
+		
 		
 		
 		Button attendButton = (Button) findViewById(R.id.join_goal_button);
