@@ -39,6 +39,7 @@
 	<string name="goal_description">Description</string>
 	<string name="goal_description_hint">Describe your goal…</string>
 	<string name="location">Location</string>
+	<string name="goal_time">Time</string>
 	
 	<!-- GoalView Strings -->
 	<string name="goal_owner">Goal Owner</string>

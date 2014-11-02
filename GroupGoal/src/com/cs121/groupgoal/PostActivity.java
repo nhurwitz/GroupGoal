@@ -89,7 +89,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			
 			Date scheduledDate = parseDate(goalDate + " " + goalTime);
 			
-			if(titleValid() && descriptionValid()) {
+			if(titleValid() && descriptionValid() && dateAndTimeValid()) {
 		
 				GoalPost goal = new GoalPost();
 				goal.setName(goalTitle);
@@ -172,6 +172,18 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			return false;
 		} else {
 			goalDescriptionView.setError(null);
+			return true;
+		}
+	}
+	
+	private boolean dateAndTimeValid() {
+		if(goalDateView.getText().toString().length() == 0 ||
+				goalTimeView.getText().toString().length() == 0) {
+			goalDateView.setError("Date and Time are required fields.");
+			return false;
+		} else {
+			goalDateView.setError(null);
+			goalTimeView.setError(null);
 			return true;
 		}
 	}
