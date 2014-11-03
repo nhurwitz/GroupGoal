@@ -214,49 +214,65 @@ containing a value of this type.
         public static final int userguidearrow=0x7f02001d;
     }
     public static final class id {
-        public static final int GotIt_button=0x7f05001c;
+        public static final int GotIt_button=0x7f050023;
         public static final int LinearLayout1=0x7f05000a;
         public static final int action_button=0x7f050009;
-        public static final int action_my_profile=0x7f050029;
-        public static final int action_notifications=0x7f05002a;
-        public static final int action_settings=0x7f050028;
-        public static final int attend_button=0x7f050020;
+        public static final int action_my_profile=0x7f050039;
+        public static final int action_notifications=0x7f05003a;
+        public static final int action_settings=0x7f050038;
+        public static final int addFriendsButton=0x7f050028;
         public static final int button1=0x7f05000e;
-        public static final int character_count_textview=0x7f050011;
-        public static final int content_view=0x7f050026;
-        public static final int description_textview=0x7f050012;
+        public static final int buttons=0x7f050016;
+        public static final int content_view=0x7f050036;
+        public static final int description_textview=0x7f050018;
+        public static final int edit_user_info_button=0x7f050026;
         public static final int edittext_action_login=0x7f050008;
-        public static final int edittext_action_signup=0x7f050019;
+        public static final int edittext_action_signup=0x7f050020;
+        public static final int goal_date=0x7f050014;
+        public static final int goal_description=0x7f050012;
+        public static final int goal_details_date=0x7f05002e;
+        public static final int goal_details_description=0x7f05002c;
+        public static final int goal_details_location=0x7f05002d;
+        public static final int goal_details_owner=0x7f05002f;
+        public static final int goal_details_title=0x7f05002b;
+        public static final int goal_location=0x7f050013;
+        public static final int goal_post=0x7f050010;
+        public static final int goal_time=0x7f050015;
+        public static final int goal_title=0x7f050011;
         public static final int hybrid=0x7f050004;
-        public static final int imageView1=0x7f05001b;
-        public static final int login_button=0x7f050021;
+        public static final int imageView1=0x7f050022;
+        public static final int join_goal_button=0x7f050030;
+        public static final int login_button=0x7f050031;
         public static final int login_form=0x7f050005;
-        public static final int logout_button=0x7f050014;
+        public static final int logout_button=0x7f05001a;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int password=0x7f050007;
-        public static final int password_again_edit_text=0x7f050018;
-        public static final int password_edit_text=0x7f050017;
+        public static final int password_again_edit_text=0x7f05001f;
+        public static final int password_edit_text=0x7f05001e;
         public static final int post_button=0x7f05000b;
-        public static final int post_edittext=0x7f050010;
         public static final int posts_listview=0x7f05000c;
         public static final int satellite=0x7f050002;
-        public static final int searchdistance_radiogroup=0x7f050013;
-        public static final int signup_button=0x7f050022;
-        public static final int signup_form=0x7f050015;
+        public static final int searchdistance_radiogroup=0x7f050019;
+        public static final int searchedFriend=0x7f050027;
+        public static final int signup_button=0x7f050032;
+        public static final int signup_form=0x7f05001b;
+        public static final int submit_goal_button=0x7f050017;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f05000d;
-        public static final int textView2=0x7f05001a;
+        public static final int textView2=0x7f050021;
         public static final int textView3=0x7f05000f;
-        public static final int textview_1=0x7f050023;
-        public static final int textview_2=0x7f050024;
-        public static final int textview_3=0x7f050025;
-        public static final int user_goals_text=0x7f05001f;
-        public static final int user_info_text=0x7f05001e;
-        public static final int user_name_text=0x7f05001d;
+        public static final int textview_1=0x7f050033;
+        public static final int textview_2=0x7f050034;
+        public static final int textview_3=0x7f050035;
+        public static final int user_goals_text=0x7f050029;
+        public static final int user_goals_text2=0x7f05002a;
+        public static final int user_info_text=0x7f050025;
+        public static final int user_name_box=0x7f050024;
         public static final int username=0x7f050006;
-        public static final int username_edit_text=0x7f050016;
-        public static final int username_view=0x7f050027;
+        public static final int username_edit_text=0x7f05001d;
+        public static final int username_fullname_text=0x7f05001c;
+        public static final int username_view=0x7f050037;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
@@ -281,13 +297,13 @@ containing a value of this type.
         public static final int view_goal=0x7f0a0003;
     }
     public static final class string {
-        public static final int GotIt_button=0x7f06002e;
-        public static final int action_my_profile=0x7f060034;
-        public static final int action_notifications=0x7f060038;
+        public static final int GotIt_button=0x7f06002f;
+        public static final int action_my_profile=0x7f060035;
+        public static final int action_notifications=0x7f060039;
         public static final int action_settings=0x7f06001b;
-        public static final int activity_post_title=0x7f060029;
+        public static final int activity_post_title=0x7f06002a;
         public static final int app_name=0x7f06001a;
-        public static final int attend=0x7f060030;
+        public static final int attend=0x7f060031;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -311,7 +327,7 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f060014;
-        public static final int character_count_placeholder=0x7f06002a;
+        public static final int character_count_placeholder=0x7f06002b;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -383,43 +399,60 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
-        public static final int error_blank_password=0x7f06003f;
-        public static final int error_blank_username=0x7f06003e;
-        public static final int error_end=0x7f060042;
-        public static final int error_intro=0x7f06003d;
-        public static final int error_join=0x7f060041;
-        public static final int error_mismatched_passwords=0x7f060040;
-        public static final int hello_world=0x7f060032;
+        public static final int create=0x7f060025;
+        public static final int error_blank_password=0x7f06004c;
+        public static final int error_blank_username=0x7f06004b;
+        public static final int error_end=0x7f06004f;
+        public static final int error_intro=0x7f06004a;
+        public static final int error_join=0x7f06004e;
+        public static final int error_mismatched_passwords=0x7f06004d;
+        public static final int goal_date=0x7f060043;
+        public static final int goal_description=0x7f06003d;
+        public static final int goal_description_hint=0x7f06003e;
+        public static final int goal_location=0x7f060042;
+        /**  PostActivity Strings 
+         */
+        public static final int goal_name=0x7f06003c;
+        /**  GoalView Strings 
+         */
+        public static final int goal_owner=0x7f060041;
+        public static final int goal_time=0x7f060040;
+        public static final int hello_world=0x7f060033;
+        public static final int join=0x7f060044;
+        public static final int location=0x7f06003f;
         public static final int login=0x7f06001c;
         public static final int logout_full=0x7f060023;
         public static final int parse=0x7f06001f;
         public static final int post=0x7f060024;
-        public static final int post_out_of_range=0x7f060026;
+        public static final int post_out_of_range=0x7f060027;
         public static final int powered_by=0x7f06001e;
-        public static final int progress_login=0x7f060043;
-        public static final int progress_post=0x7f060027;
-        public static final int progress_signup=0x7f060044;
-        public static final int prompt_password=0x7f06003b;
-        public static final int prompt_password_again=0x7f06003c;
-        public static final int prompt_post=0x7f060025;
-        public static final int prompt_username=0x7f06003a;
+        public static final int progress_login=0x7f060050;
+        public static final int progress_post=0x7f060028;
+        public static final int progress_signup=0x7f060051;
+        public static final int prompt_fullname=0x7f06003a;
+        public static final int prompt_password=0x7f060048;
+        public static final int prompt_password_again=0x7f060049;
+        public static final int prompt_post=0x7f060026;
+        public static final int prompt_searchForFriends=0x7f06003b;
+        public static final int prompt_username=0x7f060047;
         public static final int search_distance=0x7f060022;
-        public static final int settings_distance_format=0x7f060028;
+        public static final int settings_distance_format=0x7f060029;
         public static final int signup=0x7f06001d;
         public static final int slogan=0x7f060020;
         /**  Strings related to login 
          */
-        public static final int title_activity_login=0x7f060035;
-        public static final int title_activity_notifications=0x7f060037;
-        public static final int title_activity_notifications_page=0x7f060036;
+        public static final int title_activity_login=0x7f060036;
+        public static final int title_activity_notifications=0x7f060038;
+        public static final int title_activity_notifications_page=0x7f060037;
         public static final int title_activity_settings=0x7f060021;
-        public static final int title_activity_signup=0x7f060039;
-        public static final int title_activity_start_guide=0x7f06002b;
-        public static final int title_activity_user_profile=0x7f060033;
-        public static final int title_activity_view_goal=0x7f06002f;
-        public static final int use_right_menu=0x7f06002d;
-        public static final int user_guide=0x7f06002c;
-        public static final int view_profile=0x7f060031;
+        public static final int title_activity_signup=0x7f060046;
+        public static final int title_activity_start_guide=0x7f06002c;
+        public static final int title_activity_user_profile=0x7f060034;
+        public static final int title_activity_view_and_add_friends=0x7f060045;
+        public static final int title_activity_view_goal=0x7f060030;
+        public static final int use_right_menu=0x7f06002e;
+        public static final int user_guide=0x7f06002d;
+        public static final int view_profile=0x7f060032;
     }
     public static final class style {
         /** 
