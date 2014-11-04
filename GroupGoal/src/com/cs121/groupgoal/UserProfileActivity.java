@@ -158,6 +158,15 @@ import android.widget.TextView;
 			        }
 			      });
 		        
+		        menu.findItem(R.id.action_home).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			        public boolean onMenuItemClick(MenuItem item) {
+			      	 // System.out.println("Inside OnMenuItemClick");
+			      	  Intent amp = new Intent(UserProfileActivity.this, MainActivity.class);
+			          startActivity(amp);
+			          return true;
+			        }
+			      });
+		        
 		        
 			return true;
 		}

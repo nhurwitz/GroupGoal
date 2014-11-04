@@ -48,6 +48,14 @@ public class NotificationsActivity extends Activity {
 			          return true;
 			        }
 			      });
+		        
+		        menu.findItem(R.id.action_home).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			        public boolean onMenuItemClick(MenuItem item) {
+			      	  Intent amp = new Intent(NotificationsActivity.this, MainActivity.class);
+			          startActivity(amp);
+			          return true;
+			        }
+			      });
 		return true;
 		
 		
