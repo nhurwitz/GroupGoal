@@ -155,10 +155,10 @@
 	            Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
 	            ParseQuery<GoalPost> query = GoalPost.getQuery();
 	            query.include("user");
-	            query.orderByDescending("createdAt");
-	            query.whereWithinKilometers("location", geoPointFromLocation(myLoc), radius
-	                * METERS_PER_FEET / METERS_PER_KILOMETER);
-	            query.setLimit(MAX_POST_SEARCH_RESULTS);
+	            query.orderByAscending("date");
+//	            query.whereWithinKilometers("location", geoPointFromLocation(myLoc), radius
+//	                * METERS_PER_FEET / METERS_PER_KILOMETER);
+//	            query.setLimit(MAX_POST_SEARCH_RESULTS);
 	            return query;
 	          }
 	        };
