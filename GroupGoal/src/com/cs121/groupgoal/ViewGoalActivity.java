@@ -12,7 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ViewGoal extends Activity {
+public class ViewGoalActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +48,26 @@ public class ViewGoal extends Activity {
 		
 		attendButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(ViewGoal.this, MainActivity.class);
-		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				Intent intent = new Intent(ViewGoalActivity.this, MainActivity.class);
+		        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+		        startActivity(intent);
+			}
+		});
+		Button viewComments = (Button) findViewById(R.id.view_comments_button);
+		
+		viewComments.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(ViewGoalActivity.this, CommentActivity.class);
+		        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+		        startActivity(intent);
+			}
+		});
+		Button viewAttendees = (Button) findViewById(R.id.view_attendees_button);
+		
+		viewAttendees.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(ViewGoalActivity.this, ViewAttendeesActivity.class);
+		        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 		        startActivity(intent);
 			}
 		});

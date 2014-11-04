@@ -217,7 +217,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         selectedPostObjectId = item.getObjectId();
         
         // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.
-        Intent intent = new Intent(MainActivity.this, ViewGoal.class)
+        Intent intent = new Intent(MainActivity.this, ViewGoalActivity.class)
         	.putExtra("goal_name", item.getName().toString())
         	.putExtra("goal_description", item.getDescription().toString())
         	.putExtra("goal_location", item.getEventLocation().toString())
