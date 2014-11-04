@@ -1,30 +1,33 @@
 	package com.cs121.groupgoal;
 	
 	import java.util.ArrayList;
+import java.util.List;
 	
-	import android.app.Activity;
-	import android.app.ProgressDialog;
-	import android.content.Intent;
-	import android.os.Bundle;
-	import android.view.KeyEvent;
-	import android.view.View;
-	import android.view.inputmethod.EditorInfo;
-	import android.widget.Button;
-	import android.widget.EditText;
-	import android.widget.TextView;
-	import android.widget.Toast;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 	
 	import com.cs121.groupgoal.R;
-	import com.parse.ParseException;
-	import com.parse.ParseUser;
-	import com.parse.SignUpCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 	
 	/**
 	 * Activity which displays a login screen to the user.
 	 */
 	public class SignUpActivity extends Activity {
 	  // UI references.
-		private EditText fullnameEditText;
+	  private EditText firstNameEditText;
+	  private EditText lastNameEditText;
 	  private EditText usernameEditText;
 	  private EditText passwordEditText;
 	  private EditText passwordAgainEditText;
@@ -36,7 +39,8 @@
 	    setContentView(R.layout.activity_signup);
 	
 	    // Set up the signup form.
-	    fullnameEditText = (EditText) findViewById(R.id.username_fullname_text);
+	    firstNameEditText = (EditText) findViewById(R.id.username_firstname_text);
+	    lastNameEditText = (EditText) findViewById(R.id.username_lastname_text);
 	    usernameEditText = (EditText) findViewById(R.id.username_edit_text);
 	
 	    passwordEditText = (EditText) findViewById(R.id.password_edit_text);
@@ -63,7 +67,10 @@
 	  }
 	
 	  private void signup() {
-		String userfullname = fullnameEditText.getText().toString().trim();
+		String userFirstName = capitalize(firstNameEditText.getText().toString().trim());
+		String userLastName = capitalize(lastNameEditText.getText().toString().trim());
+		
+		String userfullname = userFirstName + "^" + userLastName;
 	    String username = usernameEditText.getText().toString().trim();
 	    String password = passwordEditText.getText().toString().trim();
 	    String passwordAgain = passwordAgainEditText.getText().toString().trim();
@@ -75,6 +82,10 @@
 	      validationError = true;
 	      validationErrorMessage.append(getString(R.string.error_blank_username));
 	    }
+	    if (userfullname.length() < 2) {
+		      validationError = true;
+		      validationErrorMessage.append(getString(R.string.error_blank_username));
+		}
 	    if (password.length() == 0) {
 	      if (validationError) {
 	        validationErrorMessage.append(getString(R.string.error_join));
@@ -105,7 +116,6 @@
 	
 	    // Set up a new Parse user
 	    ParseUser user = new ParseUser();
-	    System.out.println("the user's name: "+userfullname);
 	    user.put("fullName", userfullname); //save the fullname entered by the user
 	    user.setUsername(username);
 	    user.setPassword(password);
@@ -113,7 +123,7 @@
 	    String message = "Edit Your Personal Message Here";
 	    user.put("userDescription", message);
 	    
-	    ArrayList<ParseUser> friends = new ArrayList(); 
+	    List<ParseUser> friends = new ArrayList<ParseUser>(); 
 	    user.put("friendsList", friends);
 	
 	
@@ -133,5 +143,16 @@
 	        }
 	      }
 	    });
+	  }
+	  
+	  @SuppressLint("DefaultLocale")
+	private String capitalize(String name) {
+		  name = name.toLowerCase();
+		  if(name.length() > 1) {
+			  return Character.toUpperCase(name.charAt(0)) + name.substring(1);
+		  } else {
+			  return name.toUpperCase();
+		  }
+		  
 	  }
 	}

@@ -176,7 +176,9 @@
 	        TextView contentView = (TextView) view.findViewById(R.id.content_view);
 	        TextView usernameView = (TextView) view.findViewById(R.id.username_view);
 	        contentView.setText(post.getName());
-	        usernameView.setText(post.getOwner().getUsername());
+	        String fullName = post.getOwner().getString("fullName").toString();
+	        String[] firstLast = fullName.split("\\^");
+	        usernameView.setText(firstLast[0] + " " + firstLast[1]);
 	        return view;
 	      }
 	    };

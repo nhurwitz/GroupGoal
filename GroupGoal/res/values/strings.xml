@@ -33,7 +33,8 @@
     <string name="title_activity_notifications_page">NotificationsPageActivity</string>
     <string name="title_activity_notifications">Your Notifications!</string>
     <string name="action_notifications">Notifications</string>
-    <string name="prompt_fullname">Your Full Name</string>
+    <string name="prompt_firstname">First Name</string>
+    <string name="prompt_lastname">Last Name</string>
     <string name="prompt_searchForFriends">Type a friend\'s username</string>
     
 
