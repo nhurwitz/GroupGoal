@@ -1,21 +1,15 @@
-	package com.cs121.groupgoal;
+package com.cs121.groupgoal;
 	
-	import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+	
 import com.parse.ParseUser;
 	
-	import android.app.Activity;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,8 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 	
-	import java.util.ArrayList;
-import java.util.List;
+
 	
 	//adding some new comment shit
 	
@@ -118,7 +111,7 @@ import java.util.List;
 		}
 		
 		
-		public void searchAndAddFriends(){ //should be called when button is pushed to add friends (use searchedFriend attribute)
+		public void searchAndAddFriends(){ //is called when button is pushed to add friends (use searchedFriend attribute)
 			
 		}
 		
