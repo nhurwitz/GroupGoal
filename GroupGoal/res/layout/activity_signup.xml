@@ -14,11 +14,18 @@
             android:orientation="vertical" >
 
              <EditText
-                android:id="@+id/username_fullname_text"
+                android:id="@+id/username_firstname_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_fullname"
-                android:inputType="textEmailAddress"
+                android:hint="@string/prompt_firstname"
+                android:maxLines="1"
+                android:singleLine="true" />
+             
+              <EditText
+                android:id="@+id/username_lastname_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_lastname"
                 android:maxLines="1"
                 android:singleLine="true" />
              
