@@ -40,7 +40,8 @@ public class ViewGoal extends Activity {
 		textView.setText(goalDateAndTime);
 		
 		textView = (TextView) findViewById(R.id.goal_details_owner);
-		textView.setText(goalOwner);
+		String[] goalOwnerFirstLast = goalOwner.split("\\^");
+		textView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
 		
 		
 		

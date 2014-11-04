@@ -223,7 +223,7 @@
 	        	.putExtra("goal_name", item.getName().toString())
 	        	.putExtra("goal_description", item.getDescription().toString())
 	        	.putExtra("goal_location", item.getEventLocation().toString())
-	        	.putExtra("goal_owner", item.getOwner().getUsername().toString())
+	        	.putExtra("goal_owner", item.getOwner().getString("fullName").toString())
 	        	.putExtra("goal_date_time", item.getDate().toString());
 	        
 	        startActivity(intent);
