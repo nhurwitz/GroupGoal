@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
@@ -16,6 +17,8 @@ public class StartGuideActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_guide);
 		
+		
+		
 		Button gotItButton = (Button) findViewById(R.id.GotIt_button);
 		
 		gotItButton.setOnClickListener(new OnClickListener() {
@@ -25,5 +28,23 @@ public class StartGuideActivity extends Activity {
 		        startActivity(intent);
 			}
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.start_guide, menu);
+		
+		/**  IF NEEDED FOR MENU SELECTION
+		  menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		        public boolean onMenuItemClick(MenuItem item) {
+		          startActivity(new Intent(NotificationsActivity.this, SettingsActivity.class));
+		          return true;
+		        }
+		      });
+
+	**/
+		return true;
+		
 	}
 }
