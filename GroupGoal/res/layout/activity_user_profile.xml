@@ -10,23 +10,83 @@
     tools:context="com.cs121.groupgoal.UserProfileActivity" >
 
     <TextView
-        android:id = "@+id/user_name_text"
+        android:id = "@+id/user_name_box"
+        android:textAppearance="?android:attr/textAppearanceLarge" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:layout_marginTop="10dp"
         android:text="User Name:" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="About Me-"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     
     <TextView
         android:id="@+id/user_info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Relevant User Information:" />
-    
-     <TextView
+        android:layout_marginTop="20dp"
+        android:paddingStart="20dp"   
+        android:paddingLeft="30dp"  
+        android:paddingRight="60dp"     
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="" />
+
+    <Button
+        android:id="@+id/edit_user_info_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="10dp"
+        android:text="Edit" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     	android:layout_marginTop="20dp"
+        android:text="Add Friends"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/searchedFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/prompt_searchForFriends" >
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/addFriendsButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:layout_marginTop="10dp"       
+        android:text="Add" />
+
+    <TextView
         android:id="@+id/user_goals_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="List of Goals:" />
+        android:layout_marginTop="20dp"
+        android:text="Upcoming Goals:" />
     
-    
+     <TextView
+        android:id="@+id/user_goals_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Past Goals:" />
 
 </LinearLayout>
