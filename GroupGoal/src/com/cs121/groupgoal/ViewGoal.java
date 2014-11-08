@@ -1,10 +1,18 @@
 package com.cs121.groupgoal;
 
+import java.util.Date;
+
+import org.apache.http.ParseException;
+
 import com.cs121.groupgoal.R;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +21,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ViewGoal extends Activity {
+	
+	GoalPost goal;
+	
+	String goalName = "";
+	String goalDescription = "";
+	ParseGeoPoint locationMade = null;
+	String goalLocation = "";
+	ParseUser goalOwner = null;
+	Date goalDateAndTime = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +37,28 @@ public class ViewGoal extends Activity {
 		setContentView(R.layout.activity_view_goal);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setDisplayShowHomeEnabled(false);
-		
+	    
 		Intent intent = getIntent();
-		Bundle extras = intent.getExtras();
-		String goalName = extras.getString("goal_name");
-		String goalDescription = extras.getString("goal_description");
-		String goalLocation = extras.getString("goal_location");
-		String goalOwner = extras.getString("goal_owner");
-		String goalDateAndTime = extras.getString("goal_date_time");
+		String parseId = intent.getStringExtra("goal_id");
+		String ownerName = intent.getStringExtra("goal_owner");
+	 
+	    ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class);
+	    
+	    try {
+	    	goal = postQuery.get(parseId);
+	    } catch (com.parse.ParseException e) {
+			Log.e("Goal Error", e.getMessage());
+		}
+		
+	    if(goal != null) {
+	    	goalName = goal.getName().toString();
+	    	goalDescription = goal.getDescription().toString();
+	    	locationMade = goal.getLocation();
+	    	goalLocation = goal.getEventLocation().toString();
+	    	goalDateAndTime = goal.getDate();
+	    }
+
+		
 		
 		TextView textView = (TextView) findViewById(R.id.goal_details_title);
 		textView.setText(goalName);
@@ -39,10 +70,10 @@ public class ViewGoal extends Activity {
 		textView.setText(goalLocation);
 		
 		textView = (TextView) findViewById(R.id.goal_details_date);
-		textView.setText(goalDateAndTime);
+		textView.setText(goalDateAndTime.toString());
 		
 		textView = (TextView) findViewById(R.id.goal_details_owner);
-		String[] goalOwnerFirstLast = goalOwner.split("\\^");
+		String[] goalOwnerFirstLast = ownerName.split("\\^");
 		textView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
 		
 		Button attendButton = (Button) findViewById(R.id.join_goal_button);

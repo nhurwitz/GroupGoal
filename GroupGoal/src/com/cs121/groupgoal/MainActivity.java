@@ -199,14 +199,10 @@ public class MainActivity extends FragmentActivity implements LocationListener,
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final GoalPost item = postsQueryAdapter.getItem(position);
         selectedPostObjectId = item.getObjectId();
-        
-        // #TODO (nhurwitz) replace SettingsActivity with GoalActivity when done.
+
         Intent intent = new Intent(MainActivity.this, ViewGoal.class)
-        	.putExtra("goal_name", item.getName().toString())
-        	.putExtra("goal_description", item.getDescription().toString())
-        	.putExtra("goal_location", item.getEventLocation().toString())
-        	.putExtra("goal_owner", item.getOwner().get("fullName").toString())
-        	.putExtra("goal_date_time", item.getDate().toString());
+        	.putExtra("goal_id", item.getObjectId())
+        	.putExtra("goal_owner", item.getOwner().get("fullName").toString());
         
         startActivity(intent);
       }
