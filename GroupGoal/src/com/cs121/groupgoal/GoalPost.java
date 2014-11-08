@@ -14,6 +14,13 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Posts")
 public class GoalPost extends ParseObject {
+  
+  public enum Category {
+	  ACADEMIC,
+	  SOCIAL,
+	  FOOD,
+	  ADVENTURE
+  }
 	
   public String getName() {
 	  return getString("name");
@@ -61,6 +68,14 @@ public class GoalPost extends ParseObject {
   
   public void setPrivate(boolean isPrivate) {
 	  put("private", isPrivate);
+  }
+  
+  public List<Category> getCategories() {
+	  return getList("category");
+  }
+  
+  public void setCategories(List<Category> categories) {
+	  put("category", categories);
   }
   
   public Date getDate() {
