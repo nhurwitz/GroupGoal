@@ -129,9 +129,14 @@
         </activity>
         
         <activity
-            android:name=".ViewAttendeesActivity"
-            android:label="@string/title_activity_view_attendees" >
-        </activity>
+	       android:name=".ViewAttendeesActivity"
+	       android:label="@string/title_activity_view_attendees"
+	       android:parentActivityName="com.cs121.groupgoal.ViewGoal" >
+	       <!-- Parent activity meta-data to support 4.0 and lower -->
+	       <meta-data
+	           android:name="android.support.PARENT_ACTIVITY"
+	           android:value="com.cs121.groupgoal.ViewGoal" />
+	   </activity>
         
         <activity
             android:name=".ViewAndAddFriendsActivity"
