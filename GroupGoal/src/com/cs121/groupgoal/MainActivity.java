@@ -174,10 +174,12 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         
         // #TODO (nhurwitz) Replace fields with appropriate ones.
         
+        String[] goalOwnerFirstLast = post.getOwner().get("fullName").toString().split("\\^");
+        
         TextView contentView = (TextView) view.findViewById(R.id.content_view);
         TextView usernameView = (TextView) view.findViewById(R.id.username_view);
         contentView.setText(post.getName());
-        usernameView.setText(post.getOwner().getUsername());
+        usernameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
         return view;
       }
     };
@@ -203,7 +205,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         	.putExtra("goal_name", item.getName().toString())
         	.putExtra("goal_description", item.getDescription().toString())
         	.putExtra("goal_location", item.getEventLocation().toString())
-        	.putExtra("goal_owner", item.getOwner().getUsername().toString())
+        	.putExtra("goal_owner", item.getOwner().get("fullName").toString())
         	.putExtra("goal_date_time", item.getDate().toString());
         
         startActivity(intent);
@@ -446,6 +448,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.main, menu);
+    getActionBar().setDisplayShowHomeEnabled(false);
 
     menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
       public boolean onMenuItemClick(MenuItem item) {

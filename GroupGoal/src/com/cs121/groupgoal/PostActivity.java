@@ -65,6 +65,8 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_post);
     getActionBar().setDisplayHomeAsUpEnabled(true);
+    getActionBar().setDisplayShowHomeEnabled(false);
+
 
     Intent intent = getIntent();
     

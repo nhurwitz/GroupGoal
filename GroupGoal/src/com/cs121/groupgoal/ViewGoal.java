@@ -39,11 +39,9 @@ public class ViewGoal extends Activity {
 		textView = (TextView) findViewById(R.id.goal_details_date);
 		textView.setText(goalDateAndTime);
 		
-		//textView = (TextView) findViewById(R.id.goal_details_owner);
-		//String[] goalOwnerFirstLast = goalOwner.split("\\^");
-		//textView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
-		
-		
+		textView = (TextView) findViewById(R.id.goal_details_owner);
+		String[] goalOwnerFirstLast = goalOwner.split("\\^");
+		textView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
 		
 		Button attendButton = (Button) findViewById(R.id.join_goal_button);
 		
