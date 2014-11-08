@@ -18,6 +18,8 @@ public class ViewGoal extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_view_goal);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	    getActionBar().setDisplayShowHomeEnabled(false);
 		
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
