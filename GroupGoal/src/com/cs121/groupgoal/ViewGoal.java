@@ -56,6 +56,28 @@ public class ViewGoal extends Activity {
 			
 			
 		});
+		Button viewComments = (Button) findViewById(R.id.view_comments_button);
+		
+		viewComments.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(ViewGoal.this, CommentActivity.class);
+		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+		        startActivity(intent);
+			}
+			
+			
+		});
+		Button viewAttendees = (Button) findViewById(R.id.view_attendees_button);
+		
+		viewAttendees.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(ViewGoal.this, ViewAttendeesActivity.class);
+		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+		        startActivity(intent);
+			}
+			
+			
+		});
 
 	}
 }
