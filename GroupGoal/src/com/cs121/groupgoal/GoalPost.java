@@ -71,7 +71,7 @@ public class GoalPost extends ParseObject {
 	  put("date", date);
   }
   
-  public List<Object> getAttendees() {
+  public List<ParseUser> getAttendees() {
 	  return getList("attendees");
   }
   

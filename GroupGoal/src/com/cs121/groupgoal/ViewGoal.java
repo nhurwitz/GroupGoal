@@ -1,6 +1,8 @@
 package com.cs121.groupgoal;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.http.ParseException;
 
@@ -30,6 +32,9 @@ public class ViewGoal extends Activity {
 	String goalLocation = "";
 	ParseUser goalOwner = null;
 	Date goalDateAndTime = null;
+	List<ParseUser> attendees = null;
+	
+	boolean attending = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +55,16 @@ public class ViewGoal extends Activity {
 			Log.e("Goal Error", e.getMessage());
 		}
 		
+	    
+	    
 	    if(goal != null) {
+	    	attendees = (goal.getAttendees() == null) ? new ArrayList<ParseUser>() : goal.getAttendees();
 	    	goalName = goal.getName().toString();
 	    	goalDescription = goal.getDescription().toString();
 	    	locationMade = goal.getLocation();
 	    	goalLocation = goal.getEventLocation().toString();
 	    	goalDateAndTime = goal.getDate();
-	    }
-
-		
+	    }	
 		
 		TextView textView = (TextView) findViewById(R.id.goal_details_title);
 		textView.setText(goalName);
@@ -77,15 +83,24 @@ public class ViewGoal extends Activity {
 		textView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
 		
 		Button attendButton = (Button) findViewById(R.id.join_goal_button);
+		if(attendees.contains(ParseUser.getCurrentUser())) {
+			attending = true;
+			setAttendingBox(attending);
+		}
 		
 		attendButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(ViewGoal.this, MainActivity.class);
-		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-		        startActivity(intent);
+				if(!attending) {
+					attendees.add(ParseUser.getCurrentUser());
+					attending = true;
+					setAttendingBox(attending);
+				} else {
+					attendees.remove(ParseUser.getCurrentUser());
+					attending = false;
+					setAttendingBox(attending);
+				}
+				goal.setAttendees(attendees);
 			}
-			
-			
 		});
 		Button viewComments = (Button) findViewById(R.id.view_comments_button);
 		
@@ -110,5 +125,14 @@ public class ViewGoal extends Activity {
 			
 		});
 
+	}
+	
+	public void setAttendingBox(boolean attending) {
+		Button attendButton = (Button) findViewById(R.id.join_goal_button);
+		if(attending) {
+			attendButton.setText("Joined!");
+		} else {
+			attendButton.setText("Join?");
+		}
 	}
 }
