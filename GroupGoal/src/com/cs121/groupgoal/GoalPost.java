@@ -95,7 +95,7 @@ public class GoalPost extends ParseObject {
   }
   
   public Number getCurrentGroupSize() {
-	  return getList("attendees").size();
+	  return getList("attendees") == null ? 0 : getList("attendees").size();
   }
   
   public List<ParseUser> getAttendees() {

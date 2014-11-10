@@ -146,7 +146,7 @@ import com.parse.SignUpCallback;
 	  }
 	  
 	  @SuppressLint("DefaultLocale")
-	private String capitalize(String name) {
+	public static String capitalize(String name) {
 		  name = name.toLowerCase();
 		  if(name.length() > 1) {
 			  return Character.toUpperCase(name.charAt(0)) + name.substring(1);
