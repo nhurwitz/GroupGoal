@@ -43,10 +43,14 @@
 
     <!-- PostActivity Strings -->
     <string name="goal_name">Goal Name</string>
+    <string name="goal_date_hint">Choose a Date</string>
     <string name="goal_description">Description</string>
     <string name="goal_description_hint">Describe your goal…</string>
     <string name="location">Location</string>
     <string name="goal_time">Time</string>
+    <string name="goal_time_hint">Choose a Time</string>
+    <string name="goal_private">Private</string>
+    <string name="goal_category">Category</string>
 
     <!-- GoalView Strings -->
     <string name="goal_owner">Goal Owner</string>
