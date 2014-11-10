@@ -98,24 +98,25 @@ public class GoalPost extends ParseObject {
 	  return getList("attendees") == null ? 0 : getList("attendees").size();
   }
   
-  public List<ParseUser> getAttendees() {
-	  return getList("attendees");
+  public List<String> getAttendees() {
+	  List<String> a = getList("attendees");
+	  return a;
   }
   
-  public void setAttendees(List<ParseUser> attendees) {
+  public void setAttendees(List<String> attendees) {
 	  put("attendees", attendees);
   }
   
-  public void addAttendee(ParseUser user) {
-	  List<Object> attendees = getList("attendees");
+  public void addAttendee(String user) {
+	  List<String> attendees = getList("attendees");
 	  if(!attendees.contains(user)) {
 		  attendees.add(user);
 		  put("attendees", attendees);
 	  }
   }
   
-  public void removeAttendee(ParseUser user) {
-	  List<Object> attendees = getList("attendees");
+  public void removeAttendee(String user) {
+	  List<String> attendees = getList("attendees");
 	  if(attendees.contains(user)) {
 		  attendees.remove(user);
 		  put("attendees", attendees);

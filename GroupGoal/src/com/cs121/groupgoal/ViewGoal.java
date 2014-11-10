@@ -32,7 +32,7 @@ public class ViewGoal extends Activity {
 	String goalLocation = "";
 	ParseUser goalOwner = null;
 	Date goalDateAndTime = null;
-	List<ParseUser> attendees = null;
+	List<String> attendees = null;
 	
 	boolean attending = false;
 
@@ -58,7 +58,7 @@ public class ViewGoal extends Activity {
 	    
 	    
 	    if(goal != null) {
-	    	attendees = (goal.getAttendees() == null) ? new ArrayList<ParseUser>() : goal.getAttendees();
+	    	attendees = goal.getAttendees();
 	    	goalName = goal.getName().toString();
 	    	goalDescription = goal.getDescription().toString();
 	    	locationMade = goal.getLocation();
@@ -83,7 +83,7 @@ public class ViewGoal extends Activity {
 		textView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
 		
 		Button attendButton = (Button) findViewById(R.id.join_goal_button);
-		if(attendees.contains(ParseUser.getCurrentUser())) {
+		if(attendees.contains(ParseUser.getCurrentUser().getObjectId())) {
 			attending = true;
 			setAttendingBox(attending);
 		}
@@ -91,15 +91,16 @@ public class ViewGoal extends Activity {
 		attendButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if(!attending) {
-					attendees.add(ParseUser.getCurrentUser());
+					attendees.add(ParseUser.getCurrentUser().getObjectId());
 					attending = true;
 					setAttendingBox(attending);
 				} else {
-					attendees.remove(ParseUser.getCurrentUser());
+					attendees.remove(ParseUser.getCurrentUser().getObjectId());
 					attending = false;
 					setAttendingBox(attending);
 				}
 				goal.setAttendees(attendees);
+				goal.saveInBackground();
 			}
 		});
 		Button viewComments = (Button) findViewById(R.id.view_comments_button);

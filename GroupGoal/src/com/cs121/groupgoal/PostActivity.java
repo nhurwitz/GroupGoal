@@ -1,9 +1,11 @@
 package com.cs121.groupgoal;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -121,6 +123,9 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				GoalPost.Category goalCategory = GoalPost.Category.valueOf(
 						categoryDropdown.getSelectedItem().toString().toUpperCase());
 		
+				List<String> attendees = new ArrayList<String>();
+				attendees.add(ParseUser.getCurrentUser().getObjectId());
+				
 				GoalPost goal = new GoalPost();
 				goal.setName(goalTitle);
 				goal.setDescription(goalDescription);
@@ -131,6 +136,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setPrivate(goalPrivate);
 				goal.setTargetGroupSize(goalSize);
 				goal.setCategory(goalCategory);
+				goal.setAttendees(attendees);
 				
 				
 				goal.saveInBackground(new SaveCallback() {
