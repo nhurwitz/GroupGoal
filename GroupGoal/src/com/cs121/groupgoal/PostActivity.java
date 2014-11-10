@@ -85,7 +85,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     
     categoryDropdown = (Spinner)findViewById(R.id.goal_category_spinner);
     String[] items = new String[GoalPost.Category.values().length+1];
-    items[0] = "Category";
+    items[0] = "";
     for(int i = 1; i < items.length; i++) {
     	items[i] = GoalPost.Category.values()[i-1].toString().toLowerCase();
     }
@@ -110,12 +110,12 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			String goalDate = goalDateView.getText().toString();
 			String goalTime = goalTimeView.getText().toString();
 			boolean goalPrivate = isPrivateCheckbox.isChecked();
-			GoalPost.Category goalCategory = GoalPost.Category.valueOf(
-					categoryDropdown.getSelectedItem().toString().toUpperCase());
 			
 			Date scheduledDate = parseDate(goalDate + " " + goalTime);
 			
-			if(titleValid() && descriptionValid() && dateAndTimeValid()) {
+			if(titleValid() && descriptionValid() && dateAndTimeValid() && categoryValid()) {
+				GoalPost.Category goalCategory = GoalPost.Category.valueOf(
+						categoryDropdown.getSelectedItem().toString().toUpperCase());
 		
 				GoalPost goal = new GoalPost();
 				goal.setName(goalTitle);
@@ -213,6 +213,17 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 		} else {
 			goalDateView.setError(null);
 			goalTimeView.setError(null);
+			return true;
+		}
+	}
+	
+	@SuppressLint("ShowToast")
+	private boolean categoryValid() {
+		if(categoryDropdown.getSelectedItem().toString().length() == 0) {
+			Toast.makeText(getApplicationContext(), "Category is a required field", 
+					Toast.LENGTH_LONG);
+			return false;
+		} else {
 			return true;
 		}
 	}
