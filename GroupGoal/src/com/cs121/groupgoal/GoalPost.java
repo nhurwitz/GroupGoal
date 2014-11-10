@@ -70,12 +70,12 @@ public class GoalPost extends ParseObject {
 	  put("private", isPrivate);
   }
   
-  public List<Category> getCategories() {
-	  return getList("category");
+  public Category getCategory() {
+	  return Category.valueOf(get("category").toString());
   }
   
-  public void setCategories(List<Category> categories) {
-	  put("category", categories);
+  public void setCategory(Category category) {
+	  put("category", category.toString());
   }
   
   public Date getDate() {

@@ -23,13 +23,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.cs121.groupgoal.GoalPost.Category;
 import com.cs121.groupgoal.R;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -54,12 +58,16 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   
   private Button createButton;
   private ParseGeoPoint geoPoint;
+  
+  private CheckBox isPrivateCheckbox;
+  private Spinner categoryDropdown;
 
   private Date date;
   private SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("MM-dd-yyyy");
   private SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("hh:mm a");
   private SimpleDateFormat DATE_AND_TIME_FORMATTER = new SimpleDateFormat("MM-dd-yyyy hh:mm a");
 
+  @SuppressLint("DefaultLocale")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -74,12 +82,22 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     
     Location location = intent.getParcelableExtra(Application.INTENT_EXTRA_LOCATION);
     geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+    
+    categoryDropdown = (Spinner)findViewById(R.id.goal_category_spinner);
+    String[] items = new String[GoalPost.Category.values().length+1];
+    items[0] = "Category";
+    for(int i = 1; i < items.length; i++) {
+    	items[i] = GoalPost.Category.values()[i-1].toString().toLowerCase();
+    }
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+    categoryDropdown.setAdapter(adapter);
 
     goalTitleView = (EditText) findViewById(R.id.goal_title);
     goalDescriptionView = (EditText) findViewById(R.id.goal_description);
     goalLocationView = (EditText) findViewById(R.id.goal_location);
     goalDateView = (TextView) findViewById(R.id.goal_date);
     goalTimeView = (TextView) findViewById(R.id.goal_time);
+    isPrivateCheckbox = (CheckBox) findViewById(R.id.goal_checkbox_private);
     createButton = (Button) findViewById(R.id.submit_goal_button);
     
     createButton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +109,9 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			String goalLocation = goalLocationView.getText().toString();
 			String goalDate = goalDateView.getText().toString();
 			String goalTime = goalTimeView.getText().toString();
+			boolean goalPrivate = isPrivateCheckbox.isChecked();
+			GoalPost.Category goalCategory = GoalPost.Category.valueOf(
+					categoryDropdown.getSelectedItem().toString().toUpperCase());
 			
 			Date scheduledDate = parseDate(goalDate + " " + goalTime);
 			
@@ -103,6 +124,9 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setDate(scheduledDate);
 				goal.setEventLocation(goalLocation);
 				goal.setLocation(geoPoint);
+				goal.setPrivate(goalPrivate);
+				goal.setCategory(goalCategory);
+				
 				
 				goal.saveInBackground(new SaveCallback() {
 			      @Override
