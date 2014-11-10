@@ -86,6 +86,18 @@ public class GoalPost extends ParseObject {
 	  put("date", date);
   }
   
+  public void setTargetGroupSize(int size) {
+	  put("size", size);
+  }
+  
+  public Number getTargetGroupSize() {
+	  return getNumber("size");
+  }
+  
+  public Number getCurrentGroupSize() {
+	  return getList("attendees").size();
+  }
+  
   public List<ParseUser> getAttendees() {
 	  return getList("attendees");
   }

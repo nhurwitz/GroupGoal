@@ -52,6 +52,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   private EditText goalTitleView;
   private EditText goalDescriptionView;
   private EditText goalLocationView;
+  private EditText goalSizeView;
   
   private TextView goalDateView;
   private TextView goalTimeView;
@@ -95,6 +96,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     goalTitleView = (EditText) findViewById(R.id.goal_title);
     goalDescriptionView = (EditText) findViewById(R.id.goal_description);
     goalLocationView = (EditText) findViewById(R.id.goal_location);
+    goalSizeView = (EditText) findViewById(R.id.goal_group_size_value);
     goalDateView = (TextView) findViewById(R.id.goal_date);
     goalTimeView = (TextView) findViewById(R.id.goal_time);
     isPrivateCheckbox = (CheckBox) findViewById(R.id.goal_checkbox_private);
@@ -110,6 +112,8 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			String goalDate = goalDateView.getText().toString();
 			String goalTime = goalTimeView.getText().toString();
 			boolean goalPrivate = isPrivateCheckbox.isChecked();
+			int goalSize = goalSizeView.getText().toString().length() == 0 ? 0 :
+				Integer.parseInt(goalSizeView.getText().toString());
 			
 			Date scheduledDate = parseDate(goalDate + " " + goalTime);
 			
@@ -125,6 +129,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setEventLocation(goalLocation);
 				goal.setLocation(geoPoint);
 				goal.setPrivate(goalPrivate);
+				goal.setTargetGroupSize(goalSize);
 				goal.setCategory(goalCategory);
 				
 				

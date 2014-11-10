@@ -117,6 +117,31 @@
 			    android:spinnerMode="dropdown" />
                 
             </LinearLayout>
+            
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goal_size"
+                android:layout_marginBottom="10dp"
+        		android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/goal_group_size"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+        		android:layout_marginTop="10dp"
+                android:inputType="number"
+                android:hint="@string/goal_size_hint"
+                android:textSize="20sp"
+                android:id="@+id/goal_group_size_value"
+                />
+            </LinearLayout>
          
           <LinearLayout
             android:layout_width="match_parent"

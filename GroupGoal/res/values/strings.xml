@@ -49,8 +49,10 @@
     <string name="location">Location</string>
     <string name="goal_time">Time</string>
     <string name="goal_time_hint">Choose a Time</string>
-    <string name="goal_private">Private</string>
-    <string name="goal_category">Category</string>
+    <string name="goal_private">Private:</string>
+    <string name="goal_category">Category:</string>
+    <string name="goal_size">Target Group Size:</string>
+    <string name="goal_size_hint">0</string>
 
     <!-- GoalView Strings -->
     <string name="goal_owner">Goal Owner</string>
