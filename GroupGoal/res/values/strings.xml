@@ -16,7 +16,7 @@
     <string name="create">Create</string>
     <string name="prompt_post">Post</string>
     <string name="post_out_of_range">Can\'t view post! Get closer.</string>
-    <string name="progress_post">Posting&#8230;</string>
+    <string name="progress_post">Posting</string>
     <string name="settings_distance_format">%d feet</string>
     <string name="activity_post_title">Create a Goal</string>
     <string name="character_count_placeholder">0/140</string>

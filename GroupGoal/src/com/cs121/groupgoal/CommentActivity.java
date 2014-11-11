@@ -26,16 +26,16 @@ import com.parse.SaveCallback;
 public class CommentActivity extends Activity {
 	  private EditText postEditText;
 	  private Button postButton;
-	 // private ParseGeoPoint geoPoint;
+	  private ParseGeoPoint geoPoint;
 	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment);
 		
-	    //Intent intent = getIntent();
-	    //Location location = intent.getParcelableExtra(Application.INTENT_EXTRA_LOCATION);
-	    //geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+	    Intent intent = getIntent();
+	    Location location = intent.getParcelableExtra(Application.INTENT_EXTRA_LOCATION);
+	    geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
 		
 		postEditText = (EditText) findViewById(R.id.edit_comment);
 	    postEditText.addTextChangedListener(new TextWatcher() {
@@ -77,10 +77,10 @@ public class CommentActivity extends Activity {
 	    //Create a comment
 	    Comment c = new Comment();
 	    // Set the location to the current user's location
-	    //c.setLocation(geoPoint);
+	    c.setLocation(geoPoint);
 	    c.setText(text);
 	    c.setUser(ParseUser.getCurrentUser());
-	  /*  ParseACL acl = new ParseACL();
+	    ParseACL acl = new ParseACL();
 	    // Give public read access
 	    acl.setPublicReadAccess(true);
 	    c.setACL(acl);
@@ -92,7 +92,7 @@ public class CommentActivity extends Activity {
 	        dialog.dismiss();
 	        finish();
 	      }
-	    });*/
+	    });
 	  }
 	  
 	  private String getPostEditTextText () {
