@@ -28,6 +28,8 @@ public class SettingsActivity extends Activity {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.activity_settings);
+    getActionBar().setDisplayHomeAsUpEnabled(true);
+    getActionBar().setDisplayShowHomeEnabled(false);
 
     float currentSearchDistance = Application.getSearchDistance();
     if (!availableOptions.contains(currentSearchDistance)) {

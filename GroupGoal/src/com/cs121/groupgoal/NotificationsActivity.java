@@ -3,6 +3,7 @@ package com.cs121.groupgoal;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -19,6 +20,8 @@ public class NotificationsActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.notifications, menu);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	    getActionBar().setDisplayShowHomeEnabled(false);
 		
 		  menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
@@ -60,16 +63,19 @@ public class NotificationsActivity extends Activity {
 		
 		
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    
+	    case R.id.action_settings:
+	    	return true;
+	    }
+	    
+	    return super.onOptionsItemSelected(item);
 	}
 }

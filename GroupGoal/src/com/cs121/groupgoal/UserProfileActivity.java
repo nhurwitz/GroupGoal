@@ -35,6 +35,8 @@ import android.widget.TextView;
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_user_profile);
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		    getActionBar().setDisplayShowHomeEnabled(false);
 			
 			displayProfile();
 			
@@ -59,11 +61,12 @@ import android.widget.TextView;
 		}
 		
 		public void displayProfile() { //function to display general user info
-			String userFullName = user.getString("fullName");
+			String userFullName = user.getString("fullName").toString();
+			String[] firstLast = userFullName.split("\\^");
 			
 			TextView nameView = (TextView) findViewById(R.id.user_name_box);
 			nameView.setTypeface(null, Typeface.BOLD);
-		    nameView.setText(userFullName);
+		    nameView.setText(firstLast[0] + " " + firstLast[1]);
 		       
 		    String userDescription = user.getString("userDescription");  
 		    TextView profileDescription = (TextView) findViewById (R.id.user_info_text);

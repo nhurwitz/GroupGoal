@@ -1,9 +1,11 @@
 package com.cs121.groupgoal;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,18 +18,24 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.cs121.groupgoal.GoalPost.Category;
 import com.cs121.groupgoal.R;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -46,22 +54,30 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   private EditText goalTitleView;
   private EditText goalDescriptionView;
   private EditText goalLocationView;
+  private EditText goalSizeView;
   
   private TextView goalDateView;
   private TextView goalTimeView;
   
   private Button createButton;
   private ParseGeoPoint geoPoint;
+  
+  private CheckBox isPrivateCheckbox;
+  private Spinner categoryDropdown;
 
   private Date date;
   private SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("MM-dd-yyyy");
   private SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("hh:mm a");
   private SimpleDateFormat DATE_AND_TIME_FORMATTER = new SimpleDateFormat("MM-dd-yyyy hh:mm a");
 
+  @SuppressLint("DefaultLocale")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_post);
+    getActionBar().setDisplayHomeAsUpEnabled(true);
+    getActionBar().setDisplayShowHomeEnabled(false);
+
 
     Intent intent = getIntent();
     
@@ -69,12 +85,23 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     
     Location location = intent.getParcelableExtra(Application.INTENT_EXTRA_LOCATION);
     geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+    
+    categoryDropdown = (Spinner)findViewById(R.id.goal_category_spinner);
+    String[] items = new String[GoalPost.Category.values().length+1];
+    items[0] = "";
+    for(int i = 1; i < items.length; i++) {
+    	items[i] = GoalPost.Category.values()[i-1].toString().toLowerCase();
+    }
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+    categoryDropdown.setAdapter(adapter);
 
     goalTitleView = (EditText) findViewById(R.id.goal_title);
     goalDescriptionView = (EditText) findViewById(R.id.goal_description);
     goalLocationView = (EditText) findViewById(R.id.goal_location);
+    goalSizeView = (EditText) findViewById(R.id.goal_group_size_value);
     goalDateView = (TextView) findViewById(R.id.goal_date);
     goalTimeView = (TextView) findViewById(R.id.goal_time);
+    isPrivateCheckbox = (CheckBox) findViewById(R.id.goal_checkbox_private);
     createButton = (Button) findViewById(R.id.submit_goal_button);
     
     createButton.setOnClickListener(new View.OnClickListener() {
@@ -86,11 +113,19 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			String goalLocation = goalLocationView.getText().toString();
 			String goalDate = goalDateView.getText().toString();
 			String goalTime = goalTimeView.getText().toString();
+			boolean goalPrivate = isPrivateCheckbox.isChecked();
+			int goalSize = goalSizeView.getText().toString().length() == 0 ? 0 :
+				Integer.parseInt(goalSizeView.getText().toString());
 			
 			Date scheduledDate = parseDate(goalDate + " " + goalTime);
 			
-			if(titleValid() && descriptionValid() && dateAndTimeValid()) {
+			if(titleValid() && descriptionValid() && dateAndTimeValid() && categoryValid()) {
+				GoalPost.Category goalCategory = GoalPost.Category.valueOf(
+						categoryDropdown.getSelectedItem().toString().toUpperCase());
 		
+				List<String> attendees = new ArrayList<String>();
+				attendees.add(ParseUser.getCurrentUser().getObjectId());
+				
 				GoalPost goal = new GoalPost();
 				goal.setName(goalTitle);
 				goal.setDescription(goalDescription);
@@ -98,6 +133,11 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setDate(scheduledDate);
 				goal.setEventLocation(goalLocation);
 				goal.setLocation(geoPoint);
+				goal.setPrivate(goalPrivate);
+				goal.setTargetGroupSize(goalSize);
+				goal.setCategory(goalCategory);
+				goal.setAttendees(attendees);
+				
 				
 				goal.saveInBackground(new SaveCallback() {
 			      @Override
@@ -186,5 +226,27 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			goalTimeView.setError(null);
 			return true;
 		}
+	}
+	
+	@SuppressLint("ShowToast")
+	private boolean categoryValid() {
+		if(categoryDropdown.getSelectedItem().toString().length() == 0) {
+			Toast.makeText(getApplicationContext(), "Category is a required field", 
+					Toast.LENGTH_LONG);
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 }

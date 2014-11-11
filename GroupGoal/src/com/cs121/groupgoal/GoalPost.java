@@ -14,6 +14,13 @@ import com.parse.ParseUser;
  */
 @ParseClassName("Posts")
 public class GoalPost extends ParseObject {
+  
+  public enum Category {
+	  ACADEMIC,
+	  SOCIAL,
+	  FOOD,
+	  ADVENTURE
+  }
 	
   public String getName() {
 	  return getString("name");
@@ -63,6 +70,14 @@ public class GoalPost extends ParseObject {
 	  put("private", isPrivate);
   }
   
+  public Category getCategory() {
+	  return Category.valueOf(get("category").toString());
+  }
+  
+  public void setCategory(Category category) {
+	  put("category", category.toString());
+  }
+  
   public Date getDate() {
 	  return getDate("date");
   }
@@ -71,24 +86,37 @@ public class GoalPost extends ParseObject {
 	  put("date", date);
   }
   
-  public List<Object> getAttendees() {
-	  return getList("attendees");
+  public void setTargetGroupSize(int size) {
+	  put("size", size);
   }
   
-  public void setAttendees(List<ParseUser> attendees) {
+  public Number getTargetGroupSize() {
+	  return getNumber("size");
+  }
+  
+  public Number getCurrentGroupSize() {
+	  return getList("attendees") == null ? 0 : getList("attendees").size();
+  }
+  
+  public List<String> getAttendees() {
+	  List<String> a = getList("attendees");
+	  return a;
+  }
+  
+  public void setAttendees(List<String> attendees) {
 	  put("attendees", attendees);
   }
   
-  public void addAttendee(ParseUser user) {
-	  List<Object> attendees = getList("attendees");
+  public void addAttendee(String user) {
+	  List<String> attendees = getList("attendees");
 	  if(!attendees.contains(user)) {
 		  attendees.add(user);
 		  put("attendees", attendees);
 	  }
   }
   
-  public void removeAttendee(ParseUser user) {
-	  List<Object> attendees = getList("attendees");
+  public void removeAttendee(String user) {
+	  List<String> attendees = getList("attendees");
 	  if(attendees.contains(user)) {
 		  attendees.remove(user);
 		  put("attendees", attendees);
