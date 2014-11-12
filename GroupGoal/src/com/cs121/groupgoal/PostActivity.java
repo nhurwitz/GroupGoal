@@ -2,6 +2,7 @@ package com.cs121.groupgoal;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -69,6 +70,8 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   private SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("MM-dd-yyyy");
   private SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("hh:mm a");
   private SimpleDateFormat DATE_AND_TIME_FORMATTER = new SimpleDateFormat("MM-dd-yyyy hh:mm a");
+  
+  ParseUser user = ParseUser.getCurrentUser();
 
   @SuppressLint("DefaultLocale")
   @Override
@@ -138,13 +141,23 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setCategory(goalCategory);
 				goal.setAttendees(attendees);
 				
-				
 				goal.saveInBackground(new SaveCallback() {
 			      @Override
 			      public void done(ParseException e) {
 			        finish();
 			      }
 			    });
+				String goalID = goal.getObjectId();		
+				System.out.println("NEW GOAL ID: "+goalID); //is null...
+				user.addAllUnique("createdGoals", Arrays.asList(goalID)); //add new goal to the users list of created goals. 
+				user.saveInBackground(new SaveCallback() {
+				      @Override
+				      public void done(ParseException e) {
+				        finish();
+				      }
+				    });
+				
+	
 				
 				Toast.makeText(getApplicationContext(), "Goal Successfully Created", 
 						Toast.LENGTH_LONG).show();

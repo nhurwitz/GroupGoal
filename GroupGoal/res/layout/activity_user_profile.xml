@@ -81,12 +81,42 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Upcoming Goals:" />
+
+    <ListView
+        android:id="@+id/upComing_goals_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </ListView>
     
      <TextView
         android:id="@+id/user_goals_text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:text="Created Goals:" />
+     
+        <ListView
+        android:id="@+id/created_goals_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    	</ListView>
+    
+     
+      <TextView
+        android:id="@+id/user_goals_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Past Goals:" />
+      
+         <ListView
+        android:id="@+id/past_goals_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    	</ListView>
+    
 
 </LinearLayout>

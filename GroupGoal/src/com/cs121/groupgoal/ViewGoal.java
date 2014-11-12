@@ -1,6 +1,7 @@
 package com.cs121.groupgoal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class ViewGoal extends Activity {
 	ParseUser goalOwner = null;
 	Date goalDateAndTime = null;
 	List<String> attendees = null;
+	
+	  ParseUser user = ParseUser.getCurrentUser();
+
 	
 	boolean attending = false;
 
@@ -94,6 +98,11 @@ public class ViewGoal extends Activity {
 					attendees.add(ParseUser.getCurrentUser().getObjectId());
 					attending = true;
 					setAttendingBox(attending);
+					String goalId = goal.getObjectId();
+					
+					user.addAllUnique("myGoals", Arrays.asList(goalId)); //saves the GoalPost to the list of goals associated to current user
+					user.saveInBackground();
+
 				} else {
 					attendees.remove(ParseUser.getCurrentUser().getObjectId());
 					attending = false;

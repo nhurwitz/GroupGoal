@@ -1,6 +1,12 @@
 package com.cs121.groupgoal;
 	
 	
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 	
 import android.app.Activity;
@@ -10,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,17 +26,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 	
-
-	
-	//adding some new comment shit
-	
-	//some new comments
 	public class UserProfileActivity extends Activity {
 		ParseUser user= ParseUser.getCurrentUser();
 		TextView userNameTextBox;
 		Editable userProfileMessage;
 		private EditText searchedFriend;
 		
+		ArrayList<String> allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined
+		//ArrayList<GoalPost> arrayList = new ArrayList<GoalPost>();	//	ArrayList<GoalPost> allGoals = allGoalsList.toArray();
+		//arrayList = user.getList("myGoals");
+		
+		ArrayList<String> pastGoals = new ArrayList<String>();
+		ArrayList<String> upcomingGoals = new ArrayList<String>();
+		
+		ArrayList<String> madeGoals = (ArrayList<String>) user.get("createdGoals"); //arrayList that holds all the goals that the user has created
+
+		GoalPost goal;
+		Date goalDate;
+
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -70,17 +84,11 @@ import android.widget.TextView;
 		       
 		    String userDescription = user.getString("userDescription");  
 		    TextView profileDescription = (TextView) findViewById (R.id.user_info_text);
-			  profileDescription.setTypeface(null, Typeface.BOLD_ITALIC);
-		    	profileDescription.setText(userDescription);
+			profileDescription.setTypeface(null, Typeface.BOLD_ITALIC);
+		    profileDescription.setText(userDescription);
 			
 		}
 		
-		public void displayLists(){ //function to display the three lists of the user's goals
-			
-			
-		}
-		
-		//TO-DO (VICKY): need to update Parse value when user edits profile description
 		public void popUpEditBox(){
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
 	
@@ -93,14 +101,9 @@ import android.widget.TextView;
 	
 			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-			  final Editable value = input.getText();
-			  TextView UserInfoDescription = (TextView) findViewById(R.id.user_info_text);
-			  UserInfoDescription.setTypeface(null, Typeface.BOLD_ITALIC);
-		      UserInfoDescription.setText("'"+value+"'");
-		      userProfileMessage=value;
-
-			  }
-			
+			  Editable value = input.getText();
+			  resetUserSignature(value);
+			  }	
 				});
 	
 			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -113,18 +116,79 @@ import android.widget.TextView;
 		
 		}
 		
+		public void resetUserSignature(Editable e){  //is called when the user updates his/her signature
+			String result = e.toString();			 // saves the attribute to Parse and updates the text field
+			
+			user.put("userDescription", result);
+			
+			String newDescription = user.getString("userDescription");  
+		    TextView profileDescription = (TextView) findViewById (R.id.user_info_text);
+			profileDescription.setTypeface(null, Typeface.BOLD_ITALIC);
+			profileDescription.setText(newDescription);
+			
+			
+		}
+		
 		
 		public void searchAndAddFriends(){ //is called when button is pushed to add friends (use searchedFriend attribute)
 			
 		}
 		
-		public void displayUpcomingGoals(){
+		public void displayLists(){ //function to display the three lists of the user's goals
+			//first sort goals between upcoming and past goals
+
+			int i;
+			Date todayDate = new Date();
+			System.out.println("empty??"+allGoals.isEmpty());
+			System.out.println("size?? "+allGoals.size());
+			for (i=0; i < allGoals.size(); i++){
+				
+				ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class);
+			    
+			    try {
+			    	System.out.println("casting here");
+			    	String id = (String) allGoals.get(i);
+			    	System.out.println("ID:::"+id);
+			    	goal = postQuery.get(id);
+			    	//System.out.println("name of goal: "+goal.getName());
+			    	goalDate = goal.getDate();
+			    } catch (com.parse.ParseException e) {
+					Log.e("Goal Error", e.getMessage());
+				}
+				
+				System.out.println("iteration number: "+i);	
+				System.out.println("date: "+goalDate);
+				System.out.println("todate: "+todayDate);
+				System.out.println("comp"+todayDate.compareTo(goalDate));
+				//GoalPost tester = allthegoals.get(i);				
+				//System.out.println("name!: "+tester.getName());
+				
+				//String ID = allGoals.get(i).getObjectId(); //ERROR OF ARRAYLIST TO OBJECT HERE
+				//System.out.println("object ID: "+ID);
+			
+			    
+			    if (todayDate.compareTo(goalDate) <= 0){ //means the goal has not passed yet or is happening right now
+			    	upcomingGoals.add(allGoals.get(i));			    	
+			    }
+			    else{
+			    	System.out.println("comparing");
+
+			    	pastGoals.add(allGoals.get(i));			    	
+			    }
+			}
+			displayUpcomingGoals(upcomingGoals);
+			displayPastGoals(pastGoals);
+			displayCreatedGoals();
 			
 		}
-		public void displayPastAttendedGoals(){
+		
+		public void displayUpcomingGoals(ArrayList<String> goals){
 			
 		}
-		public void displayPastCreatedGoals(){
+		public void displayPastGoals(ArrayList<String> goals){
+			
+		}
+		public void displayCreatedGoals(){
 			
 		}
 	
