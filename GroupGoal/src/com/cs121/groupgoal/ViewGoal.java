@@ -38,11 +38,13 @@ public class ViewGoal extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_view_goal);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setDisplayShowHomeEnabled(false);
-	    
+  	  	Log.d("only that works 2", "hi");
+
 		Intent intent = getIntent();
 		String parseId = intent.getStringExtra("goal_id");
 		String ownerName = intent.getStringExtra("goal_owner");

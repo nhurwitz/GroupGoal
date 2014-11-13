@@ -179,11 +179,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         int current = (Integer) post.getCurrentGroupSize();
         TextView contentView = (TextView) view.findViewById(R.id.content_view);
         TextView usernameView = (TextView) view.findViewById(R.id.username_view);
-        TextView categoryView = (TextView) view.findViewById(R.id.goal_list_category);
         TextView sizeView = (TextView) view.findViewById(R.id.goal_list_attending);
         contentView.setText(post.getName());
         usernameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
-        categoryView.setText(SignUpActivity.capitalize(post.getCategory().toString()));
         sizeView.setText(current + "/" + target);
         return view;
       }
@@ -202,6 +200,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Set up the handler for an item's selection
     postsListView.setOnItemClickListener(new OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    	  System.out.print("only that works");
         final GoalPost item = postsQueryAdapter.getItem(position);
         selectedPostObjectId = item.getObjectId();
 

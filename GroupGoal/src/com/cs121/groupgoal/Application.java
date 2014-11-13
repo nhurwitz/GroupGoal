@@ -33,6 +33,7 @@ public class Application extends android.app.Application {
     super.onCreate();
 
     ParseObject.registerSubclass(GoalPost.class);
+    ParseObject.registerSubclass(Comment.class);
     Parse.initialize(this, "taKaWQ9jdSlG2DryqXcpg0Aq8FMobmFjiS6K500d",
         "y0C4d44dKDn6FFJdyigkjAaonrrzbGytUzbU59Bp");
 
