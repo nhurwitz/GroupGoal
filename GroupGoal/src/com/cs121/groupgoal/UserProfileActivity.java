@@ -33,8 +33,7 @@ import android.widget.TextView;
 		private EditText searchedFriend;
 		
 		ArrayList<String> allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined
-		//ArrayList<GoalPost> arrayList = new ArrayList<GoalPost>();	//	ArrayList<GoalPost> allGoals = allGoalsList.toArray();
-		//arrayList = user.getList("myGoals");
+		
 		
 		ArrayList<String> pastGoals = new ArrayList<String>();
 		ArrayList<String> upcomingGoals = new ArrayList<String>();
@@ -71,7 +70,7 @@ import android.widget.TextView;
 				}
 			});
 			
-			displayLists();
+			sortLists();
 		}
 		
 		public void displayProfile() { //function to display general user info
@@ -120,13 +119,12 @@ import android.widget.TextView;
 			String result = e.toString();			 // saves the attribute to Parse and updates the text field
 			
 			user.put("userDescription", result);
+			user.saveInBackground();
 			
 			String newDescription = user.getString("userDescription");  
 		    TextView profileDescription = (TextView) findViewById (R.id.user_info_text);
 			profileDescription.setTypeface(null, Typeface.BOLD_ITALIC);
 			profileDescription.setText(newDescription);
-			
-			
 		}
 		
 		
@@ -134,7 +132,7 @@ import android.widget.TextView;
 			
 		}
 		
-		public void displayLists(){ //function to display the three lists of the user's goals
+		public void sortLists(){ //function to display the three lists of the user's goals
 			//first sort goals between upcoming and past goals
 
 			int i;
@@ -146,26 +144,15 @@ import android.widget.TextView;
 				ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class);
 			    
 			    try {
-			    	System.out.println("casting here");
 			    	String id = (String) allGoals.get(i);
 			    	System.out.println("ID:::"+id);
 			    	goal = postQuery.get(id);
-			    	//System.out.println("name of goal: "+goal.getName());
 			    	goalDate = goal.getDate();
 			    } catch (com.parse.ParseException e) {
 					Log.e("Goal Error", e.getMessage());
 				}
 				
 				System.out.println("iteration number: "+i);	
-				System.out.println("date: "+goalDate);
-				System.out.println("todate: "+todayDate);
-				System.out.println("comp"+todayDate.compareTo(goalDate));
-				//GoalPost tester = allthegoals.get(i);				
-				//System.out.println("name!: "+tester.getName());
-				
-				//String ID = allGoals.get(i).getObjectId(); //ERROR OF ARRAYLIST TO OBJECT HERE
-				//System.out.println("object ID: "+ID);
-			
 			    
 			    if (todayDate.compareTo(goalDate) <= 0){ //means the goal has not passed yet or is happening right now
 			    	upcomingGoals.add(allGoals.get(i));			    	
@@ -178,8 +165,7 @@ import android.widget.TextView;
 			}
 			displayUpcomingGoals(upcomingGoals);
 			displayPastGoals(pastGoals);
-			displayCreatedGoals();
-			
+			displayCreatedGoals();			
 		}
 		
 		public void displayUpcomingGoals(ArrayList<String> goals){

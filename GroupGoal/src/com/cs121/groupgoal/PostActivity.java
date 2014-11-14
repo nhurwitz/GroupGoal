@@ -72,6 +72,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   private SimpleDateFormat DATE_AND_TIME_FORMATTER = new SimpleDateFormat("MM-dd-yyyy hh:mm a");
   
   ParseUser user = ParseUser.getCurrentUser();
+  private String goalID;
 
   @SuppressLint("DefaultLocale")
   @Override
@@ -129,7 +130,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				List<String> attendees = new ArrayList<String>();
 				attendees.add(ParseUser.getCurrentUser().getObjectId());
 				
-				GoalPost goal = new GoalPost();
+				final GoalPost goal = new GoalPost();
 				goal.setName(goalTitle);
 				goal.setDescription(goalDescription);
 				goal.setOwner(ParseUser.getCurrentUser());
@@ -142,23 +143,21 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setAttendees(attendees);
 				
 				goal.saveInBackground(new SaveCallback() {
-			      @Override
-			      public void done(ParseException e) {
-			        finish();
-			      }
-			    });
-				String goalID = goal.getObjectId();		
-				System.out.println("NEW GOAL ID: "+goalID); //is null...
-				user.addAllUnique("createdGoals", Arrays.asList(goalID)); //add new goal to the users list of created goals. 
-				user.saveInBackground(new SaveCallback() {
 				      @Override
-				      public void done(ParseException e) {
+				      public void done(ParseException e) {  // add to get newly created goal ID and store with user
+				    	  goalID = goal.getObjectId();
+				    	  user.addAllUnique("createdGoals", Arrays.asList(goalID)); //add new goal to the users list of created goals. 
+							System.out.println("adding to array: "+goalID);
+							user.saveInBackground(new SaveCallback() {
+							      @Override
+							      public void done(ParseException e) {
+							        finish();
+							      }
+							    });
 				        finish();
 				      }
 				    });
-				
-	
-				
+							
 				Toast.makeText(getApplicationContext(), "Goal Successfully Created", 
 						Toast.LENGTH_LONG).show();
 				

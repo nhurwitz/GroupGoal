@@ -217,11 +217,11 @@ containing a value of this type.
         public static final int GotIt_button=0x7f05002d;
         public static final int LinearLayout1=0x7f05000c;
         public static final int action_button=0x7f05000b;
-        public static final int action_home=0x7f05004b;
-        public static final int action_my_profile=0x7f05004c;
-        public static final int action_notifications=0x7f05004d;
-        public static final int action_post=0x7f05004e;
-        public static final int action_settings=0x7f05004a;
+        public static final int action_home=0x7f05004a;
+        public static final int action_my_profile=0x7f05004b;
+        public static final int action_notifications=0x7f05004c;
+        public static final int action_post=0x7f05004d;
+        public static final int action_settings=0x7f050049;
         public static final int addFriendsButton=0x7f050032;
         public static final int button1=0x7f05000f;
         public static final int buttons=0x7f05001f;
@@ -245,8 +245,7 @@ containing a value of this type.
         public static final int goal_details_title=0x7f050039;
         public static final int goal_group_size=0x7f050019;
         public static final int goal_group_size_value=0x7f05001a;
-        public static final int goal_list_attending=0x7f050049;
-        public static final int goal_list_category=0x7f050048;
+        public static final int goal_list_attending=0x7f050048;
         public static final int goal_location=0x7f050014;
         public static final int goal_post=0x7f050011;
         public static final int goal_private_label=0x7f050015;
