@@ -9,23 +9,17 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -36,9 +30,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.cs121.groupgoal.GoalPost.Category;
-import com.cs121.groupgoal.R;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseUser;
@@ -81,14 +72,8 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     setContentView(R.layout.activity_post);
     getActionBar().setDisplayHomeAsUpEnabled(true);
     getActionBar().setDisplayShowHomeEnabled(false);
-
-
-    Intent intent = getIntent();
     
     date = new Date();
-    
-    Location location = intent.getParcelableExtra(Application.INTENT_EXTRA_LOCATION);
-    geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
     
     categoryDropdown = (Spinner)findViewById(R.id.goal_category_spinner);
     String[] items = new String[GoalPost.Category.values().length+1];
@@ -136,7 +121,6 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setOwner(ParseUser.getCurrentUser());
 				goal.setDate(scheduledDate);
 				goal.setEventLocation(goalLocation);
-				goal.setLocation(geoPoint);
 				goal.setPrivate(goalPrivate);
 				goal.setTargetGroupSize(goalSize);
 				goal.setCategory(goalCategory);
@@ -187,14 +171,12 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 	     cal.set(Calendar.HOUR, hourOfDay);
 	     cal.set(Calendar.MINUTE, minute);
 	     goalTimeView.setText(TIME_FORMATTER.format(cal.getTime()));
-	     Log.i("The goal is scheduled for ", TIME_FORMATTER.format(cal.getTime()));	
 	}
 	
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 		 Calendar cal = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-	     goalDateView.setText(DATE_FORMATTER.format(cal.getTime()));
-	     Log.e("The goal is scheduled for ", DATE_FORMATTER.format(cal.getTime()));		
+	     goalDateView.setText(DATE_FORMATTER.format(cal.getTime()));	
 	}
 	
 	private Date parseDate(String dateAndTime) {
