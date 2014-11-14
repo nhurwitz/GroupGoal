@@ -168,8 +168,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
           view = View.inflate(getContext(), R.layout.anywall_post_item, null);
         }
         
-        // #TODO (nhurwitz) Replace fields with appropriate ones.
-        
         String[] goalOwnerFirstLast = post.getOwner().get("fullName").toString().split("\\^");
         int target = (Integer) post.getTargetGroupSize();
         int current = (Integer) post.getCurrentGroupSize();
