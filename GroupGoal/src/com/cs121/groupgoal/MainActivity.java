@@ -155,6 +155,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
           public ParseQuery<GoalPost> create() {
             ParseQuery<GoalPost> query = GoalPost.getQuery();
             query.include("user");
+            System.out.println("inside main factory");
             query.orderByDescending("createdAt");
             return query;
           }

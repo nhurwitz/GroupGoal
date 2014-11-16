@@ -35,11 +35,11 @@
     <string name="prompt_firstname">First Name</string>
     <string name="prompt_lastname">Last Name</string>
     <string name="prompt_searchForFriends">Type a friend\'s username</string>
-    
+
     <!-- Action Bar Strings -->
     <string name="action_post">Post</string>
     <string name="action_settings">Settings</string>
-    <string name ="action_home">Home</string>
+    <string name="action_home">Home</string>
 
     <!-- PostActivity Strings -->
     <string name="goal_name">Goal Name</string>
@@ -68,5 +68,6 @@
     <string name="write_comment">Write a Comment</string>
     <string name="post_comment">Post Comment</string>
     <string name="title_activity_view_attendees">ViewAttendeesActivity</string>
+    <string name="title_activity_custom_adapter">CustomAdapter</string>
 
 </resources>

@@ -313,12 +313,13 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int comment=0x7f0a0000;
-        public static final int main=0x7f0a0001;
-        public static final int notifications=0x7f0a0002;
-        public static final int start_guide=0x7f0a0003;
-        public static final int user_profile=0x7f0a0004;
-        public static final int view_attendees=0x7f0a0005;
-        public static final int view_goal=0x7f0a0006;
+        public static final int custom_adapter=0x7f0a0001;
+        public static final int main=0x7f0a0002;
+        public static final int notifications=0x7f0a0003;
+        public static final int start_guide=0x7f0a0004;
+        public static final int user_profile=0x7f0a0005;
+        public static final int view_attendees=0x7f0a0006;
+        public static final int view_goal=0x7f0a0007;
     }
     public static final class string {
         public static final int GotIt_button=0x7f06002e;
@@ -428,12 +429,12 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f060013;
         public static final int create=0x7f060024;
-        public static final int error_blank_password=0x7f06005b;
-        public static final int error_blank_username=0x7f06005a;
-        public static final int error_end=0x7f06005e;
-        public static final int error_intro=0x7f060059;
-        public static final int error_join=0x7f06005d;
-        public static final int error_mismatched_passwords=0x7f06005c;
+        public static final int error_blank_password=0x7f06005c;
+        public static final int error_blank_username=0x7f06005b;
+        public static final int error_end=0x7f06005f;
+        public static final int error_intro=0x7f06005a;
+        public static final int error_join=0x7f06005e;
+        public static final int error_mismatched_passwords=0x7f06005d;
         public static final int goal_category=0x7f060047;
         public static final int goal_date=0x7f06004c;
         public static final int goal_date_hint=0x7f060040;
@@ -461,28 +462,29 @@ containing a value of this type.
         public static final int post_comment=0x7f060053;
         public static final int post_out_of_range=0x7f060026;
         public static final int powered_by=0x7f06001d;
-        public static final int progress_login=0x7f06005f;
+        public static final int progress_login=0x7f060060;
         public static final int progress_post=0x7f060027;
-        public static final int progress_signup=0x7f060060;
+        public static final int progress_signup=0x7f060061;
         public static final int prompt_firstname=0x7f060039;
         public static final int prompt_lastname=0x7f06003a;
-        public static final int prompt_password=0x7f060057;
-        public static final int prompt_password_again=0x7f060058;
+        public static final int prompt_password=0x7f060058;
+        public static final int prompt_password_again=0x7f060059;
         public static final int prompt_post=0x7f060025;
         public static final int prompt_searchForFriends=0x7f06003b;
-        public static final int prompt_username=0x7f060056;
+        public static final int prompt_username=0x7f060057;
         public static final int search_distance=0x7f060021;
         public static final int settings_distance_format=0x7f060028;
         public static final int signup=0x7f06001c;
         public static final int slogan=0x7f06001f;
         public static final int title_activity_comment=0x7f06004f;
+        public static final int title_activity_custom_adapter=0x7f060055;
         /**  Strings related to login 
          */
         public static final int title_activity_login=0x7f060035;
         public static final int title_activity_notifications=0x7f060037;
         public static final int title_activity_notifications_page=0x7f060036;
         public static final int title_activity_settings=0x7f060020;
-        public static final int title_activity_signup=0x7f060055;
+        public static final int title_activity_signup=0x7f060056;
         public static final int title_activity_start_guide=0x7f06002b;
         public static final int title_activity_user_profile=0x7f060033;
         public static final int title_activity_view_and_add_friends=0x7f06004e;
