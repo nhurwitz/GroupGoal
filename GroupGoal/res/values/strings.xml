@@ -68,5 +68,13 @@
     <string name="write_comment">Write a Comment</string>
     <string name="post_comment">Post Comment</string>
     <string name="title_activity_view_attendees">ViewAttendeesActivity</string>
+    
+     <!-- Profile Page Strings -->
+    <string name="aboutMe_title"><u>About Me:</u></string>
+    <string name="edit_signature_button">Edit</string>
+    <string name="upcoming_goals_title"><b><u>Upcoming Goals:</u></b></string>
+    <string name="past_goals_title"><b><u>Past Goals:</u></b></string>
+    <string name="created_goals_title"><b><u>Created Goals:</u></b></string>
+    
 
 </resources>

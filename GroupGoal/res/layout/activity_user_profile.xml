@@ -18,12 +18,13 @@
         android:layout_marginTop="10dp"
         android:text="User Name:" />
 
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="About Me-"
+        android:text="@string/aboutMe_title"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     
     <TextView
@@ -45,48 +46,57 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="190dp"
         android:layout_marginTop="10dp"
-        android:text="Edit" />
+        android:text="@string/edit_signature_button" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-     	android:layout_marginTop="20dp"
-        android:text="Add Friends"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/searchedFriend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/prompt_searchForFriends" >
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/addFriendsButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingStart="10dp"
-        android:layout_marginTop="10dp"       
-        android:text="Add" />
-
+    
     <TextView
         android:id="@+id/user_goals_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Upcoming Goals:" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#992D2D"
+        android:text="@string/upcoming_goals_title" />
+
+    <ListView
+        android:id="@+id/upComing_goals_listview"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    </ListView>
     
      <TextView
         android:id="@+id/user_goals_text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Past Goals:" />
+        android:textColor="#992D2D"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/created_goals_title" />
+     
+        <ListView
+        android:id="@+id/created_goals_listview"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    	</ListView>
+    
+     
+      <TextView
+        android:id="@+id/user_goals_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#992D2D"
+        android:text="@string/past_goals_title" />
+      
+         <ListView
+        android:id="@+id/past_goals_listview"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    	</ListView>
+    
 
 </LinearLayout>
