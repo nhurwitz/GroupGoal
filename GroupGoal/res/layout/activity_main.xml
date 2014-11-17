@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
+    android:background="@color/clouds"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,6 +11,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
     
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+    
+	    <EditText
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_marginBottom="10dp"
+		  android:layout_marginTop="10dp"
+		  android:layout_weight="1"
+	      android:inputType="text"
+	      android:hint="@string/goal_search"
+	      android:textSize="20sp"
+	      android:id="@+id/goal_search_box"
+	      />
+	    
+	    <Button
+	      android:radius="14dp"
+	      android:padding="1dp"
+	      android:textColor="#FFFFFF"
+          android:id="@+id/search_goal_button"
+          android:background="@drawable/button"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="@string/goal_search" />
+	</LinearLayout>
    
     <ListView
         android:id="@+id/posts_listview"

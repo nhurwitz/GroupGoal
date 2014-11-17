@@ -36,6 +36,9 @@
     <string name="prompt_lastname">Last Name</string>
     <string name="prompt_searchForFriends">Type a friend\'s username</string>
     
+    <!-- Main Activity Strings -->
+    <string name="goal_search">Search</string>
+    
     <!-- Action Bar Strings -->
     <string name="action_post">Post</string>
     <string name="action_settings">Settings</string>
@@ -68,5 +71,10 @@
     <string name="write_comment">Write a Comment</string>
     <string name="post_comment">Post Comment</string>
     <string name="title_activity_view_attendees">ViewAttendeesActivity</string>
+    
+    <!-- Colors -->
+    <color name="emerald">#2ecc71</color>
+    <color name="wet_asphalt">#34495e</color>
+    <color name="clouds">#ecf0f1</color>
 
 </resources>

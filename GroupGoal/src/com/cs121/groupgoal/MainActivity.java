@@ -12,11 +12,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ public class MainActivity extends FragmentActivity {
 
   private GoalAdapter mAdapter;
   private ListView postsListView;
+  private EditText mEditText;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,35 @@ public class MainActivity extends FragmentActivity {
     
     RemoteDataTask task = new RemoteDataTask();
     task.execute();
+    
+    mEditText = (EditText) findViewById(R.id.goal_search_box);
+    mEditText.addTextChangedListener(new TextWatcher(){
+
+          @Override
+          public void afterTextChanged(Editable arg0) {
+              // TODO Auto-generated method stub
+
+          }
+
+          @Override
+          public void beforeTextChanged(CharSequence s, int start, int count,
+                  int after) {
+              // TODO Auto-generated method stub
+
+          }
+
+          @Override
+          public void onTextChanged(CharSequence s, int start, int before,
+                  int count) {
+              System.out.println("Text ["+s+"] - Start ["+start+"] - Before ["+before+"] - Count ["+count+"]");
+            if (count < before) {
+                    // We're deleting char so we need to reset the adapter data
+                    mAdapter.resetData();
+            }
+
+            mAdapter.getFilter().filter(s.toString());
+
+          }});
   }
   
   public void updateData() {
@@ -154,6 +187,7 @@ public class MainActivity extends FragmentActivity {
       @Override
       protected void onPostExecute(Void result) {
     	  postsListView = (ListView) findViewById(R.id.posts_listview);
+    	  postsListView.setTextFilterEnabled(true);
           mAdapter = new GoalAdapter(MainActivity.this, new ArrayList<GoalPost>());
 
 
