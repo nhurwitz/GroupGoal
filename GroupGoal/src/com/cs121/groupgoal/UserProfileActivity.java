@@ -28,7 +28,7 @@ import android.widget.TextView;
 		ParseUser user= ParseUser.getCurrentUser();
 		TextView userNameTextBox;
 		Editable userProfileMessage;
-		private EditText searchedFriend;
+
 		
 		
 		@Override
@@ -48,14 +48,7 @@ import android.widget.TextView;
 				}
 			});
 			
-			searchedFriend = (EditText) findViewById(R.id.searchedFriend);
-			
-			Button AddFriendsButton = (Button) findViewById(R.id.addFriendsButton);
-			AddFriendsButton.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					searchAndAddFriends();
-				}
-			});
+
 			
 			displayLists();
 		}
@@ -114,9 +107,7 @@ import android.widget.TextView;
 		}
 		
 		
-		public void searchAndAddFriends(){ //is called when button is pushed to add friends (use searchedFriend attribute)
-			
-		}
+
 		
 		public void displayUpcomingGoals(){
 			
@@ -131,7 +122,7 @@ import android.widget.TextView;
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.user_profile, menu);
+			getMenuInflater().inflate(R.menu.main, menu);
 			
 		    menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
@@ -156,6 +147,14 @@ import android.widget.TextView;
 			      	 // System.out.println("Inside OnMenuItemClick");
 			      	  Intent amp = new Intent(UserProfileActivity.this, NotificationsActivity.class);
 			      	  //amp.putExtra("user", User Object*)
+			          startActivity(amp);
+			          return true;
+			        }
+			      });
+		        
+		        menu.findItem(R.id.action_my_friends).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			        public boolean onMenuItemClick(MenuItem item) {
+			      	  Intent amp = new Intent(UserProfileActivity.this, MyFriendsActivity.class);
 			          startActivity(amp);
 			          return true;
 			        }
