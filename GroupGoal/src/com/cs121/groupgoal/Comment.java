@@ -18,6 +18,14 @@ public class Comment extends ParseObject {
 	  public void setText(String value) {
 	    put("text", value);
 	  }
+	  /*
+	  public void setGoal(GoalPost g){
+		  put ("goal", g);
+	  }
+	  
+	  public GoalPost getGoal(){
+		  return (GoalPost) getParseObject("goal");
+	  }*/
 
 	  public ParseUser getUser() {
 	    return getParseUser("user");
@@ -26,11 +34,9 @@ public class Comment extends ParseObject {
 	  public void setUser(ParseUser value) {
 	    put("user", value);
 	  }
-	  //public void setLocation(ParseGeoPoint value) {
-		//    put("location", value);
-		  //}
+
 	  public static ParseQuery<Comment> getQuery() {
-	    return ParseQuery.getQuery(Comment.class);
+	    return ParseQuery.getQuery("Comments");
 	  }
 	}
 

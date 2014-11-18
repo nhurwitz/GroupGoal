@@ -1,7 +1,9 @@
 package com.cs121.groupgoal;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -70,6 +72,9 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   private SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("hh:mm a");
   private SimpleDateFormat DATE_AND_TIME_FORMATTER = new SimpleDateFormat("MM-dd-yyyy hh:mm a");
 
+  ParseUser user = ParseUser.getCurrentUser();
+  private String goalId;
+  
   @SuppressLint("DefaultLocale")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +131,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				List<String> attendees = new ArrayList<String>();
 				attendees.add(ParseUser.getCurrentUser().getObjectId());
 				
-				GoalPost goal = new GoalPost();
+				final GoalPost goal = new GoalPost();
 				goal.setName(goalTitle);
 				goal.setDescription(goalDescription);
 				goal.setOwner(ParseUser.getCurrentUser());
@@ -142,6 +147,14 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.saveInBackground(new SaveCallback() {
 			      @Override
 			      public void done(ParseException e) {
+			    	  goalId = goal.getObjectId();
+			    	  user.addAllUnique("createdGoals", Arrays.asList(goalId));
+			    	  user.saveInBackground(new SaveCallback(){
+			    		  @Override
+			    		  public void done(ParseException e){
+			    			  finish();
+			    		  }
+			    	  });
 			        finish();
 			      }
 			    });
