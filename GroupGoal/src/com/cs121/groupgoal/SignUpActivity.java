@@ -125,6 +125,13 @@ import com.parse.SignUpCallback;
 	    
 	    List<ParseUser> friends = new ArrayList<ParseUser>(); 
 	    user.put("friendsList", friends);
+	    
+	    List<String> myGoals = new ArrayList<String>();
+	    user.put("myGoals",  myGoals);
+	    
+	    List<String> createdGoals = new ArrayList<String>();
+	    user.put("createdGoals",  createdGoals);
+	    
 	
 	
 	    // Call the Parse signup method
