@@ -75,6 +75,9 @@
     <string name="upcoming_goals_title"><b><u>Upcoming Goals:</u></b></string>
     <string name="past_goals_title"><b><u>Past Goals:</u></b></string>
     <string name="created_goals_title"><b><u>Created Goals:</u></b></string>
+    <string name="action_my_friends">My Friends</string>
+    <string name="title_activity_my_friends">My Friends</string>
     
 
 </resources>
+

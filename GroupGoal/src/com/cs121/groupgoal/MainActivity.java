@@ -480,7 +480,13 @@ public class MainActivity extends FragmentActivity implements LocationListener,
           }
         });
           
-      //------------------------------------------------------
+      menu.findItem(R.id.action_my_friends).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+	        public boolean onMenuItemClick(MenuItem item) {
+	      	  Intent amp = new Intent(MainActivity.this, MyFriendsActivity.class);
+	          startActivity(amp);
+	          return true;
+	        }
+	      });
       
       menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
           public boolean onMenuItemClick(MenuItem item) {

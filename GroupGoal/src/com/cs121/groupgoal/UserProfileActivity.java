@@ -37,7 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		ParseUser user= ParseUser.getCurrentUser();
 		TextView userNameTextBox;
 		Editable userProfileMessage;
-		private EditText searchedFriend;
+
 		
 		ArrayList<String> allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined
 		
@@ -78,7 +78,7 @@ import android.widget.AdapterView.OnItemClickListener;
 			});
 						
 			sortLists();
-			
+
 		
 			
 			//code to create listview for upcoming Goals
@@ -247,6 +247,9 @@ import android.widget.AdapterView.OnItemClickListener;
 		
 		public static ArrayList<String> getUpcomingGoals(){
 			return upcomingGoals;
+	
+			displayLists();
+
 		}
 		
 		public void displayProfile() { //function to display general user info
@@ -291,6 +294,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		
 		}
 		
+
 		public void resetUserSignature(Editable e){  //is called when the user updates his/her signature
 			String result = e.toString();			 // saves the attribute to Parse and updates the text field
 			
@@ -301,8 +305,11 @@ import android.widget.AdapterView.OnItemClickListener;
 		    TextView profileDescription = (TextView) findViewById (R.id.user_info_text);
 			profileDescription.setTypeface(null, Typeface.BOLD_ITALIC);
 			profileDescription.setText(newDescription);
+			
 		}
-		
+
+
+
 		
 		public void sortLists(){ //function to display the three lists of the user's goals
 			//first sort goals between upcoming and past goals
@@ -342,7 +349,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.user_profile, menu);
+			getMenuInflater().inflate(R.menu.main, menu);
 			
 		    menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
@@ -367,6 +374,14 @@ import android.widget.AdapterView.OnItemClickListener;
 			      	 // System.out.println("Inside OnMenuItemClick");
 			      	  Intent amp = new Intent(UserProfileActivity.this, NotificationsActivity.class);
 			      	  //amp.putExtra("user", User Object*)
+			          startActivity(amp);
+			          return true;
+			        }
+			      });
+		        
+		        menu.findItem(R.id.action_my_friends).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			        public boolean onMenuItemClick(MenuItem item) {
+			      	  Intent amp = new Intent(UserProfileActivity.this, MyFriendsActivity.class);
 			          startActivity(amp);
 			          return true;
 			        }

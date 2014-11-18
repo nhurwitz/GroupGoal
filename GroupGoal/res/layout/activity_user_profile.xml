@@ -48,7 +48,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/edit_signature_button" />
 
-    
+
     <TextView
         android:id="@+id/user_goals_text"
         android:layout_width="wrap_content"
