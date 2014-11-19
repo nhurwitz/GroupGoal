@@ -38,6 +38,7 @@
     
     <!-- Main Activity Strings -->
     <string name="goal_search">Search</string>
+    <string name="goal_filter">Filter</string>
     
     <!-- Action Bar Strings -->
     <string name="action_post">Post</string>

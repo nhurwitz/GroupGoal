@@ -10,7 +10,8 @@
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical" 
 	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentStart="true">
+	    android:layout_alignParentStart="true" >
+	    
   		<TextView
 	        android:id="@+id/content_view"
 	        android:layout_width="fill_parent"

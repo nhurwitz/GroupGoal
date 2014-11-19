@@ -28,41 +28,42 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	private Activity activity;
 	private Filter goalFilter;
 	private List<GoalPost> pGoals;
+	private List<GoalPost> finalGoals;
 	
 	public GoalAdapter(Context context, List<GoalPost> objects) {
 	    super(context, R.layout.anywall_post_item, objects);
 	
 	    this.mContext = context;
 	    this.mGoals = objects;
-	    this.pGoals = objects;
-	    filterPrivate();
+	    this.finalGoals = objects;
+//	    this.pGoals = objects;
+//	    filterPrivate();
 	}
 	
-	private void filterPrivate() {
-		Iterator<GoalPost> i = pGoals.iterator();
-		while(i.hasNext()) {
-			GoalPost g = (GoalPost) i.next();
-			if(g.isPrivate()) {
-				// #TODO (nhurwitz) also check with invites/friends after feature
-				// is implemented.
-				if(g.getAttendees().contains(ParseUser.getCurrentUser()
-						.getObjectId().toString())) {
-					i.remove();
-				}
-			}
-		}
-	}
+//	private void filterPrivate() {
+//		Iterator<GoalPost> i = pGoals.iterator();
+//		while(i.hasNext()) {
+//			GoalPost g = (GoalPost) i.next();
+//			if(g.isPrivate()) {
+//				// #TODO (nhurwitz) also check with invites/friends after feature
+//				// is implemented.
+//				if(g.getAttendees().contains(ParseUser.getCurrentUser()
+//						.getObjectId().toString())) {
+//					i.remove();
+//				}
+//			}
+//		} 
+//	}
 	
 	public View getView(int position, View convertView, ViewGroup parent) {
 	      if(convertView == null){
 	          LayoutInflater mLayoutInflater = LayoutInflater.from(mContext);
 	          convertView = mLayoutInflater.inflate(R.layout.anywall_post_item, null);
 	      }
-	
-	      Log.i("Goal Index/Length:", mGoals.size() + "   " + position);
+	      
 	      final GoalPost goal = mGoals.get(position);
 	      
-	      if(pGoals.contains(goal)) {
+	      if(mGoals.contains(goal)) {
 	    	  String[] goalOwnerFirstLast = goal.getOwner().get("fullName").toString().split("\\^");
 		      int target = (Integer) goal.getTargetGroupSize();
 		      int current = (Integer) goal.getCurrentGroupSize();
@@ -103,7 +104,7 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	 }
 	 
 	 public void resetData() {
-	     mGoals = mGoals;
+	     mGoals = finalGoals;
 	 }
 	
 	private class GoalFilter extends Filter {
@@ -118,12 +119,23 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
                 results.count = mGoals.size();
         }
         else {
+        		String con = constraint.toString().toUpperCase();
                 // We perform filtering operation
                 List<GoalPost> filterList = new ArrayList<GoalPost>();
-
+                
                 for (GoalPost a : mGoals) {
-                    if (a.getCategory().toString().toUpperCase().startsWith(constraint.toString().toUpperCase()))
-                            filterList.add(a);
+                    int subIndex = 0;
+                	String name = a.getName().toString().toUpperCase();
+                	for(int i = 0; i < name.length(); i++) {
+                		if(subIndex == con.length()) {
+                			break;
+                		} else if(con.charAt(subIndex) == name.charAt(i)) {
+                			subIndex++;
+                		}
+                	}
+                	if(subIndex == con.length()) {
+                		filterList.add(a);
+                	}
                 }
 
                 results.values = filterList;

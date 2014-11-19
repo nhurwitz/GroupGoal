@@ -127,8 +127,8 @@ public class ViewGoal extends Activity {
 		
 		viewAttendees.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(ViewGoal.this, ViewAttendeesActivity.class);
-		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+				Intent intent = new Intent(ViewGoal.this, ViewAttendeesActivity.class)
+					.putExtra("goal_id", goal.getObjectId());
 		        startActivity(intent);
 			}
 			
