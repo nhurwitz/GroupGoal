@@ -52,10 +52,14 @@ public class ViewAttendeesActivity extends Activity {
 				Log.e("Goal Error", e.getMessage());
 			}
 	    }
+	    
+	    ArrayAdapter<String> attendeesAdapter = 
+	    		new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+	    
+	    attendeesAdapter.addAll(userProfiles.values());
 
 		attendeeView = (ListView) findViewById(R.id.attendee_list_view);
-		attendeeView.setAdapter(new ArrayAdapter(this, R.id.attendee_list_name,
-				userProfiles.values().toArray()));
+		attendeeView.setAdapter(attendeesAdapter);
 	}
 	
 	@Override
