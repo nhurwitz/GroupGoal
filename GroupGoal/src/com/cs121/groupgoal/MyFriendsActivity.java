@@ -28,7 +28,7 @@ public class MyFriendsActivity extends Activity {
 	ParseUser user = ParseUser.getCurrentUser();
 	EditText searchedFriend;
 	List<ParseUser> lst;
-	List<ParseUser> currentLst = (List<ParseUser>) user.get("friendsList");
+	List<String> currentFriends = (List<String>) user.get("friendsList");
 	TextView friendsListView;
 	
 	
@@ -72,11 +72,11 @@ public class MyFriendsActivity extends Activity {
 			    	if(!objects.isEmpty()){
 			    		String foundName = 	objects.get(0).getUsername();
 			    		
-			    		Log.d(String.valueOf(currentLst.contains(objects.get(0))),foundName);
+			    		Log.d(String.valueOf(currentFriends.contains(objects.get(0))),foundName);
 			    		
-			    		if(!currentLst.contains(objects.get(0))){
-			    			currentLst.add(objects.get(0));
-			    			user.put("friendsList", currentLst);
+			    		if(!currentFriends.contains(objects.get(0).getUsername())){
+			    			currentFriends.add(objects.get(0).getUsername());
+			    			user.put("friendsList", currentFriends);
 			    			user.saveInBackground();
 			    			Log.d("Added Friend",foundName);
 			    			displayFriends();
@@ -95,17 +95,18 @@ public class MyFriendsActivity extends Activity {
 }
 	
 	
+	//This will be changed
 	public void displayFriends(){
 	
 		String friends = "Friends: ";
 		
 		
-		if(currentLst.get(0)!=null){
+		if(currentFriends.get(0)!=null){
 				Log.d("display friends","inList");
-				for (int i=0;i<currentLst.size();i++){
-				//String nextFriend =  currentLst.get(i).getUsername();
-				//friends = new String (friends+" "+nextFriend);
-				Log.d("adding to string", friends);
+				for (int i=0;i<currentFriends.size();i++){
+					String nextFriend =  currentFriends.get(i);
+					friends = new String (friends+" "+nextFriend);
+					Log.d("adding to string", friends);
 				}
 			}
 		

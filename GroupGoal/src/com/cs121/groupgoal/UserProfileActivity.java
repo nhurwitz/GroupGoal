@@ -77,7 +77,7 @@ import android.widget.AdapterView.OnItemClickListener;
 				}
 			});
 						
-			sortLists();
+			//sortLists();
 			
 		
 			
@@ -307,7 +307,12 @@ import android.widget.AdapterView.OnItemClickListener;
 		public void sortLists(){ //function to display the three lists of the user's goals
 			//first sort goals between upcoming and past goals
 
+			Log.d("In here","");
 			int i;
+			if(allGoals==null){
+				Log.d("shit","");
+			}
+			
 			Date todayDate = new Date();
 			System.out.println("empty??"+allGoals.isEmpty());
 			System.out.println("size?? "+allGoals.size());

@@ -123,7 +123,7 @@ import com.parse.SignUpCallback;
 	    String message = "Edit Your Personal Message Here";
 	    user.put("userDescription", message);
 	    
-	    List<ParseUser> friends = new ArrayList<ParseUser>(); 
+	    List<String> friends = new ArrayList<String>(); 
 	    user.put("friendsList", friends);
 	    
 	    List<String> myGoals = new ArrayList<String>();
