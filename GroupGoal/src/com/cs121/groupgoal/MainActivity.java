@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class MainActivity extends FragmentActivity {
   private GoalAdapter mAdapter;
   private ListView postsListView;
   private EditText mEditText;
+  private Button searchGoalsButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,33 +47,16 @@ public class MainActivity extends FragmentActivity {
     task.execute();
     
     mEditText = (EditText) findViewById(R.id.goal_search_box);
-    mEditText.addTextChangedListener(new TextWatcher(){
-
-          @Override
-          public void afterTextChanged(Editable arg0) {
-              // TODO Auto-generated method stub
-
-          }
-
-          @Override
-          public void beforeTextChanged(CharSequence s, int start, int count,
-                  int after) {
-              // TODO Auto-generated method stub
-
-          }
-
-          @Override
-          public void onTextChanged(CharSequence s, int start, int before,
-                  int count) {
-              System.out.println("Text ["+s+"] - Start ["+start+"] - Before ["+before+"] - Count ["+count+"]");
-            if (count < before) {
-                    // We're deleting char so we need to reset the adapter data
-                    mAdapter.resetData();
-            }
-
-            mAdapter.getFilter().filter(s.toString());
-
-          }});
+    searchGoalsButton = (Button) findViewById(R.id.search_goal_button);
+    searchGoalsButton.setOnClickListener(new OnClickListener() {
+		public void onClick(View v) {
+			String filter = mEditText.getText().toString();
+			if(filter.length() != 0) {
+				mAdapter.getFilter().filter(filter);
+				mEditText.setText("");
+			}	
+		}    	
+    });
   }
   
   public void updateData() {

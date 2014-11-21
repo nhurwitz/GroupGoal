@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +25,7 @@ import com.parse.ParseUser;
 public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	private Context mContext;
 	private List<GoalPost> mGoals;
-	private ArrayAdapter<GoalPost> array;
-	private Activity activity;
 	private Filter goalFilter;
-	private List<GoalPost> pGoals;
 	private List<GoalPost> finalGoals;
 	
 	public GoalAdapter(Context context, List<GoalPost> objects) {
@@ -36,31 +34,14 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	    this.mContext = context;
 	    this.mGoals = objects;
 	    this.finalGoals = objects;
-//	    this.pGoals = objects;
-//	    filterPrivate();
 	}
-	
-//	private void filterPrivate() {
-//		Iterator<GoalPost> i = pGoals.iterator();
-//		while(i.hasNext()) {
-//			GoalPost g = (GoalPost) i.next();
-//			if(g.isPrivate()) {
-//				// #TODO (nhurwitz) also check with invites/friends after feature
-//				// is implemented.
-//				if(g.getAttendees().contains(ParseUser.getCurrentUser()
-//						.getObjectId().toString())) {
-//					i.remove();
-//				}
-//			}
-//		} 
-//	}
-	
+		
 	public View getView(int position, View convertView, ViewGroup parent) {
 	      if(convertView == null){
 	          LayoutInflater mLayoutInflater = LayoutInflater.from(mContext);
 	          convertView = mLayoutInflater.inflate(R.layout.anywall_post_item, null);
 	      }
-	      
+	     
 	      final GoalPost goal = mGoals.get(position);
 	      
 	      if(mGoals.contains(goal)) {
@@ -74,7 +55,14 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 		
 		      goalView.setText(goal.getName().toString());
 		      nameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
-		      attendingView.setText(current + "/" + target);
+		      if(target == 0 || current/target >= 1) {
+		    	  attendingView.setText("COMPLETE");
+		    	  attendingView.setTextColor(Color.GREEN);
+		      } else {
+		    	  attendingView.setText(current + "/" + target);	
+		    	  attendingView.setTextColor(Color.BLACK);
+		      }
+		     
 		
 		
 		      convertView.setOnClickListener(new OnClickListener() {
