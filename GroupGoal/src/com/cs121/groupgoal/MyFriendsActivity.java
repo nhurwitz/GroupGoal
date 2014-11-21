@@ -49,7 +49,7 @@ public class MyFriendsActivity extends Activity {
 			}
 		});
 		
-		displayFriends();
+		//displayFriends();
 	}
 	
 	
@@ -94,7 +94,7 @@ public class MyFriendsActivity extends Activity {
 		}
 }
 	
-	
+	//to be changed
 	public void displayFriends(){
 	
 		String friends = "Friends: ";
