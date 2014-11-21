@@ -62,6 +62,8 @@ public class ViewAttendeesActivity extends Activity {
 	    ArrayAdapter<String> attendeesAdapter = 
 	    		new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 	    
+	    attendeesAdapter.addAll(userProfiles.values());
+	    
 		attendeeView = (ListView) findViewById(R.id.attendee_list_view);
 		attendeeView.setAdapter(attendeesAdapter);
 		attendeeView.setOnItemClickListener(new OnItemClickListener() {
