@@ -28,6 +28,12 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	private Filter goalFilter;
 	private List<GoalPost> finalGoals;
 	
+	private static class ViewHolder {
+		TextView goalView;
+	    TextView nameView;
+	    TextView attendingView;
+	}
+	
 	public GoalAdapter(Context context, List<GoalPost> objects) {
 	    super(context, R.layout.anywall_post_item, objects);
 	
@@ -35,11 +41,25 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	    this.mGoals = objects;
 	    this.finalGoals = objects;
 	}
+	
+	@Override
+	public int getCount() {
+		return mGoals.size();
+	}
 		
 	public View getView(int position, View convertView, ViewGroup parent) {
+		  ViewHolder viewHolder;
+		  
 	      if(convertView == null){
+	    	  viewHolder = new ViewHolder();
 	          LayoutInflater mLayoutInflater = LayoutInflater.from(mContext);
 	          convertView = mLayoutInflater.inflate(R.layout.anywall_post_item, null);
+	          viewHolder.goalView = (TextView) convertView.findViewById(R.id.content_view);
+		      viewHolder.nameView = (TextView) convertView.findViewById(R.id.username_view);
+		      viewHolder.attendingView = (TextView) convertView.findViewById(R.id.goal_list_attending);
+		      convertView.setTag(viewHolder);
+	      } else {
+	    	  viewHolder = (ViewHolder) convertView.getTag();
 	      }
 	     
 	      final GoalPost goal = mGoals.get(position);
@@ -49,18 +69,16 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 		      int target = (Integer) goal.getTargetGroupSize();
 		      int current = (Integer) goal.getCurrentGroupSize();
 		
-		      TextView goalView = (TextView) convertView.findViewById(R.id.content_view);
-		      TextView nameView = (TextView) convertView.findViewById(R.id.username_view);
-		      TextView attendingView = (TextView) convertView.findViewById(R.id.goal_list_attending);
+		     
 		
-		      goalView.setText(goal.getName().toString());
-		      nameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
+		      viewHolder.goalView.setText(goal.getName().toString());
+		      viewHolder.nameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
 		      if(target == 0 || current/target >= 1) {
-		    	  attendingView.setText("COMPLETE");
-		    	  attendingView.setTextColor(Color.GREEN);
+		    	  viewHolder.attendingView.setText("COMPLETE");
+		    	  viewHolder.attendingView.setTextColor(Color.GREEN);
 		      } else {
-		    	  attendingView.setText(current + "/" + target);	
-		    	  attendingView.setTextColor(Color.BLACK);
+		    	  viewHolder.attendingView.setText(current + "/" + target);	
+		    	  viewHolder.attendingView.setTextColor(Color.BLACK);
 		      }
 		     
 		
@@ -94,7 +112,7 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	 public void resetData() {
 	     mGoals = finalGoals;
 	 }
-	
+	 	
 	private class GoalFilter extends Filter {
 		
 	  @SuppressLint("DefaultLocale")

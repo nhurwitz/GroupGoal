@@ -36,7 +36,19 @@
           android:background="@drawable/button"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
+          android:layout_marginLeft="5dp"
           android:text="@string/goal_search" />
+	    
+	    <Button
+	      android:radius="14dp"
+	      android:padding="1dp"
+	      android:textColor="#FFFFFF"
+          android:id="@+id/reset_goal_button"
+          android:background="@drawable/button"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:layout_marginLeft="5dp"
+          android:text="@string/goal_reset" />
 	</LinearLayout>
    
     <ListView

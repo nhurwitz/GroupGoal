@@ -37,6 +37,7 @@ public class MainActivity extends FragmentActivity {
   private ListView postsListView;
   private EditText mEditText;
   private Button searchGoalsButton;
+  private Button resetGoalsButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,27 @@ public class MainActivity extends FragmentActivity {
     mEditText = (EditText) findViewById(R.id.goal_search_box);
     searchGoalsButton = (Button) findViewById(R.id.search_goal_button);
     searchGoalsButton.setOnClickListener(new OnClickListener() {
-		public void onClick(View v) {
+
+		@Override
+    	public void onClick(View v) {
 			String filter = mEditText.getText().toString();
 			if(filter.length() != 0) {
 				mAdapter.getFilter().filter(filter);
 				mEditText.setText("");
 			}	
 		}    	
+    });
+    
+    resetGoalsButton = (Button) findViewById(R.id.reset_goal_button);
+    resetGoalsButton.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			mAdapter = new GoalAdapter(MainActivity.this, new ArrayList<GoalPost>());
+			postsListView.setAdapter(mAdapter);
+			updateData();			
+		}
+    	
     });
   }
   
@@ -65,7 +80,6 @@ public class MainActivity extends FragmentActivity {
 	  query.include("user");
       query.orderByDescending("createdAt");
       query.findInBackground(new FindCallback<GoalPost>() {
-
 		@Override
 		public void done(List<GoalPost> goals, ParseException e) {
 			if(goals != null){
@@ -74,8 +88,7 @@ public class MainActivity extends FragmentActivity {
 	              mAdapter.add(goals.get(i));
 	          }
 			}
-		}
-    	  
+		}    	  
       });
   }
 
