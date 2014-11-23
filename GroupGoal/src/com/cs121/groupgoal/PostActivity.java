@@ -1,5 +1,6 @@
 package com.cs121.groupgoal;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +65,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   
   ParseUser user = ParseUser.getCurrentUser();
   private String goalID;
-
+  
   @SuppressLint("DefaultLocale")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +142,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				        finish();
 				      }
 				    });
-							
+					
 				Toast.makeText(getApplicationContext(), "Goal Successfully Created", 
 						Toast.LENGTH_LONG).show();
 				

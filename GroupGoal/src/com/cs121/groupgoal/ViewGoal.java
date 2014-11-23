@@ -35,18 +35,19 @@ public class ViewGoal extends Activity {
 	Date goalDateAndTime = null;
 	List<String> attendees = null;
 	
-	  ParseUser user = ParseUser.getCurrentUser();
-
+	ParseUser user = ParseUser.getCurrentUser();
 	
 	boolean attending = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_view_goal);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setDisplayShowHomeEnabled(false);
-	    
+  	  	Log.d("only that works 2", "hi");
+
 		Intent intent = getIntent();
 		String parseId = intent.getStringExtra("goal_id");
 		String ownerName = intent.getStringExtra("goal_owner");
@@ -100,9 +101,8 @@ public class ViewGoal extends Activity {
 					setAttendingBox(attending);
 					String goalId = goal.getObjectId();
 					
-					user.addAllUnique("myGoals", Arrays.asList(goalId)); //saves the GoalPost to the list of goals associated to current user
+					user.addAllUnique("myGoals", Arrays.asList(goalId));
 					user.saveInBackground();
-
 				} else {
 					attendees.remove(ParseUser.getCurrentUser().getObjectId());
 					attending = false;

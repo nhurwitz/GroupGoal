@@ -14,7 +14,7 @@
     <string name="create">Create</string>
     <string name="prompt_post">Post</string>
     <string name="post_out_of_range">Can\'t view post! Get closer.</string>
-    <string name="progress_post">Posting&#8230;</string>
+    <string name="progress_post">Posting</string>
     <string name="settings_distance_format">%d feet</string>
     <string name="activity_post_title">Create a Goal</string>
     <string name="character_count_placeholder">0/140</string>
@@ -79,4 +79,15 @@
     <color name="wet_asphalt">#34495e</color>
     <color name="clouds">#ecf0f1</color>
 
+     <!-- Profile Page Strings -->
+    <string name="aboutMe_title"><u>About Me:</u></string>
+    <string name="edit_signature_button">Edit</string>
+    <string name="upcoming_goals_title"><b><u>Upcoming Goals:</u></b></string>
+    <string name="past_goals_title"><b><u>Past Goals:</u></b></string>
+    <string name="created_goals_title"><b><u>Created Goals:</u></b></string>
+    <string name="action_my_friends">My Friends</string>
+    <string name="title_activity_my_friends">My Friends</string>
+    
+
 </resources>
+
