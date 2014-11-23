@@ -31,7 +31,7 @@ public class Comment extends ParseObject {
 	    return getParseUser("user");
 	  }
 
-	  public void setUser(ParseUser value) {
+	  public void setUser(String value) {
 	    put("user", value);
 	  }
 

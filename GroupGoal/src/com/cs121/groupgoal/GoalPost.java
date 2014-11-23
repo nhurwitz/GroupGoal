@@ -123,6 +123,25 @@ public class GoalPost extends ParseObject {
 	  }
   }
 
+  
+  public void setCommentsList(List<String> comments){
+	  put("commentsList", comments);
+  }
+  
+  public void addComment (String commentID){
+	  List<String> comments = getList("commentsList");
+	  if(!comments.contains(commentID)) {
+		  comments.add(commentID);
+		  put("commentsList", comments);
+	  }
+  }
+  
+  public List<String> getComments(){
+	  List<String> c = getList("commentsList");
+	  return c;
+  }
+
+  
   public static ParseQuery<GoalPost> getQuery() {
     return ParseQuery.getQuery(GoalPost.class);
   }

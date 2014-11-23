@@ -130,6 +130,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 		
 				List<String> attendees = new ArrayList<String>();
 				attendees.add(ParseUser.getCurrentUser().getObjectId());
+				List<String> commentList = new ArrayList<String>();
 				
 				final GoalPost goal = new GoalPost();
 				goal.setName(goalTitle);
@@ -142,6 +143,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				goal.setTargetGroupSize(goalSize);
 				goal.setCategory(goalCategory);
 				goal.setAttendees(attendees);
+				goal.setCommentsList(commentList);
 				
 				
 				goal.saveInBackground(new SaveCallback() {

@@ -49,7 +49,7 @@ public class ViewGoal extends Activity {
   	  	Log.d("only that works 2", "hi");
 
 		Intent intent = getIntent();
-		String parseId = intent.getStringExtra("goal_id");
+		final String parseId = intent.getStringExtra("goal_id");
 		String ownerName = intent.getStringExtra("goal_owner");
 	 
 	    ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class);
@@ -117,6 +117,7 @@ public class ViewGoal extends Activity {
 		viewComments.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(ViewGoal.this, CommentActivity.class);
+				intent.putExtra("goalObjectId", parseId);
 		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 		        startActivity(intent);
 			}
