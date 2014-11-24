@@ -26,6 +26,7 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	private Context mContext;
 	private List<GoalPost> mGoals;
 	private Filter goalFilter;
+	private Filter categoryFilter;
 	private List<GoalPost> finalGoals;
 	
 	private static class ViewHolder {
@@ -109,6 +110,14 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	         return goalFilter;
 	 }
 	 
+	 public Filter getCategoryFilter() {
+		 if(categoryFilter == null) {
+			 categoryFilter = new CategoryFilter();
+		 }
+		 
+		 return categoryFilter;
+	 }
+	 
 	 public void resetData() {
 	     mGoals = finalGoals;
 	 }
@@ -165,4 +174,47 @@ public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	    }
     }
   }
+	private class CategoryFilter extends Filter {
+		
+		  @SuppressLint("DefaultLocale")
+		  @Override
+		  protected FilterResults performFiltering(CharSequence constraint) {
+	        FilterResults results = new FilterResults();
+	        // We implement here the filter logic
+	        if (constraint == null || constraint.length() == 0) {
+	                results.values = mGoals;
+	                results.count = mGoals.size();
+	        }
+	        else {
+	        		String con = constraint.toString().toUpperCase();
+	                // We perform filtering operation
+	                List<GoalPost> filterList = new ArrayList<GoalPost>();
+	                
+	                for (GoalPost a : mGoals) {
+	                	if(a.getCategory().toString().toUpperCase().equals(con)) {
+	                		filterList.add(a);
+	                	}
+	                }
+
+	                results.values = filterList;
+	                results.count = filterList.size();
+
+	        }
+	        
+	        return results;
+	    }
+		  
+	    @SuppressWarnings("unchecked")
+	    @Override
+	    protected void publishResults(CharSequence constraint,
+		            FilterResults results) {
+		    // Now we have to inform the adapter about the new list filtered
+		    if (results.count == 0)
+		        notifyDataSetInvalidated();
+		    else {
+		    	mGoals = (List<GoalPost>) results.values;
+		        notifyDataSetChanged();
+		    }
+	    }
+	  }
 }

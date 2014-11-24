@@ -2,6 +2,7 @@
 package com.cs121.groupgoal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,10 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -28,12 +31,17 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cs121.groupgoal.GoalPost.Category;
 import com.cs121.groupgoal.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -200,6 +208,72 @@ public class MainActivity extends FragmentActivity {
 	              return true;
 	          }
         });
+      
+      MenuItem filterSpinner = menu.findItem(R.id.action_filter);
+      View iView = filterSpinner.getActionView();
+      if(iView instanceof Spinner) {
+    	  final Spinner spinner = (Spinner) iView;
+    	  ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(
+    			  this, android.R.layout.simple_spinner_item){
+    		  
+    		  @Override
+    		  public View getView(int position, View convertView, ViewGroup parent) {
+    			  View v = super.getView(position, convertView, parent);
+
+                  ((TextView) v).setTextSize(16);
+                  ((TextView) v).setTextColor(Color.WHITE);
+                  return v;
+    		  }
+    		  
+    		  public View getDropDownView(int position, View convertView,
+                      ViewGroup parent) {
+                  View v = super.getDropDownView(position, convertView,
+                          parent);
+  
+                  ((TextView) v).setTextColor(Color.WHITE);
+                  
+                  return v;
+              }
+    	  };
+    	  
+    	  spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    	  
+    	  List<String> categoryStrings = new ArrayList<String>();
+    	  categoryStrings.add("Filter");
+    	  for(Category c : Category.values()) {
+    		  categoryStrings.add(SignUpActivity.capitalize(c.toString()));
+    	  }
+    	  
+    	  spinnerAdapter.addAll(categoryStrings);
+    	  spinner.setAdapter(spinnerAdapter);
+    	  spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@SuppressLint("DefaultLocale")
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				String selected = parent.getItemAtPosition(position).toString();
+				if(!selected.equals("Filter")){
+					mAdapter.resetData();
+					mAdapter.getCategoryFilter().filter(selected.toUpperCase());
+				} else {
+					mAdapter = new GoalAdapter(MainActivity.this, new ArrayList<GoalPost>());
+					postsListView.setAdapter(mAdapter);
+					updateData();	
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+    		  
+    	  });
+      }
+      
+      
+      
           
       //------------------------------------------------------
      
