@@ -108,11 +108,6 @@
 	   </activity>
         
         <activity
-            android:name=".CommentActivity"
-            android:label="@string/title_activity_comment" >
-        </activity>
-        
-        <activity
 	       android:name=".ViewAttendeesActivity"
 	       android:label="@string/title_activity_view_attendees"
 	       android:parentActivityName="com.cs121.groupgoal.MainActivity" >
@@ -126,6 +121,16 @@
             android:name=".MyFriendsActivity"
             android:label="My Friends" >
         </activity>
+        
+        <activity
+	       android:name=".CommentActivity"
+	       android:label="@string/title_activity_comment"
+	       android:parentActivityName="com.cs121.groupgoal.MainActivity" >
+	       <!-- Parent activity meta-data to support 4.0 and lower -->
+	       <meta-data
+	           android:name="android.support.PARENT_ACTIVITY"
+	           android:value="com.cs121.groupgoal.MainActivity" />
+	   </activity>
         
     </application>
 

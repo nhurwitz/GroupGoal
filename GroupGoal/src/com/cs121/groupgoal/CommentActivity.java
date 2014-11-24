@@ -2,6 +2,7 @@ package com.cs121.groupgoal;
 
 import java.util.ArrayList;
 
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,24 +55,18 @@ public class CommentActivity extends Activity {
 	            ParseQuery<Comment> query = ParseQuery.getQuery("Comments");
 	            query.include("user");
 	            System.out.println("inside factory");
-	            Log.d("a", "1");
-	            //query.orderByDescending("createdAt");
-
+	          
 	            return query;
 	          }
 	        };
-	        Log.d("a", "2");
 	     // Set up the query adapter
 	        commentsQueryAdapter = new ParseQueryAdapter<Comment>(this, factory) {
 	        
 	        	@Override
 	          public View getItemView(Comment post, View view, ViewGroup parent) {
-		              System.out.println("inside view");
 
 	            if (view == null) {
 	              view = View.inflate(getContext(), R.layout.activity_comment_view, null);
-	              System.out.println("inside view2");
-	              Log.d("a", "3");
 	            }
 	            
 	            
@@ -79,8 +74,8 @@ public class CommentActivity extends Activity {
 	            TextView contentView = (TextView) view.findViewById(R.id.content_view);
 	            TextView usernameView = (TextView) view.findViewById(R.id.username_view);
 	            contentView.setText(post.getText());
-	            usernameView.setText(post.getUser().toString());
-	            Log.d("a", "4");
+	            String[] fullName = post.getUser().get("fullName").toString().split("\\^");
+	            usernameView.setText(fullName[0] + " " + fullName[1]);
 	            
 	            return view;
 	          }
@@ -160,7 +155,16 @@ public class CommentActivity extends Activity {
 		startActivity(i);
 	  }
 	  
-	  
+	  @Override
+	  public boolean onOptionsItemSelected(MenuItem item) {
+	      switch (item.getItemId()) {
+	      // Respond to the action bar's Up/Home button
+	      case android.R.id.home:
+	          NavUtils.navigateUpFromSameTask(this);
+	          return true;
+	      }
+	      return super.onOptionsItemSelected(item);
+	  }
 
 	
 }
