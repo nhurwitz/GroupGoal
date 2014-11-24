@@ -20,16 +20,14 @@
             android:hint="@string/write_comment" />
     
         <Button
-                android:id="@+id/submit_comment_button"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="@string/post_comment" />
-           <ListView
-        android:id="@+id/comments_list_view"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-               
-
+     		android:id="@+id/submit_comment_button"
+     		android:layout_width="match_parent"
+      		android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/post_comment" />
+        <ListView
+        	android:id="@+id/comments_list_view"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1" />
 </LinearLayout>

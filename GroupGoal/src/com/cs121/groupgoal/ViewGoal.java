@@ -107,6 +107,12 @@ public class ViewGoal extends Activity {
 					attendees.remove(ParseUser.getCurrentUser().getObjectId());
 					attending = false;
 					setAttendingBox(attending);
+					
+					String goalId = goal.getObjectId();
+					
+					user.removeAll("myGoals", Arrays.asList(goalId));
+					user.saveInBackground();
+					
 				}
 				goal.setAttendees(attendees);
 				goal.saveInBackground();

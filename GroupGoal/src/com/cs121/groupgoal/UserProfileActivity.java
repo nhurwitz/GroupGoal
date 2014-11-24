@@ -37,7 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		ParseUser user= ParseUser.getCurrentUser();
 		TextView userNameTextBox;
 		Editable userProfileMessage;
-		private EditText searchedFriend;
+		//private EditText searchedFriend;
 		
 		ArrayList<String> allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined
 		
@@ -387,21 +387,15 @@ import android.widget.AdapterView.OnItemClickListener;
 	
 		@Override
 		public boolean onOptionsItemSelected(MenuItem item) {
-			// Handle action bar item clicks here. The action bar will
-			// automatically handle clicks on the Home/Up button, so long
-			// as you specify a parent activity in AndroidManifest.xml.
+
 			int id = item.getItemId();
 			if (id == R.id.action_settings) {
 				return true;
 			}
-			
-			//---------------------------------RD
 			else if (id == R.id.action_my_profile) {
 				System.out.println("CLICKED!");
 				return true;
-			}
-			//--------------------------
-			
+			}			
 			return super.onOptionsItemSelected(item);
 		}
 	}
