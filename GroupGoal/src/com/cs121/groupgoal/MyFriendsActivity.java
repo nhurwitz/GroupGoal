@@ -134,14 +134,7 @@ public class MyFriendsActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		
-	    menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-	        public boolean onMenuItemClick(MenuItem item) {
-	          startActivity(new Intent(MyFriendsActivity.this, SettingsActivity.class));
-	          return true;
-	        }
-	      });
-	      
-	      
+	
 	      //Add the My Profile Option to the Menu-------------------RD
 	        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 	        public boolean onMenuItemClick(MenuItem item) {
@@ -189,7 +182,7 @@ public class MyFriendsActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_my_friends) {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -71,17 +71,7 @@
 	           android:name="android.support.PARENT_ACTIVITY"
 	           android:value="com.cs121.groupgoal.MainActivity" />
 	   </activity>
-        
-       <activity
-	       android:name=".SettingsActivity"
-	       android:label="@string/action_settings"
-	       android:parentActivityName="com.cs121.groupgoal.MainActivity" >
-	       <!-- Parent activity meta-data to support 4.0 and lower -->
-	       <meta-data
-	           android:name="android.support.PARENT_ACTIVITY"
-	           android:value="com.cs121.groupgoal.MainActivity" />
-	   </activity>  
-      
+              
         <activity
             android:name=".StartGuideActivity"
             android:label="@string/title_activity_start_guide" >

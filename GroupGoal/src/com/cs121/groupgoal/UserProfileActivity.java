@@ -344,11 +344,16 @@ import android.widget.AdapterView.OnItemClickListener;
 			// Inflate the menu; this adds items to the action bar if it is present.
 			getMenuInflater().inflate(R.menu.user_profile, menu);
 			
-		    menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-		        public boolean onMenuItemClick(MenuItem item) {
-		          startActivity(new Intent(UserProfileActivity.this, SettingsActivity.class));
-		          return true;
-		        }
+		    menu.findItem(R.id.action_logout).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		    	public boolean onMenuItemClick(MenuItem item) {
+		        	// Call the Parse log out method
+		              ParseUser.logOut();
+		              // Start and intent for the dispatch activity
+		              Intent intent = new Intent(UserProfileActivity.this, DispatchActivity.class);
+		              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+		              startActivity(intent);
+			          return true;
+		          }
 		      });
 		      
 		      
@@ -391,17 +396,10 @@ import android.widget.AdapterView.OnItemClickListener;
 			// automatically handle clicks on the Home/Up button, so long
 			// as you specify a parent activity in AndroidManifest.xml.
 			int id = item.getItemId();
-			if (id == R.id.action_settings) {
+			if (id == R.id.action_my_profile) {
 				return true;
 			}
-			
-			//---------------------------------RD
-			else if (id == R.id.action_my_profile) {
-				System.out.println("CLICKED!");
-				return true;
-			}
-			//--------------------------
-			
+						
 			return super.onOptionsItemSelected(item);
 		}
 	}

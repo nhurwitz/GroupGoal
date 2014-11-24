@@ -23,13 +23,6 @@ public class NotificationsActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setDisplayShowHomeEnabled(false);
 		
-		  menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-		        public boolean onMenuItemClick(MenuItem item) {
-		          startActivity(new Intent(NotificationsActivity.this, SettingsActivity.class));
-		          return true;
-		        }
-		      });
-		      
 		      
 		      //Add the My Profile Option to the Menu-------------------RD
 		        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -72,7 +65,7 @@ public class NotificationsActivity extends Activity {
 	        NavUtils.navigateUpFromSameTask(this);
 	        return true;
 	    
-	    case R.id.action_settings:
+	    case R.id.action_notifications:
 	    	return true;
 	    }
 	    

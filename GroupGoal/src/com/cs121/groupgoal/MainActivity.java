@@ -66,6 +66,7 @@ import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 import com.parse.ParseQuery.CachePolicy;
 
 public class MainActivity extends FragmentActivity {
@@ -162,14 +163,6 @@ public class MainActivity extends FragmentActivity {
     getMenuInflater().inflate(R.menu.main, menu);
     getActionBar().setDisplayShowHomeEnabled(false);
 
-    menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-      public boolean onMenuItemClick(MenuItem item) {
-        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-        return true;
-      }
-    });
-    
-    
     //Add the My Profile Option to the Menu-------------------RD
       menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
       public boolean onMenuItemClick(MenuItem item) {
@@ -207,6 +200,18 @@ public class MainActivity extends FragmentActivity {
 	              startActivity(intent);
 	              return true;
 	          }
+        });
+      
+      menu.findItem(R.id.action_logout).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+          public boolean onMenuItemClick(MenuItem item) {
+        	// Call the Parse log out method
+              ParseUser.logOut();
+              // Start and intent for the dispatch activity
+              Intent intent = new Intent(MainActivity.this, DispatchActivity.class);
+              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+              startActivity(intent);
+	          return true;
+          }
         });
       
       MenuItem filterSpinner = menu.findItem(R.id.action_filter);
