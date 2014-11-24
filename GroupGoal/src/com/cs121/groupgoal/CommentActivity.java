@@ -1,23 +1,16 @@
 package com.cs121.groupgoal;
 
-import java.util.ArrayList;
-
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.app.NavUtils;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,7 +19,6 @@ import android.widget.Toast;
 
 import com.parse.ParseACL;
 import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
@@ -155,15 +147,29 @@ public class CommentActivity extends Activity {
 		startActivity(i);
 	  }
 	  
-	  @Override
+	@SuppressLint("NewApi")
+	@Override
 	  public boolean onOptionsItemSelected(MenuItem item) {
-	      switch (item.getItemId()) {
-	      // Respond to the action bar's Up/Home button
-	      case android.R.id.home:
-	          NavUtils.navigateUpFromSameTask(this);
-	          return true;
-	      }
-	      return super.onOptionsItemSelected(item);
+		  switch (item.getItemId()) {
+		    // Respond to the action bar's Up/Home button
+		    case android.R.id.home:
+		        Intent upIntent = NavUtils.getParentActivityIntent(this);
+		        if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+		            // This activity is NOT part of this app's task, so create a new task
+		            // when navigating up, with a synthesized back stack.
+		            TaskStackBuilder.create(this)
+		                    // Add all of this activity's parents to the back stack
+		                    .addNextIntentWithParentStack(upIntent)
+		                    // Navigate up to the closest parent
+		                    .startActivities();
+		        } else {
+		            // This activity is part of this app's task, so simply
+		            // navigate up to the logical parent activity.
+		            NavUtils.navigateUpTo(this, upIntent);
+		        }
+		        return true;
+		    }
+		    return super.onOptionsItemSelected(item);
 	  }
 
 	
