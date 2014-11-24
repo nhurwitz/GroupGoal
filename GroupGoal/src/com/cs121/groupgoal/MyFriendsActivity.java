@@ -71,7 +71,8 @@ public class MyFriendsActivity extends Activity {
 			    	Log.d("query complete","");
 			    	if(!objects.isEmpty()){
 			    		
-			    		String foundName = 	objects.get(0).getUsername();
+			    		ParseUser friend = objects.get(0);
+			    		String foundName = 	friend.getUsername();
 			    		Log.d(String.valueOf(currentLst.contains(objects.get(0))),foundName);
 			    		
 			    		
@@ -80,11 +81,22 @@ public class MyFriendsActivity extends Activity {
 			    			currentFriends.add(foundName);
 			    			user.put("friendsList", currentFriends);
 			    			user.saveInBackground();
+			    			
+			    			//add to friend's friends list
+			    			
+			    			ArrayList<String> fsList = (ArrayList<String>) friend.get("friendsList");
+			    			fsList.add(user.getUsername());
+			    			friend.put("friendsList", fsList);
+			    			
+			    			
+			    			//update Display
 			    			Log.d("Added Friend",foundName);
 			    			searchedFriend.setText("");
 			    			searchedFriend.setHint("Add another Friend!");
 			    			displayFriends();
 			    		}
+			    		
+			    		
 
 			    	}
 			    	else{
