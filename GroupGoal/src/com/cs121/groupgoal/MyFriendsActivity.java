@@ -29,6 +29,7 @@ public class MyFriendsActivity extends Activity {
 	EditText searchedFriend;
 	List<ParseUser> lst;
 	List<ParseUser> currentLst = (List<ParseUser>) user.get("friendsList");
+	List<String> currentFriends = (List<String>) user.get("friendsList");
 	TextView friendsListView;
 	
 	
@@ -49,7 +50,7 @@ public class MyFriendsActivity extends Activity {
 			}
 		});
 		
-		//displayFriends();
+		displayFriends();
 	}
 	
 	
@@ -58,11 +59,10 @@ public class MyFriendsActivity extends Activity {
 		String name = searchedFriend.getText().toString();
 		//If no name has been entered
 		if(name==""){
-			Log.d("No string","error!");
+			Log.d("No string","");
 		}
 		
 		else{
-			//Log.d("begin search","");
 			ParseQuery<ParseUser> query = ParseUser.getQuery();
 			query.whereEqualTo("username",name);
 			query.findInBackground(new FindCallback<ParseUser>() {
@@ -70,17 +70,22 @@ public class MyFriendsActivity extends Activity {
 			    if (e == null) {
 			    	Log.d("query complete","");
 			    	if(!objects.isEmpty()){
-			    		String foundName = 	objects.get(0).getUsername();
 			    		
+			    		String foundName = 	objects.get(0).getUsername();
 			    		Log.d(String.valueOf(currentLst.contains(objects.get(0))),foundName);
 			    		
-			    		if(!currentLst.contains(objects.get(0))){
-			    			currentLst.add(objects.get(0));
-			    			user.put("friendsList", currentLst);
+			    		
+			    		//add the friend to the array
+			    		if(!currentFriends.contains(foundName)){
+			    			currentFriends.add(foundName);
+			    			user.put("friendsList", currentFriends);
 			    			user.saveInBackground();
 			    			Log.d("Added Friend",foundName);
+			    			searchedFriend.setText("");
+			    			searchedFriend.setHint("Add another Friend!");
 			    			displayFriends();
 			    		}
+
 			    	}
 			    	else{
 			    		Log.d("No user exists","");
@@ -94,22 +99,17 @@ public class MyFriendsActivity extends Activity {
 		}
 }
 	
-	//to be changed
+
 	public void displayFriends(){
 	
 		String friends = "Friends: ";
 		
-		
-		if(currentLst.get(0)!=null){
-				Log.d("display friends","inList");
-				for (int i=0;i<currentLst.size();i++){
-				//String nextFriend =  currentLst.get(i).getUsername();
-				//friends = new String (friends+" "+nextFriend);
-				Log.d("adding to string", friends);
-				}
-			}
-		
-		
+		if(!currentFriends.isEmpty()){
+			for(int i=0;i<currentFriends.size();i++){
+				friends = new String(friends+"  "+currentFriends.get(i));
+			}	
+		}
+
 		
 		friendsListView.setText(friends);
 		
