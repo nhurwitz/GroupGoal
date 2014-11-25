@@ -46,6 +46,7 @@ public class CommentActivity extends Activity {
 	  private String commentText;
 	  String[] commentsMade;
 	  String[] commentsMadeR;
+	  private String goalID;
 
 	  
 
@@ -57,6 +58,7 @@ public class CommentActivity extends Activity {
 		
 		
 		Intent intent = getIntent();
+		goalID = intent.getStringExtra("goalObjectId");
 		String currentGoalId = intent.getStringExtra("goalObjectId"); //gets the objectID of the goal we were viewing
 	
 		ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class); //fetch the GoalPost object associated with the obejctId	    
@@ -225,6 +227,7 @@ public class CommentActivity extends Activity {
 				Toast.LENGTH_LONG).show();
 		
 	    Intent i = new Intent(CommentActivity.this, CommentActivity.class);
+	    i.putExtra("goalObjectId", goalID);
 		startActivity(i);
 	  }
 	  
