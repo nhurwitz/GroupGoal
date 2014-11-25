@@ -214,6 +214,18 @@ public class MainActivity extends FragmentActivity {
           }
         });
       
+      menu.findItem(R.id.action_upcoming_goals).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+          public boolean onMenuItemClick(MenuItem item) {
+        	// Call the Parse log out method
+              ParseUser.logOut();
+              // Start and intent for the dispatch activity
+              Intent intent = new Intent(MainActivity.this, UpcomingGoalsActivity.class);
+              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+              startActivity(intent);
+	          return true;
+          }
+        });
+      
       MenuItem filterSpinner = menu.findItem(R.id.action_filter);
       View iView = filterSpinner.getActionView();
       if(iView instanceof Spinner) {

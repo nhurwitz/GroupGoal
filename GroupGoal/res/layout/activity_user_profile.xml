@@ -49,21 +49,6 @@
         android:text="@string/edit_signature_button" />
 
 
-    <TextView
-        android:id="@+id/user_goals_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#992D2D"
-        android:text="@string/upcoming_goals_title" />
-
-    <ListView
-        android:id="@+id/upComing_goals_listview"
-		android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-    </ListView>
     
      <TextView
         android:id="@+id/user_goals_text2"
