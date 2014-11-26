@@ -134,6 +134,16 @@ public class ViewGoal extends Activity {
 			
 			
 		});
+		
+		Button inviteFriends = (Button) findViewById(R.id.invite_attendees_button);
+		
+		inviteFriends.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(ViewGoal.this, InviteActivity.class)
+					.putExtra("goal_id", goal.getObjectId());
+		        startActivity(intent);
+			}
+		});
 
 	}
 	

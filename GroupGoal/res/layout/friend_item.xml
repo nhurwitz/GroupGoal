@@ -21,12 +21,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
 	    android:layout_marginLeft="10dp"
 	    android:layout_marginStart="10dp"
 	    android:layout_marginRight="15dp"
-	    android:layout_marginBottom="10dp"
-    	android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"/>
 
 </RelativeLayout>

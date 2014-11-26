@@ -32,6 +32,7 @@ public class InviteActivity extends Activity {
 	}
 	
 	private ViewHolder viewHolder;
+	private GoalPost goal;
 	
 	private List<String> toInvite;
 	
@@ -45,29 +46,32 @@ public class InviteActivity extends Activity {
 		Intent intent = getIntent();
 		String parseId = intent.getStringExtra("goal_id");
 		
-		GoalPost goal;
 		try {
 			goal = ParseQuery.getQuery(GoalPost.class).get(parseId);
-			@SuppressWarnings("unchecked")
-			List<String> userIds = (List<String>) goal.get("friendsList");
-			FriendAdapter fa = new FriendAdapter(this, userIds);
-			
-			friendsList = (ListView) findViewById(R.id.friends_list);
-			sendInvite = (Button) findViewById(R.id.invite_friends_button);
-			
-			friendsList.setAdapter(fa);
-			sendInvite.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					
-					
-				}
-				
-			});
 		} catch (com.parse.ParseException e) {
 		   Log.e("Goal Error", e.getMessage());
 		}
+		
+		@SuppressWarnings("unchecked")
+		List<String> userIds = (List<String>) ParseUser.getCurrentUser().get("friendsList");
+		if(userIds == null) {
+			userIds = new ArrayList<String>();
+		}
+		FriendAdapter fa = new FriendAdapter(this, userIds);
+		
+		friendsList = (ListView) findViewById(R.id.invite_listview);
+		sendInvite = (Button) findViewById(R.id.invite_friends_button);
+		
+		friendsList.setAdapter(fa);
+		sendInvite.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+				
+			}
+			
+		});
 	}
 
 	@Override
@@ -93,6 +97,7 @@ public class InviteActivity extends Activity {
 		
 		private Context mContext;
 		private List<String> userIds;
+		private ParseUser queriedUser;
 
 		public FriendAdapter(Context context, List<String> friends) {
 			super(context, R.layout.friend_item, friends);
@@ -120,17 +125,15 @@ public class InviteActivity extends Activity {
 		      }
 		     
 		      final String id = userIds.get(position);
-		      ParseUser user;
-		      
-		      ParseQuery<ParseUser> postQuery = ParseQuery.getQuery(ParseUser.class);
 			    
 		      try {
-		      	  user = postQuery.get(id);
-		      	  String[] firstLast = user.get("fullName").toString().split("\\^");
-		      	  viewHolder.friendName.setText(firstLast[0] + " " + firstLast[1]);
+		    	  queriedUser = ParseQuery.getQuery(ParseUser.class).get(id);
 		      } catch (com.parse.ParseException e) {
 				  Log.e("Goal Error", e.getMessage());
 			  }
+		      
+		      String[] firstLast = queriedUser.get("fullName").toString().split("\\^");
+	      	  viewHolder.friendName.setText(firstLast[0] + " " + firstLast[1]);
 			     
 			
 			
