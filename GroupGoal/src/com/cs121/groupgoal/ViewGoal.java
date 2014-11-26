@@ -36,6 +36,7 @@ public class ViewGoal extends Activity {
 	List<String> attendees = null;
 	
 	ParseUser user = ParseUser.getCurrentUser();
+	String parseID;
 	
 	boolean attending = false;
 
@@ -50,6 +51,7 @@ public class ViewGoal extends Activity {
 
 		Intent intent = getIntent();
 		String parseId = intent.getStringExtra("goal_id");
+		parseID = parseId; 
 		String ownerName = intent.getStringExtra("goal_owner");
 	 
 	    ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class);
@@ -117,6 +119,7 @@ public class ViewGoal extends Activity {
 		viewComments.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(ViewGoal.this, CommentActivity.class);
+				intent.putExtra("goalObjectId", parseID);
 		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 		        startActivity(intent);
 			}
