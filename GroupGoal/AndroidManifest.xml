@@ -25,6 +25,9 @@
         android:required="true" />
 
     <application
+        android:icon="@drawable/editedggicon"
+        android:label="Group Goal"
+        
         android:name=".Application"
         android:allowBackup="true"
         android:theme="@style/AppTheme" >
