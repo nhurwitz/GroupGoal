@@ -122,6 +122,11 @@ public class GoalPost extends ParseObject {
 		  put("attendees", attendees);
 	  }
   }
+  
+  public void setCommentsList(List<String> comments){
+	  put("commentsList", comments);
+  }
+
 
   public static ParseQuery<GoalPost> getQuery() {
     return ParseQuery.getQuery(GoalPost.class);
