@@ -45,7 +45,6 @@ public class MyFriendsActivity extends Activity {
 		Button AddFriendsButton = (Button) findViewById(R.id.addFriendsButton);
 		AddFriendsButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Log.d("onclick","");
 				searchAndAddFriends();
 			}
 		});
@@ -55,14 +54,9 @@ public class MyFriendsActivity extends Activity {
 	
 	
 	public void searchAndAddFriends(){
-		Log.d("searching!",searchedFriend.getText().toString());
 		String name = searchedFriend.getText().toString();
 		//If no name has been entered
-		if(name==""){
-			Log.d("No string","");
-		}
-		
-		else{
+		if(name!=""){
 			ParseQuery<ParseUser> query = ParseUser.getQuery();
 			query.whereEqualTo("username",name);
 			query.findInBackground(new FindCallback<ParseUser>() {
@@ -72,9 +66,7 @@ public class MyFriendsActivity extends Activity {
 			    	if(!objects.isEmpty()){
 			    		
 			    		ParseUser friend = objects.get(0);
-			    		String foundName = 	friend.getUsername();
-			    		Log.d(String.valueOf(currentLst.contains(objects.get(0))),foundName);
-			    		
+			    		String foundName = 	friend.getObjectId(); 		
 			    		
 			    		//add the friend to the array
 			    		if(!currentFriends.contains(foundName)){
@@ -84,13 +76,14 @@ public class MyFriendsActivity extends Activity {
 			    			
 			    			//add to friend's friends list
 			    			
-			    			ArrayList<String> fsList = (ArrayList<String>) friend.get("friendsList");
-			    			fsList.add(user.getUsername());
+			    			@SuppressWarnings("unchecked")
+							ArrayList<String> fsList = (ArrayList<String>) friend.get("friendsList");
+			    			if(fsList == null) {
+			    				fsList = new ArrayList<String>();
+			    			}
+			    			fsList.add(user.getObjectId());
 			    			friend.put("friendsList", fsList);
 			    			
-			    			
-			    			//update Display
-			    			Log.d("Added Friend",foundName);
 			    			searchedFriend.setText("");
 			    			searchedFriend.setHint("Add another Friend!");
 			    			displayFriends();
@@ -99,17 +92,12 @@ public class MyFriendsActivity extends Activity {
 			    		
 
 			    	}
-			    	else{
-			    		Log.d("No user exists","");
-			    	}
 			    	
-			    } else {
-			    	Log.d("something went wrong finding user","");
-			    	}
+			    } 
 			  }
 			});
 		}
-}
+	}
 	
 
 	public void displayFriends(){
@@ -118,7 +106,16 @@ public class MyFriendsActivity extends Activity {
 		
 		if(!currentFriends.isEmpty()){
 			for(int i=0;i<currentFriends.size();i++){
-				friends = new String(friends+"  "+currentFriends.get(i));
+				 ParseQuery<ParseUser> postQuery = ParseQuery.getQuery(ParseUser.class);
+				    
+			      try {
+			      	  ParseUser tempUser = postQuery.get(currentFriends.get(i));
+			      	  String[] firstLast = tempUser.get("fullName").toString().split("\\^");
+			      	  friends = new String(friends+"  "+ firstLast[0] + " " + firstLast[1] + ";");
+			      } catch (com.parse.ParseException e) {
+					  Log.e("Goal Error", e.getMessage());
+				  } 
+				
 			}	
 		}
 
