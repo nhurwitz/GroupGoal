@@ -49,11 +49,11 @@ public class ViewGoal extends Activity {
 	    getActionBar().setDisplayShowHomeEnabled(false);
   	  	Log.d("only that works 2", "hi");
 
-		Intent intent = getIntent();
-		String parseId = intent.getStringExtra("goal_id");
+		Bundle bundle = getIntent().getExtras();
+		String ownerName = "";
+		String parseId = bundle.getString("goal_id");
 		parseID = parseId; 
-		String ownerName = intent.getStringExtra("goal_owner");
-	 
+			 
 	    ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class);
 	    
 	    try {
@@ -61,9 +61,19 @@ public class ViewGoal extends Activity {
 	    } catch (com.parse.ParseException e) {
 			Log.e("Goal Error", e.getMessage());
 		}
-		
-	    
-	    
+
+	    if(bundle.size() > 1) {
+			ownerName = bundle.getString("goal_owner");
+		} else {
+			ownerName = goal.getOwnerId();
+			try {
+				ownerName = ParseQuery.getQuery(ParseUser.class)
+						.get(ownerName).get("fullName").toString();
+			} catch (com.parse.ParseException e) {
+				Log.e("Goal Error", e.getMessage());
+			}
+		}
+
 	    if(goal != null) {
 	    	attendees = goal.getAttendees();
 	    	goalName = goal.getName().toString();

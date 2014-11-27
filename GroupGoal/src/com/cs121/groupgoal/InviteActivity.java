@@ -71,18 +71,23 @@ public class InviteActivity extends Activity {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void onClick(View v) {
-				for(String id : toInvite) {
-					try {
-						ParseUser user = ParseQuery.getQuery(ParseUser.class)
-								.get(id);
-						List<String> ig = (List<String>) user.get("invitedGoals");
-						ig.add(parseId);
-						user.saveInBackground();
-					} catch (com.parse.ParseException e) {
-						   Log.e("Invite Error", e.getMessage());
+				if(toInvite != null) {
+					for(String id : toInvite) {
+						try {
+							ParseUser user = ParseQuery.getQuery(ParseUser.class)
+									.get(id);
+							List<String> ig = (List<String>) user.get("invitedGoals");
+							if(!ig.contains(parseId))
+								ig.add(parseId);
+							
+							user.put("invitedGoals",ig);
+							user.saveEventually();
+						} catch (com.parse.ParseException e) {
+							   Log.e("Invite Error", e.getMessage());
+						}
 					}
 				}
-				
+								
 				Intent intent = new Intent(InviteActivity.this, ViewGoal.class)
 					.putExtra("goal_id", parseId);
 				

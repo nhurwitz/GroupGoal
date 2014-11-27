@@ -114,10 +114,12 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 						categoryDropdown.getSelectedItem().toString().toUpperCase());
 		
 				List<String> attendees = new ArrayList<String>();
-				attendees.add(ParseUser.getCurrentUser().getObjectId());
+				String currentId = ParseUser.getCurrentUser().getObjectId();
+				attendees.add(currentId);
 				List<String> commentList = new ArrayList<String>();
 				
 				final GoalPost goal = new GoalPost();
+				goal.setOwnerId(currentId);
 				goal.setName(goalTitle);
 				goal.setDescription(goalDescription);
 				goal.setOwner(ParseUser.getCurrentUser());

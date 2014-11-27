@@ -45,6 +45,14 @@ public class GoalPost extends ParseObject {
   public void setOwner(ParseUser value) {
     put("user", value);
   }
+  
+  public String getOwnerId() {
+	  return getString("ownerid");
+  }
+  
+  public void setOwnerId(String id) {
+	  put("ownerid", id);
+  }
 
   public ParseGeoPoint getLocation() {
     return getParseGeoPoint("location");
