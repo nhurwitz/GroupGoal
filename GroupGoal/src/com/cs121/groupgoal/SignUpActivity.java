@@ -123,14 +123,11 @@ import com.parse.SignUpCallback;
 	    String message = "Edit Your Personal Message Here";
 	    user.put("userDescription", message);
 	
-	    List<String> friends = new ArrayList<String>(); 
-	    user.put("friendsList", friends);
-	    
-	    List<String> myGoals = new ArrayList<String>();
-	    user.put("myGoals",  myGoals);
-	    
-	    List<String> createdGoals = new ArrayList<String>();
-	    user.put("createdGoals",  createdGoals);
+	    List<String> emptyList = new ArrayList<String>(); 
+	    user.put("friendsList", emptyList);
+	    user.put("myGoals",  emptyList);
+	    user.put("createdGoals",  emptyList);
+	    user.put("invitedGoals", emptyList);
 	
 	    // Call the Parse signup method
 	    user.signUpInBackground(new SignUpCallback() {

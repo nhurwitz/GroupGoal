@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class InviteActivity extends Activity {
 	
@@ -44,7 +45,7 @@ public class InviteActivity extends Activity {
 		setContentView(R.layout.activity_invite);
 		
 		Intent intent = getIntent();
-		String parseId = intent.getStringExtra("goal_id");
+		final String parseId = intent.getStringExtra("goal_id");
 		
 		try {
 			goal = ParseQuery.getQuery(GoalPost.class).get(parseId);
@@ -61,13 +62,31 @@ public class InviteActivity extends Activity {
 		
 		friendsList = (ListView) findViewById(R.id.invite_listview);
 		sendInvite = (Button) findViewById(R.id.invite_friends_button);
+		if(userIds.isEmpty())
+			sendInvite.setText("No friends to invite");
 		
 		friendsList.setAdapter(fa);
 		sendInvite.setOnClickListener(new OnClickListener() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onClick(View v) {
+				for(String id : toInvite) {
+					try {
+						ParseUser user = ParseQuery.getQuery(ParseUser.class)
+								.get(id);
+						List<String> ig = (List<String>) user.get("invitedGoals");
+						ig.add(parseId);
+						user.saveInBackground();
+					} catch (com.parse.ParseException e) {
+						   Log.e("Invite Error", e.getMessage());
+					}
+				}
 				
+				Intent intent = new Intent(InviteActivity.this, ViewGoal.class)
+					.putExtra("goal_id", parseId);
+				
+				startActivity(intent);
 				
 			}
 			
