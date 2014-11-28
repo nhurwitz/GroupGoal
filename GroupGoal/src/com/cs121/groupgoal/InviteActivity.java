@@ -86,8 +86,10 @@ public class InviteActivity extends Activity {
 							   Log.e("Invite Error", e.getMessage());
 						}
 					}
+				
+					Toast.makeText(InviteActivity.this, "Friends successfully invited!", Toast.LENGTH_LONG)
+						.show();
 				}
-								
 				Intent intent = new Intent(InviteActivity.this, ViewGoal.class)
 					.putExtra("goal_id", parseId);
 				
