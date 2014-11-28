@@ -129,10 +129,6 @@ import com.parse.SignUpCallback;
 	    user.put("myGoals",  emptyList);
 	    user.put("createdGoals",  emptyList);
 	    user.put("invitedGoals", emptyList);
-	    ParseACL acl = new ParseACL();
-	    acl.setPublicReadAccess(true);
-	    acl.setPublicWriteAccess(true);
-	    user.setACL(acl);
 	
 	    // Call the Parse signup method
 	    user.signUpInBackground(new SignUpCallback() {
