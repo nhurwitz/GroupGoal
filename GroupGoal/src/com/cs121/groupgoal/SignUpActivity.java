@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 	
 	import com.cs121.groupgoal.R;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -128,6 +129,10 @@ import com.parse.SignUpCallback;
 	    user.put("myGoals",  emptyList);
 	    user.put("createdGoals",  emptyList);
 	    user.put("invitedGoals", emptyList);
+	    ParseACL acl = new ParseACL();
+	    acl.setPublicReadAccess(true);
+	    acl.setPublicWriteAccess(true);
+	    user.setACL(acl);
 	
 	    // Call the Parse signup method
 	    user.signUpInBackground(new SignUpCallback() {
