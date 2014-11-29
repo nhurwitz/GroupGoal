@@ -77,8 +77,17 @@ public class InviteActivity extends Activity {
 							ParseUser user = ParseQuery.getQuery(ParseUser.class)
 									.get(id);
 							List<String> ig = (List<String>) user.get("invitedGoals");
-							if(!ig.contains(parseId))
-								ig.add(parseId);
+							String userId = ParseUser.getCurrentUser().getObjectId();
+							boolean contained = false;
+							for(String invite : toInvite) {
+								if(id == invite.split("\\^")[0]) {
+									contained = true;
+								}
+							}
+							
+							if(!contained) {
+								ig.add(id + "^" + userId);
+							}
 							
 							user.put("invitedGoals",ig);
 							user.saveEventually();
