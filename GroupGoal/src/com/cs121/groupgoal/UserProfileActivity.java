@@ -43,7 +43,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		
 		
 		ArrayList<String> pastGoals = new ArrayList<String>();
-		private static ArrayList<String> upcomingGoals = new ArrayList<String>();
+		//private static ArrayList<String> upcomingGoals = new ArrayList<String>();
 		
 		ArrayList<String> madeGoals = (ArrayList<String>) user.get("createdGoals"); //arrayList that holds all the goals that the user has created
 
@@ -80,7 +80,7 @@ import android.widget.AdapterView.OnItemClickListener;
 			sortLists();
 			
 		
-			
+			/*
 			//code to create listview for upcoming Goals
 				ParseQueryAdapter.QueryFactory<GoalPost> factory =
 				        new ParseQueryAdapter.QueryFactory<GoalPost>() {
@@ -92,6 +92,8 @@ import android.widget.AdapterView.OnItemClickListener;
 				            return query;
 				          }
 				        };
+				        
+				     
 
 				    // Set up the query adapter
 				    postsQueryAdapter = new ParseQueryAdapter<GoalPost>(this, factory) {
@@ -116,7 +118,7 @@ import android.widget.AdapterView.OnItemClickListener;
 				      }
 				    };
 
-
+				   
 				    // Attach the query adapter to the view
 				    ListView listView = (ListView) findViewById(R.id.upComing_goals_listview);
 					  listView.setAdapter(postsQueryAdapter);
@@ -135,17 +137,50 @@ import android.widget.AdapterView.OnItemClickListener;
 				      }
 				    });
 				    
-					//code to create listview for created Goals
-				    ParseQueryAdapter.QueryFactory<GoalPost> factory2 =
-					        new ParseQueryAdapter.QueryFactory<GoalPost>() {
-					          public ParseQuery<GoalPost> create() {
-					            ParseQuery<GoalPost> query = ParseQuery.getQuery("Posts");
-					            query.whereContainedIn("objectId", madeGoals);
-					            query.include("user");
-					            query.orderByAscending("date");
-					            return query;
-					          }
-					        };
+				    */
+			
+					//  added?
+			
+			//code to create listview for created Goals
+		    ParseQueryAdapter.QueryFactory<GoalPost> factory2 =
+			        new ParseQueryAdapter.QueryFactory<GoalPost>() {
+			          public ParseQuery<GoalPost> create() {
+			            ParseQuery<GoalPost> query = ParseQuery.getQuery("Posts");
+			            query.whereContainedIn("objectId", madeGoals);
+			            query.include("user");
+			            query.orderByAscending("date");
+			            return query;
+			          }
+			        };
+			        
+			        postsQueryAdapter = new ParseQueryAdapter<GoalPost>(this, factory2) {
+			      @Override
+			      public View getItemView(GoalPost post, View view, ViewGroup parent) {
+			        if (view == null) {
+			          view = View.inflate(getContext(), R.layout.anywall_post_item, null);
+			        }
+			        
+			        // #TODO (nhurwitz) Replace fields with appropriate ones.
+			        
+			        String[] goalOwnerFirstLast = post.getOwner().get("fullName").toString().split("\\^");
+			        int target = (Integer) post.getTargetGroupSize();
+			        int current = (Integer) post.getCurrentGroupSize();
+			        TextView contentView = (TextView) view.findViewById(R.id.content_view);
+			        TextView usernameView = (TextView) view.findViewById(R.id.username_view);
+			        TextView sizeView = (TextView) view.findViewById(R.id.goal_list_attending);
+			        contentView.setText(post.getName());
+			        usernameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
+			        sizeView.setText(current + "/" + target);
+			        return view;
+			      }
+			    };
+			
+			
+					//ListView listView = (ListView) findViewById(R.id.upComing_goals_listview);
+					//listView.setAdapter(postsQueryAdapter);
+			
+			
+					
 
 					    // Set up the query adapter
 					    postsQueryAdapter2 = new ParseQueryAdapter<GoalPost>(this, factory2) {
@@ -173,10 +208,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 					    // Attach the query adapter to the view
 					    ListView listView2 = (ListView) findViewById(R.id.created_goals_listview);
-						  listView2.setAdapter(postsQueryAdapter2);
+						listView2.setAdapter(postsQueryAdapter2);
 
 					    // Set up the handler for an item's selection
-					    listView.setOnItemClickListener(new OnItemClickListener() {
+					    listView2.setOnItemClickListener(new OnItemClickListener() {
 					      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					        final GoalPost item = postsQueryAdapter2.getItem(position);
 					        selectedPostObjectId = item.getObjectId();
@@ -230,7 +265,7 @@ import android.widget.AdapterView.OnItemClickListener;
 							  listView3.setAdapter(postsQueryAdapter3);
 
 						    // Set up the handler for an item's selection
-						    listView.setOnItemClickListener(new OnItemClickListener() {
+						    listView3.setOnItemClickListener(new OnItemClickListener() {
 						      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 						        final GoalPost item = postsQueryAdapter3.getItem(position);
 						        selectedPostObjectId = item.getObjectId();
@@ -245,9 +280,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 		}
 		
+		/*
 		public static ArrayList<String> getUpcomingGoals(){
 			return upcomingGoals;
 		}
+		*/
 		
 		public void displayProfile() { //function to display general user info
 			String userFullName = user.getString("fullName").toString();
@@ -326,10 +363,12 @@ import android.widget.AdapterView.OnItemClickListener;
 				
 				System.out.println("iteration number: "+i);	
 			    
+				/*
 			    if (todayDate.compareTo(goalDate) <= 0){ //means the goal has not passed yet or is happening right now
 			    	upcomingGoals.add(allGoals.get(i));			    	
 			    }
-			    else{
+			    */
+			    if(true){
 			    	System.out.println("comparing");
 
 			    	pastGoals.add(allGoals.get(i));			    	
