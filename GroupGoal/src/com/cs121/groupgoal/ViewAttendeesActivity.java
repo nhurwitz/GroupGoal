@@ -24,6 +24,9 @@ public class ViewAttendeesActivity extends Activity {
 	HashMap<String, String> userProfiles;
 	HashMap<String, String> reverseLookup;
 	
+	private String parseId;
+	private String ownerName;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,8 @@ public class ViewAttendeesActivity extends Activity {
 	    getActionBar().setDisplayShowTitleEnabled(false);
 		
 		Intent intent = getIntent();
-		String parseId = intent.getStringExtra("goal_id");
+		parseId = intent.getStringExtra("goal_id");
+		ownerName = intent.getStringExtra("goal_owner");
 		userProfiles = new HashMap<String,String>();
 		reverseLookup = new HashMap<String, String>();
 		
@@ -82,13 +86,12 @@ public class ViewAttendeesActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	    // Respond to the action bar's Up/Home button
-	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
+		Intent intent = new Intent(ViewAttendeesActivity.this, ViewGoal.class)
+			.putExtra("goal_id", parseId)
+			.putExtra("goal_owner", ownerName);
+	
+		startActivity(intent);
+		return true;
 	}
 	
 	private String adaptFullName(String fullName) {

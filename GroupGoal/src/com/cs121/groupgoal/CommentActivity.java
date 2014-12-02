@@ -30,6 +30,7 @@ public class CommentActivity extends Activity {
 	  String[] commentsMade;
 	  String[] commentsMadeR;
 	  private String goalID;
+	  private String ownerName;
 	  ParseUser user= ParseUser.getCurrentUser();
 	  	  
 	@Override
@@ -39,6 +40,7 @@ public class CommentActivity extends Activity {
 		
 		Intent intent = getIntent();
 		goalID = intent.getStringExtra("goalObjectId");
+		ownerName = intent.getStringExtra("goal_owner");
 		String currentGoalId = intent.getStringExtra("goalObjectId"); //gets the objectID of the goal we were viewing
 	
 		ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class); //fetch the GoalPost object associated with the obejctId	    
@@ -103,14 +105,12 @@ public class CommentActivity extends Activity {
 	  
 	  @Override
 		public boolean onOptionsItemSelected(MenuItem item) {
-			// Handle action bar item clicks here. The action bar will
-			// automatically handle clicks on the Home/Up button, so long
-			// as you specify a parent activity in AndroidManifest.xml.
-			int id = item.getItemId();
-			if (id == R.id.action_settings) {
-				return true;
-			}
-			return super.onOptionsItemSelected(item);
+		  Intent intent = new Intent(CommentActivity.this, ViewGoal.class)
+			.putExtra("goal_id", goalID)
+			.putExtra("goal_owner", ownerName);
+	
+		startActivity(intent);
+		return true;
 	  }
 	
 }

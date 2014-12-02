@@ -34,7 +34,8 @@ public class InviteActivity extends Activity {
 	
 	private ViewHolder viewHolder;
 	private GoalPost goal;
-	
+	private String parseId;
+	private String ownerName;
 	private List<String> toInvite;
 	
 	private ListView friendsList;
@@ -45,8 +46,8 @@ public class InviteActivity extends Activity {
 		setContentView(R.layout.activity_invite);
 		
 		Intent intent = getIntent();
-		final String parseId = intent.getStringExtra("goal_id");
-		final String ownerName = intent.getStringExtra("goal_owner");
+		parseId = intent.getStringExtra("goal_id");
+		ownerName = intent.getStringExtra("goal_owner");
 		
 		try {
 			goal = ParseQuery.getQuery(GoalPost.class).get(parseId);
@@ -121,14 +122,12 @@ public class InviteActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		Intent intent = new Intent(InviteActivity.this, ViewGoal.class)
+			.putExtra("goal_id", parseId)
+			.putExtra("goal_owner", ownerName);
+	
+		startActivity(intent);
+		return true;
 	}
 	
 	private class FriendAdapter extends ArrayAdapter<String> {
