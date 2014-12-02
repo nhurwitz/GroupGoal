@@ -29,8 +29,7 @@ public class ViewAttendeesActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_attendees);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setDisplayShowHomeEnabled(false);
+	    getActionBar().setDisplayShowTitleEnabled(false);
 		
 		Intent intent = getIntent();
 		String parseId = intent.getStringExtra("goal_id");

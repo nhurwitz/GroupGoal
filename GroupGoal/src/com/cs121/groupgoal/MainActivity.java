@@ -161,7 +161,7 @@ public class MainActivity extends FragmentActivity {
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.main, menu);
-    getActionBar().setDisplayShowHomeEnabled(false);
+    getActionBar().setDisplayShowTitleEnabled(false);
 
     //Add the My Profile Option to the Menu-------------------RD
       menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {

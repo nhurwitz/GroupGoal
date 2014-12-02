@@ -45,8 +45,7 @@ public class ViewGoal extends Activity {
 		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_view_goal);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-	    getActionBar().setDisplayShowHomeEnabled(false);
+	    getActionBar().setDisplayShowTitleEnabled(false);
   	  	Log.d("only that works 2", "hi");
 
 		Bundle bundle = getIntent().getExtras();

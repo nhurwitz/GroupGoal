@@ -64,8 +64,6 @@ import android.widget.AdapterView.OnItemClickListener;
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_user_profile);
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		    getActionBar().setDisplayShowHomeEnabled(false);
 			
 			displayProfile();
 			
@@ -382,7 +380,8 @@ import android.widget.AdapterView.OnItemClickListener;
 		public boolean onCreateOptionsMenu(Menu menu) {
 			// Inflate the menu; this adds items to the action bar if it is present.
 			getMenuInflater().inflate(R.menu.user_profile, menu);
-			
+		    getActionBar().setDisplayShowTitleEnabled(false);
+
 		    menu.findItem(R.id.action_logout).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		    	public boolean onMenuItemClick(MenuItem item) {
 		        	// Call the Parse log out method

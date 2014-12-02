@@ -71,8 +71,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_post);
-    getActionBar().setDisplayHomeAsUpEnabled(true);
-    getActionBar().setDisplayShowHomeEnabled(false);
+    getActionBar().setDisplayShowTitleEnabled(false);
     
     date = new Date();
     

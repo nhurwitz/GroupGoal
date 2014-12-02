@@ -42,7 +42,8 @@ public class UpcomingGoalsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_upcoming_goals);
-		
+	    getActionBar().setDisplayShowTitleEnabled(false);
+
 		ParseUser user= ParseUser.getCurrentUser();
 		
 		
