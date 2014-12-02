@@ -45,11 +45,11 @@ public class NotificationsActivity extends Activity {
 		setContentView(R.layout.activity_invite);
 		
 		notifications = (List<String>) ParseUser.getCurrentUser().get("invitedGoals");
-		if(notifications.isEmpty()) {
-			View linearLayout = (View) findViewById(R.id.notifications_layout);
+		if(notifications == null || notifications.isEmpty()) {
+			LinearLayout linearLayout = (LinearLayout) findViewById(R.id.notifications_layout);
 			TextView textView = new TextView(this);
 			textView.setText("No Notifications");
-			((LinearLayout) linearLayout).addView(textView);
+			linearLayout.addView(textView);
 		} else {
 			notificationsList = (ListView) findViewById(R.id.notification_listview);
 			notificationsList.setAdapter(new NotificationsAdapter(this, notifications));

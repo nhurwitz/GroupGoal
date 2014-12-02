@@ -29,6 +29,7 @@ public class ViewGoal extends Activity {
 	
 	String goalName = "";
 	String goalDescription = "";
+	String ownerName = "";
 	ParseGeoPoint locationMade = null;
 	String goalLocation = "";
 	ParseUser goalOwner = null;
@@ -46,10 +47,8 @@ public class ViewGoal extends Activity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_view_goal);
 	    getActionBar().setDisplayShowTitleEnabled(false);
-  	  	Log.d("only that works 2", "hi");
 
 		Bundle bundle = getIntent().getExtras();
-		String ownerName = "";
 		String parseId = bundle.getString("goal_id");
 		parseID = parseId; 
 			 
@@ -127,8 +126,9 @@ public class ViewGoal extends Activity {
 		
 		viewComments.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(ViewGoal.this, CommentActivity.class);
-				intent.putExtra("goalObjectId", parseID);
+				Intent intent = new Intent(ViewGoal.this, CommentActivity.class)
+					.putExtra("goalObjectId", goal.getObjectId())
+					.putExtra("goal_owner", ownerName);
 		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 		        startActivity(intent);
 			}
@@ -140,7 +140,8 @@ public class ViewGoal extends Activity {
 		viewAttendees.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(ViewGoal.this, ViewAttendeesActivity.class)
-					.putExtra("goal_id", goal.getObjectId());
+					.putExtra("goal_id", goal.getObjectId())
+					.putExtra("goal_owner", ownerName);
 		        startActivity(intent);
 			}
 			
@@ -152,7 +153,8 @@ public class ViewGoal extends Activity {
 		inviteFriends.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(ViewGoal.this, InviteActivity.class)
-					.putExtra("goal_id", goal.getObjectId());
+					.putExtra("goal_id", goal.getObjectId())
+					.putExtra("goal_owner", ownerName);
 		        startActivity(intent);
 			}
 		});

@@ -4,36 +4,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.location.Location;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.ParseACL;
-import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 
 public class CommentActivity extends Activity {
@@ -51,7 +36,6 @@ public class CommentActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment);
-	    getActionBar().setDisplayShowTitleEnabled(false);
 		
 		Intent intent = getIntent();
 		goalID = intent.getStringExtra("goalObjectId");
@@ -106,6 +90,27 @@ public class CommentActivity extends Activity {
 	    Intent i = new Intent(CommentActivity.this, CommentActivity.class);
 	    i.putExtra("goalObjectId", goalID);
 		startActivity(i);
+	  }
+	  
+	  @Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			// Inflate the menu; this adds items to the action bar if it is present.
+			getMenuInflater().inflate(R.menu.comment, menu);
+		    getActionBar().setDisplayShowTitleEnabled(false);
+
+			return true;
+		}
+	  
+	  @Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			// Handle action bar item clicks here. The action bar will
+			// automatically handle clicks on the Home/Up button, so long
+			// as you specify a parent activity in AndroidManifest.xml.
+			int id = item.getItemId();
+			if (id == R.id.action_settings) {
+				return true;
+			}
+			return super.onOptionsItemSelected(item);
 	  }
 	
 }

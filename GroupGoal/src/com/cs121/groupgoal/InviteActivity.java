@@ -46,6 +46,7 @@ public class InviteActivity extends Activity {
 		
 		Intent intent = getIntent();
 		final String parseId = intent.getStringExtra("goal_id");
+		final String ownerName = intent.getStringExtra("goal_owner");
 		
 		try {
 			goal = ParseQuery.getQuery(GoalPost.class).get(parseId);
@@ -71,7 +72,7 @@ public class InviteActivity extends Activity {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void onClick(View v) {
-				if(toInvite != null) {
+				if(toInvite != null && !toInvite.isEmpty()) {
 					for(String id : toInvite) {
 						try {
 							ParseUser user = ParseQuery.getQuery(ParseUser.class)
@@ -100,7 +101,8 @@ public class InviteActivity extends Activity {
 						.show();
 				}
 				Intent intent = new Intent(InviteActivity.this, ViewGoal.class)
-					.putExtra("goal_id", parseId);
+					.putExtra("goal_id", parseId)
+					.putExtra("goal_owner", ownerName);
 				
 				startActivity(intent);
 				
