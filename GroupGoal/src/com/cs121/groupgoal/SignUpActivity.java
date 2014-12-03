@@ -23,10 +23,10 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 	
 	/**
-	 * Activity which displays a login screen to the user.
+	 * Activity which displays a sign up screen to the user.
 	 */
 	public class SignUpActivity extends Activity {
-	  // UI references.
+
 	  private EditText firstNameEditText;
 	  private EditText lastNameEditText;
 	  private EditText usernameEditText;
@@ -39,7 +39,7 @@ import com.parse.SignUpCallback;
 	
 	    setContentView(R.layout.activity_signup);
 	
-	    // Set up the signup form.
+	    // Sets up the signup form.
 	    firstNameEditText = (EditText) findViewById(R.id.username_firstname_text);
 	    lastNameEditText = (EditText) findViewById(R.id.username_lastname_text);
 	    usernameEditText = (EditText) findViewById(R.id.username_edit_text);
@@ -58,7 +58,6 @@ import com.parse.SignUpCallback;
 	      }
 	    });
 	
-	    // Set up the submit button click handler
 	    Button mActionButton = (Button) findViewById(R.id.action_button);
 	    mActionButton.setOnClickListener(new View.OnClickListener() {
 	      public void onClick(View view) {
@@ -116,8 +115,8 @@ import com.parse.SignUpCallback;
 	    dialog.show();
 	
 	    // Set up a new Parse user
-	    ParseUser user = new ParseUser();
-	    user.put("fullName", userfullname); //save the fullname entered by the user
+	    ParseUser user = new ParseUser(); //creates a new Parse User
+	    user.put("fullName", userfullname); //save the fullname entered by the user, as well as the username and password
 	    user.setUsername(username);
 	    user.setPassword(password);
 	    
@@ -125,7 +124,7 @@ import com.parse.SignUpCallback;
 	    user.put("userDescription", message);
 	
 	    List<String> emptyList = new ArrayList<String>(); 
-	    user.put("friendsList", emptyList);
+	    user.put("friendsList", emptyList); //stores more user attributes into parse
 	    user.put("myGoals",  emptyList);
 	    user.put("createdGoals",  emptyList);
 	    user.put("invitedGoals", emptyList);

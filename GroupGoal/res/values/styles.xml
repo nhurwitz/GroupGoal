@@ -26,6 +26,7 @@
     
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#34495e</item>
+        <item name="android:icon">@drawable/editedggicon</item>
     </style>
 
 </resources>

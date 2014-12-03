@@ -10,7 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 /**
- * Activity which displays a registration screen to the user.
+ * Activity which displays a registration screen to the user where they can either sign up for a new
+ * account or login into an existing one.
  */
 public class WelcomeActivity extends Activity {
 

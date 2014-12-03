@@ -86,7 +86,7 @@ public class MainActivity extends FragmentActivity {
     task.execute();
     
     mEditText = (EditText) findViewById(R.id.goal_search_box);
-    searchGoalsButton = (Button) findViewById(R.id.search_goal_button);
+    searchGoalsButton = (Button) findViewById(R.id.search_goal_button); //search button to search for particular goals
     searchGoalsButton.setOnClickListener(new OnClickListener() {
 
 		@Override
@@ -100,7 +100,7 @@ public class MainActivity extends FragmentActivity {
 
     });
     
-    resetGoalsButton = (Button) findViewById(R.id.reset_goal_button);
+    resetGoalsButton = (Button) findViewById(R.id.reset_goal_button); 
     resetGoalsButton.setOnClickListener(new OnClickListener() {
 
 		@Override
@@ -163,7 +163,7 @@ public class MainActivity extends FragmentActivity {
     getMenuInflater().inflate(R.menu.main, menu);
     getActionBar().setDisplayShowTitleEnabled(false);
 
-    //Add the My Profile Option to the Menu-------------------RD
+    //Add the My Profile Option to the Menu
       menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
       public boolean onMenuItemClick(MenuItem item) {
     	System.out.println("Inside OnMenuItemClick");
@@ -177,7 +177,6 @@ public class MainActivity extends FragmentActivity {
           public boolean onMenuItemClick(MenuItem item) {
         	Intent amp = new Intent(MainActivity.this, NotificationsActivity.class);
         	//Pass the user to the amp activity
-        	//amp.putExtra("user",User Object*);
             startActivity(amp);
             return true;
           }
@@ -275,11 +274,7 @@ public class MainActivity extends FragmentActivity {
     	  });
       }
       
-      
-      
           
-      //------------------------------------------------------
-     
     return true;
   }
 

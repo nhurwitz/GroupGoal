@@ -24,14 +24,10 @@ import android.widget.TextView;
 
 public class UpcomingGoalsActivity extends Activity {
 
-	
-	
 	private static ArrayList<String> upcomingGoals = new ArrayList<String>();
 	ArrayList<String> allGoals = new ArrayList<String>();
 	private ParseQueryAdapter<GoalPost> postsQueryAdapter;
 	private String selectedPostObjectId;
-	
-
 	
 	GoalPost goal;
 	Date goalDate;
@@ -46,9 +42,7 @@ public class UpcomingGoalsActivity extends Activity {
 
 		ParseUser user= ParseUser.getCurrentUser();
 		
-		
 		Log.d(user.getUsername(),"help?");
-		
 		
 		List<String> mGoals =  (ArrayList<String>) user.get("myGoals");
 		
@@ -115,14 +109,9 @@ public class UpcomingGoalsActivity extends Activity {
 		        startActivity(intent);
 		      }
 		    });
-		    
-		    
-		
-		    
+		    	    
 	}
-	
-	
-	
+		
 	public void sortLists(){ //function to display the three lists of the user's goals
 		//first sort goals between upcoming and past goals
 
@@ -142,21 +131,11 @@ public class UpcomingGoalsActivity extends Activity {
 		    } catch (com.parse.ParseException e) {
 				Log.e("Goal Error", e.getMessage());
 			}
-			
-			System.out.println("iteration number: "+i);	
-		    
+					    
 			
 		    if (todayDate.compareTo(goalDate) <= 0){ //means the goal has not passed yet or is happening right now
 		    	upcomingGoals.add(allGoals.get(i));			    	
 		    }
-		    
-		    /*
-		    else{
-		    	System.out.println("comparing");
-
-		    	pastGoals.add(allGoals.get(i));			    	
-		    }
-		    */
 		}
 	
 	}

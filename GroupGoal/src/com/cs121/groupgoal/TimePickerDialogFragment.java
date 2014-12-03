@@ -8,7 +8,11 @@ import android.text.format.DateFormat;
 
 import java.util.Calendar;
 
-
+/**
+ * Used for the pop-out time picker that is displayed when a user is posting a new goal
+ * and entering relevant information.
+ *
+ */
 public class TimePickerDialogFragment extends DialogFragment {
 
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;

@@ -35,7 +35,7 @@ public class Application extends android.app.Application {
     ParseObject.registerSubclass(GoalPost.class);
     ParseObject.registerSubclass(Comment.class);
     Parse.initialize(this, "taKaWQ9jdSlG2DryqXcpg0Aq8FMobmFjiS6K500d",
-        "y0C4d44dKDn6FFJdyigkjAaonrrzbGytUzbU59Bp");
+        "y0C4d44dKDn6FFJdyigkjAaonrrzbGytUzbU59Bp"); //our personal codes to access the Parse account we created
 
     preferences = getSharedPreferences("com.cs121.groupgoal", Context.MODE_PRIVATE);
 

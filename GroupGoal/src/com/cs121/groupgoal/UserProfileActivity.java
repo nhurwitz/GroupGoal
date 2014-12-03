@@ -37,16 +37,13 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 	
 	public class UserProfileActivity extends Activity {
-		
-	
-		
+
 		Bundle extras;
 		ParseUser user;
 		TextView userNameTextBox;
 		Editable userProfileMessage;
 		ArrayList<String> allGoals,pastGoals,madeGoals;
 		private EditText searchedFriend;
-		
 
 		GoalPost goal;
 		Date goalDate;
@@ -57,11 +54,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		  private ParseQueryAdapter<GoalPost> postsQueryAdapter2;
 		  private ParseQueryAdapter<GoalPost> postsQueryAdapter3;
 
-
-
-
-		
-		@Override
+		  @Override
 		protected void onCreate(Bundle savedInstanceState) {
 			
 			extractExtras();
@@ -89,8 +82,6 @@ import android.widget.AdapterView.OnItemClickListener;
 			});
 			}
 			
-			
-						
 			sortLists();
 			
 		
@@ -152,9 +143,7 @@ import android.widget.AdapterView.OnItemClickListener;
 				    });
 				    
 				    */
-			
-					//  added?
-			
+						
 			//code to create listview for created Goals
 		    ParseQueryAdapter.QueryFactory<GoalPost> factory2 =
 			        new ParseQueryAdapter.QueryFactory<GoalPost>() {

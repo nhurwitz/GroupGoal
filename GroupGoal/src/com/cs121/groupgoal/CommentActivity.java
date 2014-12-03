@@ -22,11 +22,12 @@ import com.parse.ParseUser;
 
 
 public class CommentActivity extends Activity {
-	  private EditText postEditText;
+	
+	  private EditText postEditText; 
 	  private Button postButton;
 	  GoalPost currentGoal;
 	  ArrayList<String> allComments;
-	  private String commentText;
+	  private String commentText; 
 	  String[] commentsMade;
 	  String[] commentsMadeR;
 	  private String goalID;
@@ -43,7 +44,7 @@ public class CommentActivity extends Activity {
 		ownerName = intent.getStringExtra("goal_owner");
 		String currentGoalId = intent.getStringExtra("goalObjectId"); //gets the objectID of the goal we were viewing
 	
-		ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class); //fetch the GoalPost object associated with the obejctId	    
+		ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class); //fetch the GoalPost object associated with the objectId	    
 	    try {
 	    	currentGoal = postQuery.get(currentGoalId);
 	    } catch (com.parse.ParseException e) {
@@ -55,18 +56,18 @@ public class CommentActivity extends Activity {
 	    commentsMade = new String[allComments.size()];
 	    commentsMade = allComments.toArray(commentsMade);
 	    Collections.reverse(Arrays.asList(commentsMade)); //want to reverse the array that stores the comments so that the 
-	    commentsMadeR = commentsMade;					  // most recent comments appear at the top of the page
+	    commentsMadeR = commentsMade;					  // most recent comments appear at the top of the list
 	   
 	    System.out.println("string array size "+commentsMade.length);
 	    
-	    //make listview from string array
+	    //makes a listview from the reversed string array
 	    ArrayAdapter adapter = new ArrayAdapter<String>(this, 
 	    	      R.layout.comments_post_item, commentsMadeR);
 	    	      
 	    	      ListView listView = (ListView) findViewById(R.id.comments_list_view);
 	    	      listView.setAdapter(adapter);
 
-		postEditText = (EditText) findViewById(R.id.edit_comment);
+		postEditText = (EditText) findViewById(R.id.edit_comment); //gets the text that was inputted by the user
 	  
 	    postButton = (Button) findViewById(R.id.submit_comment_button);
 	    postButton.setOnClickListener(new View.OnClickListener() {
@@ -77,19 +78,20 @@ public class CommentActivity extends Activity {
 	  }
 
 	  private void post () {	  
+		  
 	    String text = postEditText.getText().toString();
 	    String userFullName = user.getString("fullName").toString();
 		String[] firstLast = userFullName.split("\\^");
 		String finalName = (firstLast[0] + " " + firstLast[1]); //we add the user's full name to the beginning of the comment so
 		String nameAndComment = (finalName + ": " + text);      // we know who made that comment 
 
-	    currentGoal.add("commentsList", nameAndComment);
+	    currentGoal.add("commentsList", nameAndComment); //stores the name and comment into the arrayList of strings called commentsList
 	    currentGoal.saveInBackground();
 	    
 		Toast.makeText(getApplicationContext(), "Comment successfully posted", 
 				Toast.LENGTH_LONG).show();
 		
-	    Intent i = new Intent(CommentActivity.this, CommentActivity.class);
+	    Intent i = new Intent(CommentActivity.this, CommentActivity.class); //refreshes the page so new comment will appear when posted
 	    i.putExtra("goalObjectId", goalID);
 		startActivity(i);
 	  }
@@ -99,7 +101,6 @@ public class CommentActivity extends Activity {
 			// Inflate the menu; this adds items to the action bar if it is present.
 			getMenuInflater().inflate(R.menu.comment, menu);
 		    getActionBar().setDisplayShowTitleEnabled(false);
-
 			return true;
 		}
 	  
@@ -108,7 +109,7 @@ public class CommentActivity extends Activity {
 		  Intent intent = new Intent(CommentActivity.this, ViewGoal.class)
 			.putExtra("goal_id", goalID)
 			.putExtra("goal_owner", ownerName);
-	
+		  
 		startActivity(intent);
 		return true;
 	  }

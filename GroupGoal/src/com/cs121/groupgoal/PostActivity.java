@@ -37,7 +37,8 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 /**
- * Activity which displays a login screen to the user, offering registration as well.
+ * This activity provides the interface to create a goal, specifying name, description, location, privacy, category,
+ * date and time of the goal, and will post it to the home page.
  */
 @SuppressLint("SimpleDateFormat")
 public class PostActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener, 
@@ -77,13 +78,14 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     
     categoryDropdown = (Spinner)findViewById(R.id.goal_category_spinner);
     String[] items = new String[GoalPost.Category.values().length+1];
-    items[0] = "";
+    items[0] = "Select One:"; //the first item in the menu; gives the user some guidelines
     for(int i = 1; i < items.length; i++) {
     	items[i] = GoalPost.Category.values()[i-1].toString().toLowerCase();
     }
     ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
     categoryDropdown.setAdapter(adapter);
 
+    //retrieves all the values inputted by the user
     goalTitleView = (EditText) findViewById(R.id.goal_title);
     goalDescriptionView = (EditText) findViewById(R.id.goal_description);
     goalLocationView = (EditText) findViewById(R.id.goal_location);
@@ -91,7 +93,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
     goalDateView = (TextView) findViewById(R.id.goal_date);
     goalTimeView = (TextView) findViewById(R.id.goal_time);
     isPrivateCheckbox = (CheckBox) findViewById(R.id.goal_checkbox_private);
-    createButton = (Button) findViewById(R.id.submit_goal_button);
+    createButton = (Button) findViewById(R.id.submit_goal_button); 
     
     createButton.setOnClickListener(new View.OnClickListener() {
 		
@@ -108,7 +110,8 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			
 			Date scheduledDate = parseDate(goalDate + " " + goalTime);
 			
-			if(titleValid() && descriptionValid() && dateAndTimeValid() && categoryValid()) {
+			//checks to make sure all fields are valid
+			if(titleValid() && descriptionValid() && dateAndTimeValid() && categoryValid() && locationIsValid()) {
 				GoalPost.Category goalCategory = GoalPost.Category.valueOf(
 						categoryDropdown.getSelectedItem().toString().toUpperCase());
 		
@@ -135,7 +138,6 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 				      public void done(ParseException e) {  // add to get newly created goal ID and store with user
 				    	  goalID = goal.getObjectId();
 				    	  user.addAllUnique("createdGoals", Arrays.asList(goalID)); //add new goal to the users list of created goals. 
-							System.out.println("adding to array: "+goalID);
 							user.saveInBackground(new SaveCallback() {
 							      @Override
 							      public void done(ParseException e) {
@@ -156,7 +158,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 	});
   }
 
-  
+  //methods for pop out pickers, drop down menus, and field validation.
   public void showDatePickerDialog(View v) {
       FragmentTransaction ft = getFragmentManager().beginTransaction();
       DialogFragment newFragment = new DatePickerDialogFragment(PostActivity.this);
@@ -210,6 +212,17 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			return false;
 		} else {
 			goalDescriptionView.setError(null);
+			return true;
+		}
+	}
+	
+	private boolean locationIsValid(){
+		if (goalLocationView.getText().toString().length()==0){
+			goalLocationView.setError("Please enter a location.");
+			return false;
+		}
+		else {
+			goalLocationView.setError(null);
 			return true;
 		}
 	}

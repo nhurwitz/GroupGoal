@@ -1,14 +1,18 @@
 package com.cs121.groupgoal;
 
 import java.util.Calendar;
-
 import android.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.os.Bundle;
 
-public class DatePickerDialogFragment extends DialogFragment {
+/**
+ * This activity is used when a user posts a goal and needs to choose a date from the pop-out calendar
+ *
+ */
+
+public class DatePickerDialogFragment extends DialogFragment { //used to pick dates when posting a Goal
 
     private OnDateSetListener mDateSetListener;
 

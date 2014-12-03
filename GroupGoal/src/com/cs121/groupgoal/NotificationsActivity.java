@@ -23,6 +23,10 @@ import android.widget.TextView;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+/**
+ * This class contains the code necessary to receive notificaitons when you are invited to a goal.
+ *
+ */
 public class NotificationsActivity extends Activity {
 	
 	private static class ViewHolder {

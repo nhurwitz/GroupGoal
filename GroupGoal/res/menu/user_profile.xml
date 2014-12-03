@@ -1,4 +1,8 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.cs121.groupgoal.MyFriendsActivity" 
+            android:icon="@drawable/editedggicon"
+    >
 
      <item
         android:id="@+id/action_home"

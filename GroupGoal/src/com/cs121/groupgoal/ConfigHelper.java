@@ -25,7 +25,7 @@ public class ConfigHelper {
         @Override
         public void done(ParseConfig parseConfig, ParseException e) {
           if (e == null) {
-            // Yay, retrieved successfully
+            // Retrieved successfully
             config = parseConfig;
             configLastFetchedTime = System.currentTimeMillis();
           } else {

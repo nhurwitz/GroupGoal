@@ -17,6 +17,12 @@ import android.widget.ListView;
 
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+/**
+ * This activity lists the names of users that have joined a particular goal and allows the user to click on 
+ * those user's profiles. 
+ *
+ */
 public class ViewAttendeesActivity extends Activity {
 
 	GoalPost goal;
