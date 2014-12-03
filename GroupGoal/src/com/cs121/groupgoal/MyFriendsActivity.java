@@ -57,17 +57,20 @@ public class MyFriendsActivity extends Activity {
 		String name = searchedFriend.getText().toString();
 		//If no name has been entered
 		if(name!=""){
+			Log.d("searching for..",name);
 			ParseQuery<ParseUser> query = ParseUser.getQuery();
 			query.whereEqualTo("username",name);
-			query.findInBackground(new FindCallback<ParseUser>() {
+			Log.d("check 2",name);
+			query.findInBackground(new FindCallback<ParseUser>() {	
 			  public void done(List<ParseUser> objects, ParseException e) {
-			    if (e == null) {
-			    	Log.d("query complete","");
+				  Log.d("query complete","");
+				  if (e == null) {
+			    	Log.d("e is null","");
 			    	if(!objects.isEmpty()){
 			    		
 			    		ParseUser friend = objects.get(0);
 			    		String foundName = 	friend.getObjectId(); 		
-			    		
+			    		Log.d("found him!",foundName);
 			    		//add the friend to the array
 			    		if(!currentFriends.contains(foundName)){
 			    			currentFriends.add(foundName);

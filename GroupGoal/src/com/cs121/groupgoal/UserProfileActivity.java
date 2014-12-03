@@ -6,12 +6,15 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseQueryAdapter.QueryFactory;
 import com.parse.ParseUser;
 	
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -34,18 +37,16 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 	
 	public class UserProfileActivity extends Activity {
-		ParseUser user= ParseUser.getCurrentUser();
+		
+	
+		
+		Bundle extras;
+		ParseUser user;
 		TextView userNameTextBox;
 		Editable userProfileMessage;
+		ArrayList<String> allGoals,pastGoals,madeGoals;
 		private EditText searchedFriend;
 		
-		ArrayList<String> allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined
-		
-		
-		ArrayList<String> pastGoals = new ArrayList<String>();
-		//private static ArrayList<String> upcomingGoals = new ArrayList<String>();
-		
-		ArrayList<String> madeGoals = (ArrayList<String>) user.get("createdGoals"); //arrayList that holds all the goals that the user has created
 
 		GoalPost goal;
 		Date goalDate;
@@ -62,11 +63,23 @@ import android.widget.AdapterView.OnItemClickListener;
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
+			
+			extractExtras();
+			Log.d("what user",user.getUsername());
+			
+			allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined			
+			pastGoals = new ArrayList<String>();
+			madeGoals = (ArrayList<String>) user.get("createdGoals"); //arrayList that holds all the goals that the user has created
+
+		
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_user_profile);
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		    getActionBar().setDisplayShowHomeEnabled(false);
 			
 			displayProfile();
 			
+			if(user==ParseUser.getCurrentUser()){
 			Button EditButton = (Button) findViewById(R.id.edit_user_info_button);		
 			EditButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -74,6 +87,9 @@ import android.widget.AdapterView.OnItemClickListener;
 			      
 				}
 			});
+			}
+			
+			
 						
 			sortLists();
 			
@@ -278,11 +294,58 @@ import android.widget.AdapterView.OnItemClickListener;
 
 		}
 		
-		/*
-		public static ArrayList<String> getUpcomingGoals(){
-			return upcomingGoals;
+		
+		//extract the user name from the intent and set user using a ParseQuery
+		private void extractExtras() {
+			
+			extras = getIntent().getExtras(); 
+			
+			
+			//default to the current user
+			user = ParseUser.getCurrentUser();
+
+			//set user to other if passed in as an extra
+			if(extras!=null){
+				String id = extras.getString("userId");
+				Log.d("the id is",id);
+				
+			try {
+				user = ParseQuery.getQuery(ParseUser.class).get(id);
+				Log.d("we got the user",id);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				
+			}
+			}
+			
+			
+			/*
+			if (extras != null) {
+			    userName = extras.getString("name");
+				if(userName!=""){
+					ParseQuery<ParseUser> query = ParseUser.getQuery();
+					query.whereEqualTo("username",userName);
+					query.findInBackground(new FindCallback<ParseUser>() {
+					  public void done(List<ParseUser> objects, ParseException e) {
+					    if (e == null) {
+					    	Log.d("query complete","");
+					    	if(!objects.isEmpty()){
+					    		user = objects.get(0); 
+					    		Log.d("the new user is",user.getUsername());
+					    		}
+					    }
+					  }
+					  });
+				}
+
+			}
+			*/
+			
+			
+			
+
 		}
-		*/
+
 		
 		public void displayProfile() { //function to display general user info
 			String userFullName = user.getString("fullName").toString();
@@ -305,22 +368,26 @@ import android.widget.AdapterView.OnItemClickListener;
 			alert.setTitle("Your Personalized Message");
 			alert.setMessage("Message");
 	
-			// Set an EditText view to get user input 
-			final EditText input = new EditText(this);
-			alert.setView(input);
+			
+			
+				// Set an EditText view to get user input 
+				final EditText input = new EditText(this);
+				alert.setView(input);
 	
-			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-			  Editable value = input.getText();
-			  resetUserSignature(value);
-			  }	
+				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						Editable value = input.getText();
+						resetUserSignature(value);
+					}	
+					});
+	
+				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						// Canceled.
+					}
 				});
-	
-			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			  public void onClick(DialogInterface dialog, int whichButton) {
-			    // Canceled.
-			  }
-			});
+			
+			
 	
 			alert.show();
 		
@@ -379,9 +446,8 @@ import android.widget.AdapterView.OnItemClickListener;
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.user_profile, menu);
-		    getActionBar().setDisplayShowTitleEnabled(false);
-
+			getMenuInflater().inflate(R.menu.main, menu);
+			
 		    menu.findItem(R.id.action_logout).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		    	public boolean onMenuItemClick(MenuItem item) {
 		        	// Call the Parse log out method
@@ -395,11 +461,9 @@ import android.widget.AdapterView.OnItemClickListener;
 		      });
 		      
 		      
-		      //Add the My Profile Option to the Menu-------------------RD
 		        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
 		      	  Intent amp = new Intent(UserProfileActivity.this, UserProfileActivity.class);
-		      	  //amp.putExtra("user", User Object*)
 		          startActivity(amp);
 		          return true;
 		        }
@@ -407,9 +471,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		        
 		        menu.findItem(R.id.action_notifications).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			        public boolean onMenuItemClick(MenuItem item) {
-			      	 // System.out.println("Inside OnMenuItemClick");
 			      	  Intent amp = new Intent(UserProfileActivity.this, NotificationsActivity.class);
-			      	  //amp.putExtra("user", User Object*)
 			          startActivity(amp);
 			          return true;
 			        }
@@ -417,7 +479,6 @@ import android.widget.AdapterView.OnItemClickListener;
 		        
 		        menu.findItem(R.id.action_home).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			        public boolean onMenuItemClick(MenuItem item) {
-			      	 // System.out.println("Inside OnMenuItemClick");
 			      	  Intent amp = new Intent(UserProfileActivity.this, MainActivity.class);
 			          startActivity(amp);
 			          return true;

@@ -168,8 +168,6 @@ public class MainActivity extends FragmentActivity {
       public boolean onMenuItemClick(MenuItem item) {
     	System.out.println("Inside OnMenuItemClick");
     	Intent amp = new Intent(MainActivity.this, UserProfileActivity.class);
-    	//Pass the user to the amp activity
-    	//amp.putExtra("user",User Object*);
         startActivity(amp);
         return true;
       }

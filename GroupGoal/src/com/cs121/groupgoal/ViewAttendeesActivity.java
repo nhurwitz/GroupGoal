@@ -23,6 +23,7 @@ public class ViewAttendeesActivity extends Activity {
 	ListView attendeeView;
 	HashMap<String, String> userProfiles;
 	HashMap<String, String> reverseLookup;
+	ParseUser attendee;
 	
 	private String parseId;
 	private String ownerName;
@@ -77,7 +78,7 @@ public class ViewAttendeesActivity extends Activity {
 				
 				Intent intent = new Intent(ViewAttendeesActivity.this,
 						UserProfileActivity.class)
-					.putExtra("user_id", userId);
+					.putExtra("userId", userId);
 			
 				startActivity(intent);
 			}
