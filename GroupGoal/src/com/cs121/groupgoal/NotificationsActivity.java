@@ -1,30 +1,27 @@
 package com.cs121.groupgoal;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 public class NotificationsActivity extends Activity {
 	
@@ -42,14 +39,12 @@ public class NotificationsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_invite);
+		setContentView(R.layout.activity_notifications);
 		
 		notifications = (List<String>) ParseUser.getCurrentUser().get("invitedGoals");
 		if(notifications == null || notifications.isEmpty()) {
-			LinearLayout linearLayout = (LinearLayout) findViewById(R.id.notifications_layout);
-			TextView textView = new TextView(this);
+			TextView textView = (TextView) findViewById(R.id.notifications_text);
 			textView.setText("No Notifications");
-			linearLayout.addView(textView);
 		} else {
 			notificationsList = (ListView) findViewById(R.id.notification_listview);
 			notificationsList.setAdapter(new NotificationsAdapter(this, notifications));
