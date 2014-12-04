@@ -450,11 +450,17 @@ import android.widget.AdapterView.OnItemClickListener;
 		      
 		        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
-		      	  Intent amp = new Intent(UserProfileActivity.this, UserProfileActivity.class);
-		          startActivity(amp);
 		          return true;
 		        }
 		      });
+		        
+		        menu.findItem(R.id.action_my_friends).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			        public boolean onMenuItemClick(MenuItem item) {
+			      	  Intent amp = new Intent(UserProfileActivity.this, MyFriendsActivity.class);
+			          startActivity(amp);
+			          return true;
+			        }
+			      });
 		        
 		        menu.findItem(R.id.action_notifications).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			        public boolean onMenuItemClick(MenuItem item) {
