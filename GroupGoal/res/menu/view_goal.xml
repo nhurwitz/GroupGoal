@@ -4,8 +4,21 @@
     tools:context="com.cs121.groupgoal.ViewGoal" >
 
     <item
-        android:id="@+id/action_my_profile"
-        android:orderInCategory="100"
-        android:title="@string/action_my_profile"/>
+        android:id="@+id/action_comment"
+        android:orderInCategory="97"
+        android:showAsAction="ifRoom"
+        android:title="@string/view_comments"/>
+    
+     <item
+        android:id="@+id/action_attendees"
+        android:orderInCategory="97"
+        android:showAsAction="ifRoom"
+        android:title="@string/view_attendees"/>
+    
+     <item
+        android:id="@+id/action_invite"
+        android:orderInCategory="99"
+        android:showAsAction="ifRoom"
+        android:title="@string/goal_invite"/>
 
 </menu>

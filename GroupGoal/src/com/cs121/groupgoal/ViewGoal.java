@@ -8,21 +8,30 @@ import java.util.List;
 import org.apache.http.ParseException;
 
 import com.cs121.groupgoal.R;
+import com.cs121.groupgoal.GoalPost.Category;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class ViewGoal extends Activity {
 	
@@ -123,43 +132,7 @@ public class ViewGoal extends Activity {
 				goal.saveInBackground();
 			}
 		});
-		Button viewComments = (Button) findViewById(R.id.view_comments_button);
 		
-		viewComments.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(ViewGoal.this, CommentActivity.class)
-					.putExtra("goalObjectId", goal.getObjectId())
-					.putExtra("goal_owner", ownerName);
-		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-		        startActivity(intent);
-			}
-			
-			
-		});
-		Button viewAttendees = (Button) findViewById(R.id.view_attendees_button);
-		
-		viewAttendees.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(ViewGoal.this, ViewAttendeesActivity.class)
-					.putExtra("goal_id", goal.getObjectId())
-					.putExtra("goal_owner", ownerName);
-		        startActivity(intent);
-			}
-			
-			
-		});
-		
-		Button inviteFriends = (Button) findViewById(R.id.invite_attendees_button);
-		
-		inviteFriends.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(ViewGoal.this, InviteActivity.class)
-					.putExtra("goal_id", goal.getObjectId())
-					.putExtra("goal_owner", ownerName);
-		        startActivity(intent);
-			}
-		});
-
 	}
 	
 	public void setAttendingBox(boolean attending) {
@@ -181,4 +154,46 @@ public class ViewGoal extends Activity {
 		}
 		return true;
 	}
+	
+	@Override
+	  public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu; this adds items to the action bar if it is present.
+	    getMenuInflater().inflate(R.menu.view_goal, menu);
+	    getActionBar().setDisplayShowTitleEnabled(false);
+
+	    //Add the My Profile Option to the Menu
+	      menu.findItem(R.id.action_invite).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+	      public boolean onMenuItemClick(MenuItem item) {
+	    	  Intent intent = new Intent(ViewGoal.this, InviteActivity.class)
+				.putExtra("goal_id", goal.getObjectId())
+				.putExtra("goal_owner", ownerName);
+	        startActivity(intent);
+	        return true;
+	      }
+	    });
+	      
+	      
+	      menu.findItem(R.id.action_attendees).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		      public boolean onMenuItemClick(MenuItem item) {
+		    	  Intent intent = new Intent(ViewGoal.this, ViewAttendeesActivity.class)
+					.putExtra("goal_id", goal.getObjectId())
+					.putExtra("goal_owner", ownerName);
+		        startActivity(intent);
+		        return true;
+		      }
+		    });     
+	      
+	      menu.findItem(R.id.action_comment).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		      public boolean onMenuItemClick(MenuItem item) {
+		    	  Intent intent = new Intent(ViewGoal.this, CommentActivity.class)
+					.putExtra("goalObjectId", goal.getObjectId())
+					.putExtra("goal_owner", ownerName);
+		        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+		        startActivity(intent);
+		        return true;
+		      }
+		    });     
+	          
+	    return true;
+	  }
 }

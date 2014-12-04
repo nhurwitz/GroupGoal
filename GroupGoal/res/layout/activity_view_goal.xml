@@ -84,30 +84,11 @@
     
     <Button
         android:id="@+id/join_goal_button"
-        android:layout_width="match_parent"
+        android:background="@drawable/button"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="0.5"
         android:text="@string/join" />
         
-    <Button
-        android:id="@+id/view_comments_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="@string/view_comments" />
-    
-    <Button
-        android:id="@+id/view_attendees_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="@string/view_attendees" />
-        
-    <Button
-        android:id="@+id/invite_attendees_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="@string/goal_invite" />
-
 </LinearLayout>
