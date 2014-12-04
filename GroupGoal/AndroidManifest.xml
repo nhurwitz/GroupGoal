@@ -46,11 +46,26 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".DispatchActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cs121.groupgoal.DispatchActivity" />
+        </activity>
+        
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_signup"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".DispatchActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cs121.groupgoal.DispatchActivity" />
+        </activity>
         <activity
             android:name=".DispatchActivity"
             android:noHistory="true" >

@@ -35,7 +35,7 @@ public class MyFriendsActivity extends Activity {
 	List<ParseUser> lst;
 	List<ParseUser> currentLst = (List<ParseUser>) user.get("friendsList");
 	List<String> currentFriends = (List<String>) user.get("friendsList");
-	TextView friendsListView,testListView;
+	TextView testListView;
 	ListView friendsView;
 	
 	HashMap<String, String> userProfiles;
@@ -51,7 +51,6 @@ public class MyFriendsActivity extends Activity {
 		reverseLookup = new HashMap<String, String>();
 		
 		searchedFriend = (EditText) findViewById(R.id.searchedFriend);
-		friendsListView = (TextView) findViewById(R.id.friends_list);
 		friendsView = (ListView) findViewById(R.id.friends_list_view);
 		testListView = (TextView) findViewById(R.id.textView3);
 		
@@ -117,28 +116,6 @@ public class MyFriendsActivity extends Activity {
 	
 
 	public void displayFriends(){
-	
-		String friends = "Friends: ";
-		
-		if(!currentFriends.isEmpty()){
-			for(int i=0;i<currentFriends.size();i++){
-				 ParseQuery<ParseUser> postQuery = ParseQuery.getQuery(ParseUser.class);
-				    
-			      try {
-			      	  ParseUser tempUser = postQuery.get(currentFriends.get(i));
-			      	  String[] firstLast = tempUser.get("fullName").toString().split("\\^");
-			      	  friends = new String(friends+"  "+ firstLast[0] + " " + firstLast[1] + ";");
-			      } catch (com.parse.ParseException e) {
-					  Log.e("Goal Error", e.getMessage());
-				  } 
-				
-			}	
-		}
-
-		
-		friendsListView.setText(friends);
-		
-		
 		
 		//with list view
 		ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
@@ -146,13 +123,8 @@ public class MyFriendsActivity extends Activity {
 		String theId = "";
 		Log.d("for loop","");
 		for(String id : currentFriends) {
-			ParseUser user;
 	    	try {
-	    		user = userQuery.get(id);
-	    		
-	    		if(user!=null){
-	    			Log.d("storing user with id: ",id);
-	    		}
+	    		ParseUser user = userQuery.get(id);
 		    	userProfiles.put(id, adaptFullName(user.get("fullName").toString()));
 		    	theId = id;
 		    	reverseLookup.put(adaptFullName(user.get("fullName").toString()), id);
