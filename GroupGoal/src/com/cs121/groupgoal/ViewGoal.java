@@ -15,6 +15,7 @@ import com.parse.ParseUser;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -168,5 +169,16 @@ public class ViewGoal extends Activity {
 		} else {
 			attendButton.setText("Join?");
 		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				Intent intent = new Intent(ViewGoal.this, MainActivity.class);
+				startActivity(intent);
+				return true;
+		}
+		return true;
 	}
 }
