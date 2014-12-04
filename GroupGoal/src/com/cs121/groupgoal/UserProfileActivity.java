@@ -58,7 +58,6 @@ import android.widget.AdapterView.OnItemClickListener;
 		protected void onCreate(Bundle savedInstanceState) {
 			
 			extractExtras();
-			Log.d("what user",user.getUsername());
 			
 			allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined			
 			pastGoals = new ArrayList<String>();
@@ -67,8 +66,7 @@ import android.widget.AdapterView.OnItemClickListener;
 		
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_user_profile);
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		    getActionBar().setDisplayShowHomeEnabled(false);
+			getActionBar().setDisplayShowTitleEnabled(false);
 			
 			displayProfile();
 			
