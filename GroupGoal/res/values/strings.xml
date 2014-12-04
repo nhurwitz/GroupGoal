@@ -67,8 +67,8 @@
     <string name="join">Join?</string>
     <string name="title_activity_view_and_add_friends">ViewAndAddFriendsActivity</string>
     <string name="title_activity_comment">CommentActivity</string>
-    <string name="view_comments">View Comments</string>
-    <string name="view_attendees">View Attendees</string>
+    <string name="view_comments">Comments</string>
+    <string name="view_attendees">Attendees</string>
 
     <!-- Comment Strings -->
     <string name="write_comment">Write a Comment</string>
