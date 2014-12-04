@@ -446,6 +446,15 @@ import android.widget.AdapterView.OnItemClickListener;
 			          return true;
 		          }
 		      });
+		    
+		    menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		          public boolean onMenuItemClick(MenuItem item) {
+			              Intent intent = new Intent(UserProfileActivity.this, PostActivity.class);
+			              
+			              startActivity(intent);
+			              return true;
+			          }
+		        });
 		      
 		      
 		        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
