@@ -11,26 +11,32 @@
     tools:context="com.cs121.groupgoal.GoalView">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/goal_details_title"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"/>
+    
+    <View
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dp"
+	    android:background="@color/wet_asphalt"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/goal_description"
         android:textAllCaps="true"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/goal_details_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textAlignment="viewStart"
         android:layout_gravity="start" />
 
@@ -39,14 +45,14 @@
         android:layout_height="wrap_content"
         android:text="@string/goal_location"
         android:textAllCaps="true"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/goal_details_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textAlignment="viewStart"
         android:layout_gravity="start" />
 
@@ -55,14 +61,14 @@
         android:layout_height="wrap_content"
         android:text="@string/goal_date"
         android:textAllCaps="true"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/goal_details_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textAlignment="viewStart"
         android:layout_gravity="start" />
 
@@ -71,14 +77,14 @@
         android:layout_height="wrap_content"
         android:text="@string/goal_owner"
         android:textAllCaps="true"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/goal_details_owner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textAlignment="viewStart"
         android:layout_gravity="start" />
     

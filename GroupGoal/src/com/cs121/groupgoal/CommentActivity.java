@@ -57,8 +57,6 @@ public class CommentActivity extends Activity {
 	    commentsMade = allComments.toArray(commentsMade);
 	    Collections.reverse(Arrays.asList(commentsMade)); //want to reverse the array that stores the comments so that the 
 	    commentsMadeR = commentsMade;					  // most recent comments appear at the top of the list
-	   
-	    System.out.println("string array size "+commentsMade.length);
 	    
 	    //makes a listview from the reversed string array
 	    ArrayAdapter adapter = new ArrayAdapter<String>(this, 
