@@ -32,6 +32,7 @@ public class CommentActivity extends Activity {
 	  String[] commentsMadeR;
 	  private String goalID;
 	  private String ownerName;
+	  String currentGoalId;
 	  ParseUser user= ParseUser.getCurrentUser();
 	  	  
 	@Override
@@ -42,8 +43,12 @@ public class CommentActivity extends Activity {
 		Intent intent = getIntent();
 		goalID = intent.getStringExtra("goalObjectId");
 		ownerName = intent.getStringExtra("goal_owner");
-		String currentGoalId = intent.getStringExtra("goalObjectId"); //gets the objectID of the goal we were viewing
+		currentGoalId = intent.getStringExtra("goalObjectId"); //gets the objectID of the goal we were viewing
 	
+		update();
+	}
+	
+	private void update() {
 		ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class); //fetch the GoalPost object associated with the objectId	    
 	    try {
 	    	currentGoal = postQuery.get(currentGoalId);
@@ -73,7 +78,7 @@ public class CommentActivity extends Activity {
 	    	  post();
 	      }
 	    });
-	  }
+	}
 
 	  private void post () {	  
 		  
@@ -89,9 +94,7 @@ public class CommentActivity extends Activity {
 		Toast.makeText(getApplicationContext(), "Comment successfully posted", 
 				Toast.LENGTH_LONG).show();
 		
-	    Intent i = new Intent(CommentActivity.this, CommentActivity.class); //refreshes the page so new comment will appear when posted
-	    i.putExtra("goalObjectId", goalID);
-		startActivity(i);
+	    update();
 	  }
 	  
 	  @Override
