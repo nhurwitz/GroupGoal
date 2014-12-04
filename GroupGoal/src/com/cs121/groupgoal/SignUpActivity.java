@@ -128,7 +128,7 @@ import com.parse.SignUpCallback;
 	    user.put("myGoals",  emptyList);
 	    user.put("createdGoals",  emptyList);
 	    user.put("invitedGoals", emptyList);
-	
+	    
 	    // Call the Parse signup method
 	    user.signUpInBackground(new SignUpCallback() {
 	      @Override
