@@ -12,9 +12,9 @@
 	    
     <Button
       android:padding="1dp"
-      android:textColor="#FFFFFF"
       android:id="@+id/invite_friends_button"
       android:background="@drawable/button"
+      android:textColor="#FFFFFF"
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
       android:text="@string/goal_invite" />

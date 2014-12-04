@@ -18,6 +18,7 @@ public class DispatchActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getActionBar().setDisplayShowTitleEnabled(false);
     // Check if there is current user info
     if (ParseUser.getCurrentUser() != null) {
       // Start an intent for the logged in activity

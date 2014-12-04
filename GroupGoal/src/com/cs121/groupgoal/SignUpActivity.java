@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -35,10 +36,10 @@ import com.parse.SignUpCallback;
 	
 	  @Override
 	  protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	
+	    super.onCreate(savedInstanceState);	
 	    setContentView(R.layout.activity_signup);
-	
+	    getActionBar().setDisplayShowTitleEnabled(false);
+	    
 	    // Sets up the signup form.
 	    firstNameEditText = (EditText) findViewById(R.id.username_firstname_text);
 	    lastNameEditText = (EditText) findViewById(R.id.username_lastname_text);
@@ -157,4 +158,16 @@ import com.parse.SignUpCallback;
 		  }
 		  
 	  }
-	}
+	
+	  @Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			// Handle action bar item clicks here. The action bar will
+			// automatically handle clicks on the Home/Up button, so long
+			// as you specify a parent activity in AndroidManifest.xml.
+			int id = item.getItemId();
+			if (id == R.id.action_settings) {
+				return true;
+			}
+			return super.onOptionsItemSelected(item);
+		}
+}
