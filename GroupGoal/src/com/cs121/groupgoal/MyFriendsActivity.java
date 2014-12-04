@@ -1,6 +1,7 @@
 package com.cs121.groupgoal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,16 +20,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
-/**
- * 
- * This activity displays the users current friends, and also
- * allows them to add friends by searching for their username
- *
- */
 public class MyFriendsActivity extends Activity {
 
 	ParseUser user = ParseUser.getCurrentUser();
@@ -36,7 +35,11 @@ public class MyFriendsActivity extends Activity {
 	List<ParseUser> lst;
 	List<ParseUser> currentLst = (List<ParseUser>) user.get("friendsList");
 	List<String> currentFriends = (List<String>) user.get("friendsList");
-	TextView friendsListView;
+	TextView friendsListView,testListView;
+	ListView friendsView;
+	
+	HashMap<String, String> userProfiles;
+	HashMap<String, String> reverseLookup;
 	
 	
 	@Override
@@ -44,8 +47,13 @@ public class MyFriendsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_friends);
 		
+		userProfiles = new HashMap<String,String>();
+		reverseLookup = new HashMap<String, String>();
+		
 		searchedFriend = (EditText) findViewById(R.id.searchedFriend);
 		friendsListView = (TextView) findViewById(R.id.friends_list);
+		friendsView = (ListView) findViewById(R.id.friends_list_view);
+		testListView = (TextView) findViewById(R.id.textView3);
 		
 		Button AddFriendsButton = (Button) findViewById(R.id.addFriendsButton);
 		AddFriendsButton.setOnClickListener(new OnClickListener() {
@@ -96,7 +104,11 @@ public class MyFriendsActivity extends Activity {
 			    			searchedFriend.setHint("Add another Friend!");
 			    			displayFriends();
 			    		}
+			    		
+			    		
+
 			    	}
+			    	
 			    } 
 			  }
 			});
@@ -122,8 +134,60 @@ public class MyFriendsActivity extends Activity {
 				
 			}	
 		}
+
 		
-		friendsListView.setText(friends);	
+		friendsListView.setText(friends);
+		
+		
+		
+		//with list view
+		ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+		
+		String theId = "";
+		Log.d("for loop","");
+		for(String id : currentFriends) {
+			ParseUser user;
+	    	try {
+	    		user = userQuery.get(id);
+	    		
+	    		if(user!=null){
+	    			Log.d("storing user with id: ",id);
+	    		}
+		    	userProfiles.put(id, adaptFullName(user.get("fullName").toString()));
+		    	theId = id;
+		    	reverseLookup.put(adaptFullName(user.get("fullName").toString()), id);
+	    	} catch (com.parse.ParseException e) {
+				Log.e("Friend Error", e.getMessage());
+			}
+		
+		}
+		
+		Log.d(userProfiles.get(theId),"THIS IS THE USER!!!");
+		
+		ArrayAdapter<String> attendeesAdapter = 
+	    		new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+		
+		  attendeesAdapter.addAll(userProfiles.values());
+		    //Log.d(userProfiles.,"");
+			friendsView.setAdapter(attendeesAdapter);
+
+
+		
+	  
+		
+
+		friendsView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?>adapter,View v, int position, long id) {
+				String user = (String) adapter.getItemAtPosition(position);
+				String userId = reverseLookup.get(user);
+				
+				Intent intent = new Intent(MyFriendsActivity.this,
+						UserProfileActivity.class)
+					.putExtra("userId", userId);
+			
+				startActivity(intent);
+			}
+		});
 		
 	}
 
@@ -133,10 +197,11 @@ public class MyFriendsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 	    getActionBar().setDisplayShowTitleEnabled(false);
 	
-	      //Add the My Profile Option to the Menu
+	      //Add the My Profile Option to the Menu-------------------RD
 	        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 	        public boolean onMenuItemClick(MenuItem item) {
 	      	  Intent amp = new Intent(MyFriendsActivity.this, UserProfileActivity.class);
+	      	  //amp.putExtra("user", User Object*)
 	          startActivity(amp);
 	          return true;
 	        }
@@ -144,7 +209,9 @@ public class MyFriendsActivity extends Activity {
 	        
 	        menu.findItem(R.id.action_notifications).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
+		      	 // System.out.println("Inside OnMenuItemClick");
 		      	  Intent amp = new Intent(MyFriendsActivity.this, NotificationsActivity.class);
+		      	  //amp.putExtra("user", User Object*)
 		          startActivity(amp);
 		          return true;
 		        }
@@ -160,6 +227,7 @@ public class MyFriendsActivity extends Activity {
 	        
 	        menu.findItem(R.id.action_home).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
+		      	 // System.out.println("Inside OnMenuItemClick");
 		      	  Intent amp = new Intent(MyFriendsActivity.this, MainActivity.class);
 		          startActivity(amp);
 		          return true;
@@ -180,6 +248,12 @@ public class MyFriendsActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private String adaptFullName(String fullName) {
+		String[] goalOwnerFirstLast = fullName.split("\\^");
+		Log.d("the name: ",(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]));
+		return (goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
 	}
 	
 	

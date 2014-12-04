@@ -9,6 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cs121.groupgoal.MyFriendsActivity" >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Friends" />
+    
       <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -30,8 +35,6 @@
     <Button
         android:id="@+id/addFriendsButton"
         style="?android:attr/buttonStyleSmall"
-        android:background="@drawable/button"
-        android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
@@ -46,6 +49,20 @@
         android:layout_height="wrap_content"
      	android:layout_marginTop="20dp"
         android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+     <ListView
+        android:id="@+id/friends_list_view"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+     
+     <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     	android:layout_marginTop="20dp"
+        android:text="Sub Text.."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>
