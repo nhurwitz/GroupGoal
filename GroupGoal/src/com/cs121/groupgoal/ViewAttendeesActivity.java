@@ -34,7 +34,6 @@ public class ViewAttendeesActivity extends Activity {
 	private String parseId;
 	private String ownerName;
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
