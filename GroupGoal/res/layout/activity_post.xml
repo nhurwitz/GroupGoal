@@ -202,8 +202,10 @@
 
             <Button
                 android:id="@+id/submit_goal_button"
+                android:background="@drawable/button"
+        		android:textColor="#ffffff"
                 android:layout_height="wrap_content"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_weight="0.5"
                 android:text="@string/create" />
         </LinearLayout>
