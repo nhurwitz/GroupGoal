@@ -179,6 +179,15 @@ public class MainActivity extends FragmentActivity {
       }
     });
       
+      //Add Upcoming Goals to the Menu
+      menu.findItem(R.id.action_upcoming_goals).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+      public boolean onMenuItemClick(MenuItem item) {
+    	Intent amp = new Intent(MainActivity.this, UpcomingGoalsActivity.class);
+        startActivity(amp);
+        return true;
+      }
+    });
+      
       menu.findItem(R.id.action_notifications).setOnMenuItemClickListener(new OnMenuItemClickListener() {
           public boolean onMenuItemClick(MenuItem item) {
         	Intent amp = new Intent(MainActivity.this, NotificationsActivity.class);

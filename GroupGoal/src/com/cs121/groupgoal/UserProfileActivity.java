@@ -15,6 +15,7 @@ import com.parse.ParseQueryAdapter.QueryFactory;
 import com.parse.ParseUser;
 	
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -324,6 +325,14 @@ import android.widget.AdapterView.OnItemClickListener;
 		        menu.findItem(R.id.action_my_friends).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			        public boolean onMenuItemClick(MenuItem item) {
 			      	  Intent amp = new Intent(UserProfileActivity.this, MyFriendsActivity.class);
+			          startActivity(amp);
+			          return true;
+			        }
+			      });
+		        
+		        menu.findItem(R.id.action_upcoming_goals).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			        public boolean onMenuItemClick(MenuItem item) {
+			      	Intent amp = new Intent(UserProfileActivity.this, UpcomingGoalsActivity.class);
 			          startActivity(amp);
 			          return true;
 			        }

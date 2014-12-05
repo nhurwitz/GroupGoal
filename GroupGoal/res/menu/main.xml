@@ -4,19 +4,25 @@
 
     <item
         android:id="@+id/action_home"
-        android:orderInCategory="96"
+        android:orderInCategory="95"
         android:showAsAction="never"
         android:title="@string/action_home"/>
     
     <item
         android:id="@+id/action_my_profile"
-        android:orderInCategory="97"
+        android:orderInCategory="96"
         android:showAsAction="never"
         android:title="@string/action_my_profile"/>
     
+    <item
+        android:id="@+id/action_upcoming_goals"
+        android:orderInCategory="97"
+        android:showAsAction="never"
+        android:title="@string/action_upcoming_goals"/>
+    
      <item
         android:id="@+id/action_my_friends"
-        android:orderInCategory="97"
+        android:orderInCategory="98"
         android:showAsAction="never"
         android:title="@string/action_my_friends"/>
     
@@ -34,13 +40,13 @@
       
        <item
         android:id="@+id/action_post"
-        android:orderInCategory="95"
+        android:orderInCategory="94"
         android:showAsAction="always"
         android:title="@string/action_post"/>
        
        <item
         android:id="@+id/action_filter"
-        android:orderInCategory="94"
+        android:orderInCategory="93"
         android:showAsAction="always"
         android:title="@string/action_filter"
         android:actionViewClass="android.widget.Spinner"/>   

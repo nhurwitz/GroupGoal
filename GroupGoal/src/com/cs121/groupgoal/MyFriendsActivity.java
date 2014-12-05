@@ -193,6 +193,14 @@ public class MyFriendsActivity extends Activity {
 		        }
 		      });
 	        
+	        menu.findItem(R.id.action_upcoming_goals).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+	        public boolean onMenuItemClick(MenuItem item) {
+	      	Intent amp = new Intent(MyFriendsActivity.this, UpcomingGoalsActivity.class);
+	          startActivity(amp);
+	          return true;
+	        }
+	      });
+	        
 	        menu.findItem(R.id.action_home).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
 		      	  Intent amp = new Intent(MyFriendsActivity.this, MainActivity.class);
