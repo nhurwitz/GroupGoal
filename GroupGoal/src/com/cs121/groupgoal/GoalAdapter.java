@@ -22,6 +22,10 @@ import android.widget.TextView;
 
 import com.parse.ParseUser;
 
+/**
+ * This activity customizes an adapter for Goal posts.
+ *
+ */
 public class GoalAdapter extends ArrayAdapter<GoalPost> implements Filterable{
 	private Context mContext;
 	private List<GoalPost> mGoals;

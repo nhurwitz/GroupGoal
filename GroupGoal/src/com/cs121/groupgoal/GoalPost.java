@@ -10,7 +10,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
- * Data model for a post. Creates a Parse object and stores its info.
+ * Data model for a post. Creates a Parse object and stores its info
  */
 @ParseClassName("Posts")
 public class GoalPost extends ParseObject {

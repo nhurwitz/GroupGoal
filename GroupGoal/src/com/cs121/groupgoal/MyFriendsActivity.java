@@ -28,6 +28,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+/** 
+ * This activity lists the users current friends and displays
+ * them in listviews, and also allows them to add friends by searching
+ * for their friend's username.
+ *
+ */
 public class MyFriendsActivity extends Activity {
 
 	ParseUser user = ParseUser.getCurrentUser();
@@ -69,7 +75,6 @@ public class MyFriendsActivity extends Activity {
 		String name = searchedFriend.getText().toString();
 		//If no name has been entered
 		if(name!=""){
-			Log.d("searching for..",name);
 			ParseQuery<ParseUser> query = ParseUser.getQuery();
 			query.whereEqualTo("username",name);
 			Log.d("check 2",name);
@@ -82,7 +87,6 @@ public class MyFriendsActivity extends Activity {
 			    		
 			    		ParseUser friend = objects.get(0);
 			    		String foundName = 	friend.getObjectId(); 		
-			    		Log.d("found him!",foundName);
 			    		//add the friend to the array
 			    		if(!currentFriends.contains(foundName)){
 			    			currentFriends.add(foundName);
@@ -143,12 +147,7 @@ public class MyFriendsActivity extends Activity {
 		    //Log.d(userProfiles.,"");
 			friendsView.setAdapter(attendeesAdapter);
 
-
-		
-	  
-		
-
-		friendsView.setOnItemClickListener(new OnItemClickListener() {
+	friendsView.setOnItemClickListener(new OnItemClickListener() { //can view friends profile when name is clicked
 			public void onItemClick(AdapterView<?>adapter,View v, int position, long id) {
 				String user = (String) adapter.getItemAtPosition(position);
 				String userId = reverseLookup.get(user);
@@ -173,7 +172,6 @@ public class MyFriendsActivity extends Activity {
 	        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 	        public boolean onMenuItemClick(MenuItem item) {
 	      	  Intent amp = new Intent(MyFriendsActivity.this, UserProfileActivity.class);
-	      	  //amp.putExtra("user", User Object*)
 	          startActivity(amp);
 	          return true;
 	        }
@@ -181,9 +179,7 @@ public class MyFriendsActivity extends Activity {
 	        
 	        menu.findItem(R.id.action_notifications).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
-		      	 // System.out.println("Inside OnMenuItemClick");
 		      	  Intent amp = new Intent(MyFriendsActivity.this, NotificationsActivity.class);
-		      	  //amp.putExtra("user", User Object*)
 		          startActivity(amp);
 		          return true;
 		        }
@@ -199,7 +195,6 @@ public class MyFriendsActivity extends Activity {
 	        
 	        menu.findItem(R.id.action_home).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
-		      	 // System.out.println("Inside OnMenuItemClick");
 		      	  Intent amp = new Intent(MyFriendsActivity.this, MainActivity.class);
 		          startActivity(amp);
 		          return true;
@@ -209,7 +204,6 @@ public class MyFriendsActivity extends Activity {
 	        menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 	            public boolean onMenuItemClick(MenuItem item) {
 	  	              Intent intent = new Intent(MyFriendsActivity.this, PostActivity.class);
-	  	              
 	  	              startActivity(intent);
 	  	              return true;
 	  	          }

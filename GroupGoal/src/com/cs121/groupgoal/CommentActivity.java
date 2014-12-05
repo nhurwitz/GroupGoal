@@ -20,7 +20,11 @@ import android.widget.Toast;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-
+/**
+ * This activity handles all the storing and displaying of commments
+ * that are posted by the attendees of a specific goal
+ *
+ */
 public class CommentActivity extends Activity {
 	
 	  private EditText postEditText; 

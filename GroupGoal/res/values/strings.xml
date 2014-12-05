@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Dispatch/Login Activity and Manifest Strings -->
+    
     <string name="app_name">GroupGoal</string>
     <string name="login">Log in</string>
     <string name="signup">Sign up</string>
@@ -13,28 +15,22 @@
     <string name="post">Post</string>
     <string name="create">Create</string>
     <string name="prompt_post">Post</string>
-    <string name="post_out_of_range">Can\'t view post! Get closer.</string>
-    <string name="progress_post">Posting</string>
-    <string name="settings_distance_format">%d feet</string>
     <string name="activity_post_title">Create a Goal</string>
-    <string name="character_count_placeholder">0/140</string>
-    <string name="title_activity_start_guide">Start Guide Activity</string>
-    <string name="user_guide">Welcome to the User QuickStart Guide!</string>
-    <string name="use_right_menu">Use the menu in the top right corner to view your profile, scroll through posted goals, create a new goal, and view your notifications!</string>
-    <string name="GotIt_button">Got it, thanks!</string>
     <string name="title_activity_view_goal">View Goal</string>
     <string name="attend">Attend</string>
     <string name="view_profile">View My Profile</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_user_profile">My Profile</string>
     <string name="action_my_profile">My Profile</string>
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_notifications_page">NotificationsPageActivity</string>
-    <string name="title_activity_notifications">Your Notifications!</string>
-    <string name="action_notifications">Notifications</string>
     <string name="prompt_firstname">First Name</string>
     <string name="prompt_lastname">Last Name</string>
-    <string name="prompt_searchForFriends">Type a friend\'s username</string>
+    <string name="progress_post">Posting</string>
+    
+    <!-- Start Guide Tutorial Activity Strings -->
+    <string name="title_activity_start_guide">Start Guide Activity</string>
+    <string name="user_guide">Welcome to the User QuickStart Guide!</string>
+    <string name="use_right_menu">Use the menu in the top right corner to view your profile, scroll through posted goals, create a new goal, and view your notifications!</string>
+    <string name="GotIt_button">Got it, thanks!</string>    
 
     <!-- Main Activity Strings -->
     <string name="goal_search">Search</string>
@@ -90,7 +86,15 @@
     <string name="title_activity_my_friends">My Friends</string>
     <string name="title_activity_invite">InviteActivity</string>
     
-    <!-- Invite Activity -->
+    <!-- Invite Activity Strings -->
     <string name="goal_invite">Invite Friends</string>
+    <string name="prompt_searchForFriends">Type a friend\'s username</string>
+        
+    <!-- Notifications Activity Strings -->
+    <string name="title_activity_notifications_page">NotificationsPageActivity</string>
+    <string name="title_activity_notifications">Your Notifications!</string>
+    <string name="action_notifications">Notifications</string>
+    
+
 
 </resources>

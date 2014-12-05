@@ -24,7 +24,10 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
- * This class contains the code necessary to receive notificaitons when you are invited to a goal.
+ * This class contains the code necessary to receive notifications when you are invited to a goal or added as
+ * a friend by someone else.
+ * Does not currently work because of backend limitations, but when those limitations are removed,
+ * code is here for use. 
  *
  */
 public class NotificationsActivity extends Activity {

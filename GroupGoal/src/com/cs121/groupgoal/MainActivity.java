@@ -69,6 +69,13 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.parse.ParseQuery.CachePolicy;
 
+/**
+ * This activity holds the code for the home page of the app,
+ * which displays all posted goals, as well as a search bar, filter drop
+ * down menu, refresh button, and a menu which allows users to navigate to other pages of the 
+ * app.
+ *
+ */
 public class MainActivity extends FragmentActivity {
 
   private GoalAdapter mAdapter;
@@ -100,7 +107,7 @@ public class MainActivity extends FragmentActivity {
 
     });
     
-    resetGoalsButton = (Button) findViewById(R.id.reset_goal_button); 
+    resetGoalsButton = (Button) findViewById(R.id.reset_goal_button); //allows user to refresh page and see new goals that may have been posted
     resetGoalsButton.setOnClickListener(new OnClickListener() {
 
 		@Override
@@ -166,7 +173,6 @@ public class MainActivity extends FragmentActivity {
     //Add the My Profile Option to the Menu
       menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
       public boolean onMenuItemClick(MenuItem item) {
-    	System.out.println("Inside OnMenuItemClick");
     	Intent amp = new Intent(MainActivity.this, UserProfileActivity.class);
         startActivity(amp);
         return true;
@@ -190,14 +196,14 @@ public class MainActivity extends FragmentActivity {
 	        }
 	      });
       
-      menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-          public boolean onMenuItemClick(MenuItem item) {
-	              Intent intent = new Intent(MainActivity.this, PostActivity.class);
-	              
-	              startActivity(intent);
-	              return true;
-	          }
-        });
+//      menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//          public boolean onMenuItemClick(MenuItem item) {
+//	              Intent intent = new Intent(MainActivity.this, PostActivity.class);
+//	              
+//	              startActivity(intent);
+//	              return true;
+//	          }
+//        });
       
       menu.findItem(R.id.action_logout).setOnMenuItemClickListener(new OnMenuItemClickListener() {
           public boolean onMenuItemClick(MenuItem item) {
@@ -296,7 +302,6 @@ public class MainActivity extends FragmentActivity {
     	  postsListView = (ListView) findViewById(R.id.posts_listview);
     	  postsListView.setTextFilterEnabled(true);
           mAdapter = new GoalAdapter(MainActivity.this, new ArrayList<GoalPost>());
-
 
           postsListView.setAdapter(mAdapter);
           postsListView.setVisibility(View.VISIBLE);

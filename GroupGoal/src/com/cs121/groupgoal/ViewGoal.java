@@ -33,6 +33,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+/**
+ * This activity displays all the relevant information of the goal,
+ * and gives the user the option to join or unjoin the goal.
+ *
+ */
 public class ViewGoal extends Activity {
 	
 	GoalPost goal;
@@ -135,7 +140,7 @@ public class ViewGoal extends Activity {
 		
 	}
 	
-	public void setAttendingBox(boolean attending) {
+	public void setAttendingBox(boolean attending) { //switches text of button from join to joined depending on state
 		Button attendButton = (Button) findViewById(R.id.join_goal_button);
 		if(attending) {
 			attendButton.setText("Joined!");

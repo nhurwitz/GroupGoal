@@ -35,7 +35,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-	
+
+/**
+ * This activity contains the user's personal information, and allows them
+ * to write a personal signature. It also fetches all the past goals that the
+ * user has completed and all the goals created by the user and displays them as list views.
+ *
+ */
 	public class UserProfileActivity extends Activity {
 
 		Bundle extras;
@@ -49,7 +55,8 @@ import android.widget.AdapterView.OnItemClickListener;
 		Date goalDate;
 		
 		  private String selectedPostObjectId;
-
+		  
+		  //adapters to display the listviews of Goals 
 		  private ParseQueryAdapter<GoalPost> postsQueryAdapter;
 		  private ParseQueryAdapter<GoalPost> postsQueryAdapter2;
 		  private ParseQueryAdapter<GoalPost> postsQueryAdapter3;
@@ -71,77 +78,16 @@ import android.widget.AdapterView.OnItemClickListener;
 			displayProfile();
 			
 			if(user==ParseUser.getCurrentUser()){
-			Button EditButton = (Button) findViewById(R.id.edit_user_info_button);		
+			Button EditButton = (Button) findViewById(R.id.edit_user_info_button);//allows user to edit their personal signature	
 			EditButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					popUpEditBox();
-			      
 				}
 			});
 			}
 			
 			sortLists();
-			
-		
-			/*
-			//code to create listview for upcoming Goals
-				ParseQueryAdapter.QueryFactory<GoalPost> factory =
-				        new ParseQueryAdapter.QueryFactory<GoalPost>() {
-				          public ParseQuery<GoalPost> create() {
-				            ParseQuery<GoalPost> query = ParseQuery.getQuery("Posts");
-				            query.whereContainedIn("objectId", upcomingGoals);
-				            query.include("user");
-				            query.orderByAscending("date");
-				            return query;
-				          }
-				        };
-				        
-				     
-
-				    // Set up the query adapter
-				    postsQueryAdapter = new ParseQueryAdapter<GoalPost>(this, factory) {
-				      @Override
-				      public View getItemView(GoalPost post, View view, ViewGroup parent) {
-				        if (view == null) {
-				          view = View.inflate(getContext(), R.layout.anywall_post_item, null);
-				        }
-				        
-				        // #TODO (nhurwitz) Replace fields with appropriate ones.
-				        
-				        String[] goalOwnerFirstLast = post.getOwner().get("fullName").toString().split("\\^");
-				        int target = (Integer) post.getTargetGroupSize();
-				        int current = (Integer) post.getCurrentGroupSize();
-				        TextView contentView = (TextView) view.findViewById(R.id.content_view);
-				        TextView usernameView = (TextView) view.findViewById(R.id.username_view);
-				        TextView sizeView = (TextView) view.findViewById(R.id.goal_list_attending);
-				        contentView.setText(post.getName());
-				        usernameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
-				        sizeView.setText(current + "/" + target);
-				        return view;
-				      }
-				    };
-
-				   
-				    // Attach the query adapter to the view
-				    ListView listView = (ListView) findViewById(R.id.upComing_goals_listview);
-					  listView.setAdapter(postsQueryAdapter);
-
-				    // Set up the handler for an item's selection
-				    listView.setOnItemClickListener(new OnItemClickListener() {
-				      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				        final GoalPost item = postsQueryAdapter.getItem(position);
-				        selectedPostObjectId = item.getObjectId();
-
-				        Intent intent = new Intent(UserProfileActivity.this, ViewGoal.class)
-				        	.putExtra("goal_id", item.getObjectId())
-				        	.putExtra("goal_owner", item.getOwner().get("fullName").toString());
-				        
-				        startActivity(intent);
-				      }
-				    });
-				    
-				    */
-						
+							
 			//code to create listview for created Goals
 		    ParseQueryAdapter.QueryFactory<GoalPost> factory2 =
 			        new ParseQueryAdapter.QueryFactory<GoalPost>() {
@@ -154,45 +100,15 @@ import android.widget.AdapterView.OnItemClickListener;
 			          }
 			        };
 			        
-			        postsQueryAdapter = new ParseQueryAdapter<GoalPost>(this, factory2) {
-			      @Override
-			      public View getItemView(GoalPost post, View view, ViewGroup parent) {
-			        if (view == null) {
-			          view = View.inflate(getContext(), R.layout.anywall_post_item, null);
-			        }
-			        
-			        // #TODO (nhurwitz) Replace fields with appropriate ones.
-			        
-			        String[] goalOwnerFirstLast = post.getOwner().get("fullName").toString().split("\\^");
-			        int target = (Integer) post.getTargetGroupSize();
-			        int current = (Integer) post.getCurrentGroupSize();
-			        TextView contentView = (TextView) view.findViewById(R.id.content_view);
-			        TextView usernameView = (TextView) view.findViewById(R.id.username_view);
-			        TextView sizeView = (TextView) view.findViewById(R.id.goal_list_attending);
-			        contentView.setText(post.getName());
-			        usernameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
-			        sizeView.setText(current + "/" + target);
-			        return view;
-			      }
-			    };
-			
-			
-					//ListView listView = (ListView) findViewById(R.id.upComing_goals_listview);
-					//listView.setAdapter(postsQueryAdapter);
-			
-			
-					
 
-					    // Set up the query adapter
+					    // Set up the query adapter for created goals
 					    postsQueryAdapter2 = new ParseQueryAdapter<GoalPost>(this, factory2) {
 					      @Override
 					      public View getItemView(GoalPost post, View view, ViewGroup parent) {
 					        if (view == null) {
 					          view = View.inflate(getContext(), R.layout.anywall_post_item, null);
 					        }
-					        
-					        // #TODO (nhurwitz) Replace fields with appropriate ones.
-					        
+					        					        
 					        String[] goalOwnerFirstLast = post.getOwner().get("fullName").toString().split("\\^");
 					        int target = (Integer) post.getTargetGroupSize();
 					        int current = (Integer) post.getCurrentGroupSize();
@@ -237,16 +153,14 @@ import android.widget.AdapterView.OnItemClickListener;
 						          }
 						        };
 
-						    // Set up the query adapter
+						    // Set up the query adapter for past goals
 						    postsQueryAdapter3 = new ParseQueryAdapter<GoalPost>(this, factory3) {
 						      @Override
 						      public View getItemView(GoalPost post, View view, ViewGroup parent) {
 						        if (view == null) {
 						          view = View.inflate(getContext(), R.layout.anywall_post_item, null);
 						        }
-						        
-						        // #TODO (nhurwitz) Replace fields with appropriate ones.
-						        
+						        						        
 						        String[] goalOwnerFirstLast = post.getOwner().get("fullName").toString().split("\\^");
 						        int target = (Integer) post.getTargetGroupSize();
 						        int current = (Integer) post.getCurrentGroupSize();
@@ -305,34 +219,7 @@ import android.widget.AdapterView.OnItemClickListener;
 			}
 			}
 			
-			
-			/*
-			if (extras != null) {
-			    userName = extras.getString("name");
-				if(userName!=""){
-					ParseQuery<ParseUser> query = ParseUser.getQuery();
-					query.whereEqualTo("username",userName);
-					query.findInBackground(new FindCallback<ParseUser>() {
-					  public void done(List<ParseUser> objects, ParseException e) {
-					    if (e == null) {
-					    	Log.d("query complete","");
-					    	if(!objects.isEmpty()){
-					    		user = objects.get(0); 
-					    		Log.d("the new user is",user.getUsername());
-					    		}
-					    }
-					  }
-					  });
-				}
-
-			}
-			*/
-			
-			
-			
-
 		}
-
 		
 		public void displayProfile() { //function to display general user info
 			String userFullName = user.getString("fullName").toString();
@@ -354,8 +241,6 @@ import android.widget.AdapterView.OnItemClickListener;
 	
 			alert.setTitle("Your Personalized Message");
 			alert.setMessage("Message");
-	
-			
 			
 				// Set an EditText view to get user input 
 				final EditText input = new EditText(this);
@@ -373,9 +258,6 @@ import android.widget.AdapterView.OnItemClickListener;
 						// Canceled.
 					}
 				});
-			
-			
-	
 			alert.show();
 		
 		}
@@ -393,40 +275,26 @@ import android.widget.AdapterView.OnItemClickListener;
 		}
 		
 		
-		public void sortLists(){ //function to display the three lists of the user's goals
-			//first sort goals between upcoming and past goals
-
+		public void sortLists(){ //function to sort the users joined goals between upcoming and past goals
 			int i;
 			Date todayDate = new Date();
-			System.out.println("empty??"+allGoals.isEmpty());
-			System.out.println("size?? "+allGoals.size());
+
 			for (i=0; i < allGoals.size(); i++){
 				
 				ParseQuery<GoalPost> postQuery = ParseQuery.getQuery(GoalPost.class);
 			    
 			    try {
 			    	String id = (String) allGoals.get(i);
-			    	System.out.println("ID:::"+id);
 			    	goal = postQuery.get(id);
 			    	goalDate = goal.getDate();
 			    } catch (com.parse.ParseException e) {
 					Log.e("Goal Error", e.getMessage());
 				}
-				
-				System.out.println("iteration number: "+i);	
-			    
-				/*
-			    if (todayDate.compareTo(goalDate) <= 0){ //means the goal has not passed yet or is happening right now
-			    	upcomingGoals.add(allGoals.get(i));			    	
-			    }
-			    */
-			    if(true){
-			    	System.out.println("comparing");
 
+			    if(todayDate.compareTo(goalDate) > 0){ //means the goal already passed
 			    	pastGoals.add(allGoals.get(i));			    	
 			    }
 			}
-		
 		}
 		
 	
@@ -446,17 +314,7 @@ import android.widget.AdapterView.OnItemClickListener;
 			          return true;
 		          }
 		      });
-		    
-		    menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-		          public boolean onMenuItemClick(MenuItem item) {
-			              Intent intent = new Intent(UserProfileActivity.this, PostActivity.class);
-			              
-			              startActivity(intent);
-			              return true;
-			          }
-		        });
-		      
-		      
+
 		        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
 		          return true;
@@ -487,15 +345,12 @@ import android.widget.AdapterView.OnItemClickListener;
 			        }
 			      });
 		        
-		        
 			return true;
 		}
 	
 		@Override
 		public boolean onOptionsItemSelected(MenuItem item) {
-			// Handle action bar item clicks here. The action bar will
-			// automatically handle clicks on the Home/Up button, so long
-			// as you specify a parent activity in AndroidManifest.xml.
+			// Handle action bar item clicks here
 			int id = item.getItemId();
 			if (id == R.id.action_my_profile) {
 				return true;

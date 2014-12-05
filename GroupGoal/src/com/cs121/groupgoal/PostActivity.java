@@ -206,6 +206,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 		}
 	}
 	
+	
 	private boolean descriptionValid() {
 		if(goalDescriptionView.getText().toString().length() == 0) {
 			goalDescriptionView.setError("Description is a required field.");
