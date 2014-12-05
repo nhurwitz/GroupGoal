@@ -77,14 +77,18 @@ import android.widget.AdapterView.OnItemClickListener;
 			
 			displayProfile();
 			
-			if(user==ParseUser.getCurrentUser()){
+			
 			Button EditButton = (Button) findViewById(R.id.edit_user_info_button);//allows user to edit their personal signature	
 			EditButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					popUpEditBox();
 				}
 			});
+			
+			if(user!=ParseUser.getCurrentUser()){
+				EditButton.setVisibility(View.INVISIBLE);
 			}
+			
 			
 			sortLists();
 							
@@ -274,8 +278,8 @@ import android.widget.AdapterView.OnItemClickListener;
 			profileDescription.setText(newDescription);
 		}
 		
-		
-		public void sortLists(){ //function to sort the users joined goals between upcoming and past goals
+		//function to sort the users joined goals between upcoming and past goals
+		public void sortLists(){ 
 			int i;
 			Date todayDate = new Date();
 
