@@ -58,7 +58,6 @@ import android.widget.AdapterView.OnItemClickListener;
 		  private String selectedPostObjectId;
 		  
 		  //adapters to display the listviews of Goals 
-		  private ParseQueryAdapter<GoalPost> postsQueryAdapter;
 		  private ParseQueryAdapter<GoalPost> postsQueryAdapter2;
 		  private ParseQueryAdapter<GoalPost> postsQueryAdapter3;
 
