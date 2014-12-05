@@ -162,6 +162,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cs121.groupgoal.MainActivity" />
         </activity>
+               <activity
+            android:name=".UpcomingGoalsActivity"
+            android:label="@string/title_activity_upcoming"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cs121.groupgoal.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
