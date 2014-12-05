@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 /** 
@@ -70,19 +71,16 @@ public class MyFriendsActivity extends Activity {
 		displayFriends();
 	}
 	
-	
+	//finds friends and adds them to your friends list
 	public void searchAndAddFriends(){
 		String name = searchedFriend.getText().toString();
 		//If no name has been entered
 		if(name!=""){
 			ParseQuery<ParseUser> query = ParseUser.getQuery();
 			query.whereEqualTo("username",name);
-			Log.d("check 2",name);
 			query.findInBackground(new FindCallback<ParseUser>() {	
 			  public void done(List<ParseUser> objects, ParseException e) {
-				  Log.d("query complete","");
 				  if (e == null) {
-			    	Log.d("e is null","");
 			    	if(!objects.isEmpty()){
 			    		
 			    		ParseUser friend = objects.get(0);
@@ -108,7 +106,12 @@ public class MyFriendsActivity extends Activity {
 			    			displayFriends();
 			    		}
 			    		
-			    		
+
+			    	}
+			    	else{
+			    		Toast.makeText(getApplicationContext(), "Username does not exist.", 
+			    				Toast.LENGTH_LONG).show();
+		    			searchedFriend.setText("");
 
 			    	}
 			    	
@@ -118,14 +121,13 @@ public class MyFriendsActivity extends Activity {
 		}
 	}
 	
-
+	//displays the list of friends
 	public void displayFriends(){
 		
 		//with list view
 		ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
 		
 		String theId = "";
-		Log.d("for loop","");
 		for(String id : currentFriends) {
 	    	try {
 	    		ParseUser user = userQuery.get(id);
@@ -137,15 +139,13 @@ public class MyFriendsActivity extends Activity {
 			}
 		
 		}
-		
-		Log.d(userProfiles.get(theId),"THIS IS THE USER!!!");
+
 		
 		ArrayAdapter<String> attendeesAdapter = 
 	    		new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		
-		  attendeesAdapter.addAll(userProfiles.values());
-		    //Log.d(userProfiles.,"");
-			friendsView.setAdapter(attendeesAdapter);
+		attendeesAdapter.addAll(userProfiles.values());
+		friendsView.setAdapter(attendeesAdapter);
 
 	friendsView.setOnItemClickListener(new OnItemClickListener() { //can view friends profile when name is clicked
 			public void onItemClick(AdapterView<?>adapter,View v, int position, long id) {
@@ -168,7 +168,7 @@ public class MyFriendsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 	    getActionBar().setDisplayShowTitleEnabled(false);
 	
-	      //Add the My Profile Option to the Menu-------------------RD
+
 	        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 	        public boolean onMenuItemClick(MenuItem item) {
 	      	  Intent amp = new Intent(MyFriendsActivity.this, UserProfileActivity.class);
