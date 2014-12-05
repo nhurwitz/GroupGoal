@@ -205,14 +205,14 @@ public class MainActivity extends FragmentActivity {
 	        }
 	      });
       
-//      menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-//          public boolean onMenuItemClick(MenuItem item) {
-//	              Intent intent = new Intent(MainActivity.this, PostActivity.class);
-//	              
-//	              startActivity(intent);
-//	              return true;
-//	          }
-//        });
+      menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+          public boolean onMenuItemClick(MenuItem item) {
+	              Intent intent = new Intent(MainActivity.this, PostActivity.class);
+	              
+	              startActivity(intent);
+	              return true;
+	          }
+       });
       
       menu.findItem(R.id.action_logout).setOnMenuItemClickListener(new OnMenuItemClickListener() {
           public boolean onMenuItemClick(MenuItem item) {

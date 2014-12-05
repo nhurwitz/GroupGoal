@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -50,10 +51,11 @@ import android.widget.AdapterView.OnItemClickListener;
 		TextView userNameTextBox;
 		Editable userProfileMessage;
 		ArrayList<String> allGoals,pastGoals,madeGoals;
-		private EditText searchedFriend;
+		
 
 		GoalPost goal;
 		Date goalDate;
+		
 		
 		  private String selectedPostObjectId;
 		  
@@ -64,8 +66,10 @@ import android.widget.AdapterView.OnItemClickListener;
 		  @Override
 		protected void onCreate(Bundle savedInstanceState) {
 			
+			//get the user and other extras passed into the intent
 			extractExtras();
 			
+			//the lsits of user goals
 			allGoals =  (ArrayList<String>) user.get("myGoals"); //arrayList that holds all the goals that the user has joined			
 			pastGoals = new ArrayList<String>();
 			madeGoals = (ArrayList<String>) user.get("createdGoals"); //arrayList that holds all the goals that the user has created
@@ -75,6 +79,7 @@ import android.widget.AdapterView.OnItemClickListener;
 			setContentView(R.layout.activity_user_profile);
 			getActionBar().setDisplayShowTitleEnabled(false);
 			
+			//displays the UI elements of the profile
 			displayProfile();
 			
 			
@@ -121,7 +126,13 @@ import android.widget.AdapterView.OnItemClickListener;
 					        TextView sizeView = (TextView) view.findViewById(R.id.goal_list_attending);
 					        contentView.setText(post.getName());
 					        usernameView.setText(goalOwnerFirstLast[0] + " " + goalOwnerFirstLast[1]);
-					        sizeView.setText(current + "/" + target);
+					        if(target == 0 || current/target >= 1) {
+						    	  sizeView.setText("COMPLETE");
+						    	  sizeView.setTextColor(Color.GREEN);
+						      } else {
+						    	  sizeView.setText(current + "/" + target);	
+						    	  sizeView.setTextColor(Color.BLACK);
+						      }
 					        return view;
 					      }
 					    };
@@ -356,6 +367,14 @@ import android.widget.AdapterView.OnItemClickListener;
 			          return true;
 			        }
 			      });
+		        menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		            public boolean onMenuItemClick(MenuItem item) {
+		  	              Intent intent = new Intent(UserProfileActivity.this, PostActivity.class);
+		  	              
+		  	              startActivity(intent);
+		  	              return true;
+		  	          }
+		         });
 		        
 			return true;
 		}

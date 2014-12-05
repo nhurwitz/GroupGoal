@@ -97,6 +97,7 @@ public class CommentActivity extends Activity {
 	    
 		Toast.makeText(getApplicationContext(), "Comment successfully posted", 
 				Toast.LENGTH_LONG).show();
+		postEditText.setText("");
 		
 	    update();
 	  }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -61,8 +62,68 @@ public class NotificationsActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.invite, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 	    getActionBar().setDisplayShowTitleEnabled(false);
+	    
+	    menu.findItem(R.id.action_logout).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+	    	public boolean onMenuItemClick(MenuItem item) {
+	        	// Call the Parse log out method
+	              ParseUser.logOut();
+	              // Start and intent for the dispatch activity
+	              Intent intent = new Intent(NotificationsActivity.this, DispatchActivity.class);
+	              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+	              startActivity(intent);
+		          return true;
+	          }
+	      });
+	    menu.findItem(R.id.action_post).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+	          public boolean onMenuItemClick(MenuItem item) {
+		              Intent intent = new Intent(NotificationsActivity.this, PostActivity.class);
+		              
+		              startActivity(intent);
+		              return true;
+		          }
+	       });
+
+	        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+	        	public boolean onMenuItemClick(MenuItem item) {
+			      	  Intent amp = new Intent(NotificationsActivity.this, UserProfileActivity.class);
+			          startActivity(amp);
+			          return true;
+			        }
+	      });
+	        
+	        menu.findItem(R.id.action_my_friends).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		        public boolean onMenuItemClick(MenuItem item) {
+		      	  Intent amp = new Intent(NotificationsActivity.this, MyFriendsActivity.class);
+		          startActivity(amp);
+		          return true;
+		        }
+		      });
+	        
+	        menu.findItem(R.id.action_upcoming_goals).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		        public boolean onMenuItemClick(MenuItem item) {
+		      	Intent amp = new Intent(NotificationsActivity.this, UpcomingGoalsActivity.class);
+		          startActivity(amp);
+		          return true;
+		        }
+		      });
+	        
+	        menu.findItem(R.id.action_notifications).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		        public boolean onMenuItemClick(MenuItem item) {
+		      	  Intent amp = new Intent(NotificationsActivity.this, NotificationsActivity.class);
+		          startActivity(amp);
+		          return true;
+		        }
+		      });
+	        
+	        menu.findItem(R.id.action_home).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		        public boolean onMenuItemClick(MenuItem item) {
+		      	  Intent amp = new Intent(NotificationsActivity.this, MainActivity.class);
+		          startActivity(amp);
+		          return true;
+		        }
+		      });
 
 		return true;
 	}

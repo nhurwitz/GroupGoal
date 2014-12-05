@@ -111,7 +111,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			Date scheduledDate = parseDate(goalDate + " " + goalTime);
 			
 			//checks to make sure all fields are valid
-			if(titleValid() && descriptionValid() && dateAndTimeValid() && categoryValid() && locationIsValid()) {
+			if(titleValid() && descriptionValid() && locationIsValid() && dateAndTimeValid() && categoryValid() ) {
 				GoalPost.Category goalCategory = GoalPost.Category.valueOf(
 						categoryDropdown.getSelectedItem().toString().toUpperCase());
 		
@@ -158,7 +158,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 	});
   }
 
-  //methods for pop out pickers, drop down menus, and field validation.
+  //methods for pop out pickers, drop down menus, and input field validation.
   public void showDatePickerDialog(View v) {
       FragmentTransaction ft = getFragmentManager().beginTransaction();
       DialogFragment newFragment = new DatePickerDialogFragment(PostActivity.this);
@@ -205,8 +205,7 @@ public class PostActivity extends FragmentActivity implements DatePickerDialog.O
 			return true;
 		}
 	}
-	
-	
+		
 	private boolean descriptionValid() {
 		if(goalDescriptionView.getText().toString().length() == 0) {
 			goalDescriptionView.setError("Description is a required field.");
