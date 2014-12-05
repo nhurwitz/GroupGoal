@@ -332,6 +332,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 		        menu.findItem(R.id.action_my_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 		        public boolean onMenuItemClick(MenuItem item) {
+		        	Intent amp = new Intent(UserProfileActivity.this, UserProfileActivity.class);
+			          startActivity(amp);
 		          return true;
 		        }
 		      });
