@@ -24,7 +24,7 @@ The concept of the app is to allow you to make goal events, and invite friends t
 </ul>
 
 <h2> Authors </h2>
-<b>Project Idea</b> by Mai Ho, Jiexi Cao, Alex Putman
+<b>Project Idea</b> by Mai Ho, Jiexi Cao, Alex Putman <br>
 <b>Development</b> by Vicky Gyorffy, Reece Denzel, Noam Hurwitz, Joanna Finkelstein
 
 <h2> License </h2>
