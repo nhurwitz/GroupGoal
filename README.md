@@ -24,9 +24,16 @@ The concept of the app is to allow you to make goal events, and invite friends t
 </ul>
 
 <h2> Authors </h2>
+<b>Project Idea</b> by Mai Ho, Jiexi Cao, Alex Putman
+<b>Development</b> by Vicky Gyorffy, Reece Denzel, Noam Hurwitz, Joanna Finkelstein
 
+<h2> License </h2>
+GroupGoal is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-GroupGoal is an Android application developed by Noam Hurwitz (nhurwitz), Vicky Gyorffy (vickygyorffy),
-Reece Denzel (rdenzel), and Joanna Finkelstein (jff0202012) for the CS121 Software Development group project. 
+You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+
+Copyright (c) 2014, GroupGoal
+
+All rights reserved.
 
 
